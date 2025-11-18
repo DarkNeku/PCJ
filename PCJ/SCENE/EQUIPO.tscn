@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnvpfiiabyrqo"]
+[gd_scene load_steps=13 format=3 uid="uid://dsmrdu5111wrs"]
 
+[ext_resource type="Script" uid="uid://bdhl2ohut3kve" path="res://SCRIPT/EQUIPO.gd" id="1_uqji2"]
 [ext_resource type="Texture2D" uid="uid://crg7i7r4i4igb" path="res://ASSET/Button-PNG-Royalty-Free-High-Quality.png" id="1_wp0hi"]
 [ext_resource type="Texture2D" uid="uid://cx183l2rvsrfg" path="res://ASSET/Button-PNG.png" id="2_7doee"]
 
@@ -277,6 +278,7 @@ texture = ExtResource("2_7doee")
 texture = ExtResource("2_7doee")
 
 [node name="EQUIPO" type="Node2D"]
+script = ExtResource("1_uqji2")
 
 [node name="Panel" type="Panel" parent="."]
 offset_right = 720.0
