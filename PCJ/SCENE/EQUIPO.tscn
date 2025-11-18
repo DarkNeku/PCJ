@@ -298,7 +298,7 @@ offset_right = 325.0
 offset_bottom = 410.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 3
+columns = 2
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1

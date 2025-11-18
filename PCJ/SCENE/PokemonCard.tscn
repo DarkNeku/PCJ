@@ -12,7 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_o5874")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(220, 155)
+custom_minimum_size = Vector2(220, 159.71)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5

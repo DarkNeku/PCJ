@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/SCRIPT/EQUIPO.gd">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/SCRIPT/EQUIPO.gd" />
+              <option name="originalContent" value="extends Node2D&#10;&#10;# Referencia al GridContainer donde se mostrarán las tarjetas&#10;@onready var grid_container = $Panel/GridContainer&#10;&#10;func _ready():&#10;&#9;mostrar_bulbasaur()&#10;&#10;func mostrar_bulbasaur():&#10;&#9;# Instanciar la tarjeta de Pokémon&#10;&#9;var tarjeta_escena = load(&quot;res://SCENE/PokemonCard.tscn&quot;)&#10;&#9;var tarjeta = tarjeta_escena.instantiate()&#10;&#9;# Agregar la tarjeta al GridContainer&#10;&#9;grid_container.add_child(tarjeta)&#10;&#9;# Configurar la tarjeta usando call_deferred para asegurar que los nodos hijos estén listos&#10;&#9;tarjeta.call_deferred(&quot;configurar&quot;, &quot;res://ASSET/POKEMON/1.0. Bulbasaur.png&quot;, 20, 20, 0, 100)&#10;" />
+              <option name="updatedContent" value="extends Node2D&#10;&#10;# Referencia al GridContainer donde se mostrarán las tarjetas&#10;@onready var grid_container = $Panel/GridContainer&#10;&#10;func _ready():&#10;&#9;mostrar_equipo()&#10;&#10;func mostrar_equipo():&#10;&#9;var pokemones = [&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/1.0. Bulbasaur.png&quot;, &quot;ps&quot;: 20, &quot;ps_max&quot;: 20, &quot;exp&quot;: 0, &quot;exp_max&quot;: 100},&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/25.0. Pikachu Inicial (fase 2).png&quot;, &quot;ps&quot;: 22, &quot;ps_max&quot;: 22, &quot;exp&quot;: 10, &quot;exp_max&quot;: 100},&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/133.0. Eevee Inicial (Fase 2).png&quot;, &quot;ps&quot;: 18, &quot;ps_max&quot;: 18, &quot;exp&quot;: 20, &quot;exp_max&quot;: 100},&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/134.0. Vaporeon Inicial (Fase 3).png&quot;, &quot;ps&quot;: 30, &quot;ps_max&quot;: 30, &quot;exp&quot;: 50, &quot;exp_max&quot;: 100},&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/135.0. Jolteon Inicial (Fase 3).png&quot;, &quot;ps&quot;: 28, &quot;ps_max&quot;: 28, &quot;exp&quot;: 70, &quot;exp_max&quot;: 100},&#10;&#9;&#9;{&quot;img&quot;: &quot;res://ASSET/POKEMON/136.0. Flareon Inicial (Fase 3).png&quot;, &quot;ps&quot;: 26, &quot;ps_max&quot;: 26, &quot;exp&quot;: 90, &quot;exp_max&quot;: 100}&#10;&#9;]&#10;&#9;for poke in pokemones:&#10;&#9;&#9;# Instanciar la tarjeta de Pokémon&#10;&#9;&#9;var tarjeta_escena = load(&quot;res://SCENE/PokemonCard.tscn&quot;)&#10;&#9;&#9;var tarjeta = tarjeta_escena.instantiate()&#10;&#9;&#9;# Agregar la tarjeta al GridContainer&#10;&#9;&#9;grid_container.add_child(tarjeta)&#10;&#9;&#9;# Configurar la tarjeta usando call_deferred para asegurar que los nodos hijos estén listos&#10;&#9;&#9;tarjeta.call_deferred(&quot;configurar&quot;, poke[&quot;img&quot;], poke[&quot;ps&quot;], poke[&quot;ps_max&quot;], poke[&quot;exp&quot;], poke[&quot;exp_max&quot;])" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
