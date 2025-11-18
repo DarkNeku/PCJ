@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-# Referencias a los nodos hijos
+# Referencias a los nodos hijos A
 @onready var imagen = $TextureRect
 @onready var barra_ps = $SALUD/ProgressBar
 @onready var barra_exp = $EXPERIENCIA/ProgressBar
