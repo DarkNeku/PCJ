@@ -2,30 +2,75 @@
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 
-[node name="PANELES" type="Node2D"]
+[node name="PANELES" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_unuhw")
 
-[node name="PanelEquipo" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelEquipo" type="VBoxContainer" parent="."]
+layout_mode = 2
 
-[node name="PanelPC" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Label" type="Label" parent="PanelEquipo"]
+layout_mode = 2
+text = "EQUIPO"
+horizontal_alignment = 1
 
-[node name="PanelCaptura" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="GridContainer" type="GridContainer" parent="PanelEquipo"]
+layout_mode = 2
+columns = 2
+
+[node name="PanelPC" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelPC"]
+layout_mode = 2
+text = "PC"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelPC"]
+layout_mode = 2
+
+[node name="PanelCaptura" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelCaptura"]
+layout_mode = 2
+text = "CAPTURA"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelCaptura"]
+custom_minimum_size = Vector2(0, 900)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="PanelCaptura/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
 [node name="BarraNavegacion" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 1
 
 [node name="BtnEquipo" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "EQUIPO"
 
 [node name="BtnPC" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "PC"
 
 [node name="BtnCaptura" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "CAPTURA"
