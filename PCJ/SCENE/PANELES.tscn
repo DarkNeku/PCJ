@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://yo2i6m45rom8"]
+
+[ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
+
+[node name="PANELES" type="Node2D"]
+script = ExtResource("1_unuhw")
+
+[node name="PanelEquipo" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelPC" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelCaptura" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BarraNavegacion" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnEquipo" type="Button" parent="BarraNavegacion"]
+layout_mode = 2
+
+[node name="BtnPC" type="Button" parent="BarraNavegacion"]
+layout_mode = 2
+
+[node name="BtnCaptura" type="Button" parent="BarraNavegacion"]
+layout_mode = 2
