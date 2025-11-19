@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://db5filsmqvg32"
-path="res://.godot/imported/PIKACHU3.png-2853dd4b8621e6719f591031a755eab8.ctex"
+path="res://.godot/imported/PIKACHU_3.png-527255eb1dafd1313ca360d27c5f0248.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/PIKACHU3.png"
-dest_files=["res://.godot/imported/PIKACHU3.png-2853dd4b8621e6719f591031a755eab8.ctex"]
+source_file="res://ASSET/POKEDEX/PIKACHU_3.png"
+dest_files=["res://.godot/imported/PIKACHU_3.png-527255eb1dafd1313ca360d27c5f0248.ctex"]
 
 [params]
 

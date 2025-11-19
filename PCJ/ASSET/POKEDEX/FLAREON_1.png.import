@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://be3kmcdg1bean"
-path="res://.godot/imported/FLAREON 3.png-3fda90ebe6b7f8f8f2e78f9d31fea29a.ctex"
+path="res://.godot/imported/FLAREON_1.png-91d8128658b432aec8a7c449dbaf1bbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/FLAREON 3.png"
-dest_files=["res://.godot/imported/FLAREON 3.png-3fda90ebe6b7f8f8f2e78f9d31fea29a.ctex"]
+source_file="res://ASSET/POKEDEX/FLAREON_1.png"
+dest_files=["res://.godot/imported/FLAREON_1.png-91d8128658b432aec8a7c449dbaf1bbc.ctex"]
 
 [params]
 

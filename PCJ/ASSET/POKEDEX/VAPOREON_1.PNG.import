@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0wqgjgsl1mpe"
-path="res://.godot/imported/VAPOREON 3.PNG-99293a80c12416ebf44d7243ed8c5442.ctex"
+path="res://.godot/imported/VAPOREON_1.PNG-4530a0d70ea2f56e12fb7ed91c5d0c71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/VAPOREON 3.PNG"
-dest_files=["res://.godot/imported/VAPOREON 3.PNG-99293a80c12416ebf44d7243ed8c5442.ctex"]
+source_file="res://ASSET/POKEDEX/VAPOREON_1.PNG"
+dest_files=["res://.godot/imported/VAPOREON_1.PNG-4530a0d70ea2f56e12fb7ed91c5d0c71.ctex"]
 
 [params]
 

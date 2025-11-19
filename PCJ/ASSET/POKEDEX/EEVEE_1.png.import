@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdotlhx8ngexd"
-path="res://.godot/imported/EEVEE 1.png-455eb077b44b1c5d3d5092191eb596a0.ctex"
+path="res://.godot/imported/EEVEE_1.png-b3241569798882d9ae36b9efaaff2c26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/EEVEE 1.png"
-dest_files=["res://.godot/imported/EEVEE 1.png-455eb077b44b1c5d3d5092191eb596a0.ctex"]
+source_file="res://ASSET/POKEDEX/EEVEE_1.png"
+dest_files=["res://.godot/imported/EEVEE_1.png-b3241569798882d9ae36b9efaaff2c26.ctex"]
 
 [params]
 

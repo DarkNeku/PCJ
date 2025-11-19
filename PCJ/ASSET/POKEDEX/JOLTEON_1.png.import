@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djq2u4ocs65sh"
-path="res://.godot/imported/JOLTEON 3.png-743cfedb489b1869add699ef3a09146d.ctex"
+path="res://.godot/imported/JOLTEON_1.png-dc057db788e8a8f60609cf152fd13094.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/JOLTEON 3.png"
-dest_files=["res://.godot/imported/JOLTEON 3.png-743cfedb489b1869add699ef3a09146d.ctex"]
+source_file="res://ASSET/POKEDEX/JOLTEON_1.png"
+dest_files=["res://.godot/imported/JOLTEON_1.png-dc057db788e8a8f60609cf152fd13094.ctex"]
 
 [params]
 
