@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckv1as3cfj3ni"
-path="res://.godot/imported/NIDORANH.png-b804686bf1446d35d30a37723031181a.ctex"
+path="res://.godot/imported/NIDORANHEMBRA.png-5af0319b1e57f2fd3473f0510fe990c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSET/POKEDEX/NIDORANH.png"
-dest_files=["res://.godot/imported/NIDORANH.png-b804686bf1446d35d30a37723031181a.ctex"]
+source_file="res://ASSET/POKEDEX/NIDORANHEMBRA.png"
+dest_files=["res://.godot/imported/NIDORANHEMBRA.png-5af0319b1e57f2fd3473f0510fe990c5.ctex"]
 
 [params]
 
