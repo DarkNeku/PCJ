@@ -10,12 +10,17 @@ extends VBoxContainer
 @onready var btn_captura = $BarraNavegacion/BtnCaptura
 @onready var scroll_captura = $PanelCaptura/ScrollContainer
 @onready var grid_captura = $PanelCaptura/ScrollContainer/GridContainer
+@onready var confirmacion = $CONFIRMACION
+
+var dialogo_confirmacion
+var nombre_pokemon_seleccionado = ""
 
 func _ready():
 	mostrar_seccion("equipo")
 	btn_equipo.pressed.connect(func(): mostrar_seccion("equipo"))
 	btn_pc.pressed.connect(func(): mostrar_seccion("pc"))
 	btn_captura.pressed.connect(func(): mostrar_seccion("captura"))
+	dialogo_confirmacion = $CONFIRMACION
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -58,6 +63,12 @@ func mostrar_tarjetas_captura():
 					var exp = int(poke.get("exp_actual", 0))
 					var exp_max = int(poke.get("exp_evo", 0))
 					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max)
+					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(poke.get("nombre", "")))
 					grid_captura.add_child(tarjeta)
 	else:
 		print("No se pudo abrir el archivo POKEMON_DB.json")
+
+func mostrar_confirmacion(nombre_pokemon):
+	nombre_pokemon_seleccionado = nombre_pokemon
+	confirmacion.dialog_text = "¿CAPTURASTE A %s?" % nombre_pokemon
+	confirmacion.popup_centered()

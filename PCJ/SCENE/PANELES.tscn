@@ -74,3 +74,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 50
 text = "CAPTURA"
+
+[node name="CONFIRMACION" type="ConfirmationDialog" parent="."]
+title = "CONFIRMA"
+size = Vector2i(500, 200)
+visible = true
+
+[connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
