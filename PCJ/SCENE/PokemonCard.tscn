@@ -12,37 +12,42 @@ grow_vertical = 2
 script = ExtResource("1_o5874")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(220, 159.71)
+custom_minimum_size = Vector2(355, 250)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SALUD" type="HBoxContainer" parent="."]
+[node name="BARRAS" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SALUD" type="HBoxContainer" parent="BARRAS"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+size_flags_horizontal = 0
 
-[node name="PS" type="Label" parent="SALUD"]
-custom_minimum_size = Vector2(40, 0)
+[node name="PS" type="Label" parent="BARRAS/SALUD"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "PS"
 
-[node name="ProgressBar" type="ProgressBar" parent="SALUD"]
-custom_minimum_size = Vector2(150, 25)
+[node name="ProgressBar" type="ProgressBar" parent="BARRAS/SALUD"]
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 value = 25.0
 show_percentage = false
 
-[node name="EXPERIENCIA" type="HBoxContainer" parent="."]
+[node name="EXPERIENCIA" type="HBoxContainer" parent="BARRAS"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="EXP" type="Label" parent="EXPERIENCIA"]
-custom_minimum_size = Vector2(40, 0)
+[node name="EXP" type="Label" parent="BARRAS/EXPERIENCIA"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "EXP"
 
-[node name="ProgressBar" type="ProgressBar" parent="EXPERIENCIA"]
-custom_minimum_size = Vector2(150, 25)
+[node name="ProgressBar" type="ProgressBar" parent="BARRAS/EXPERIENCIA"]
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 value = 50.0
 show_percentage = false

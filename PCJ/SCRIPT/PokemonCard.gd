@@ -2,8 +2,8 @@ extends VBoxContainer
 
 # Referencias a los nodos hijos A
 @onready var imagen = $TextureRect
-@onready var barra_ps = $SALUD/ProgressBar
-@onready var barra_exp = $EXPERIENCIA/ProgressBar
+@onready var barra_ps = $BARRAS/SALUD/ProgressBar
+@onready var barra_exp = $BARRAS/EXPERIENCIA/ProgressBar
 
 # Función para configurar la tarjeta con los datos del Pokémon
 func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual: int, exp_maximo: int):
