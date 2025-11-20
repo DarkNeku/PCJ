@@ -12,12 +12,14 @@ extends VBoxContainer
 @onready var grid_captura = $PanelCaptura/ScrollContainer/GridContainer
 @onready var confirmacion = $CONFIRMACION
 @onready var barra_busqueda = $PanelCaptura/BarraBusqueda
-@onready var grid_pc = $PanelPC/GridContainer
+@onready var grid_pc = $PanelPC/ScrollContainer/GridContainer
+@onready var busquedaPC = $PanelPC/busquedaPC
 
 var dialogo_confirmacion
 var nombre_pokemon_seleccionado = ""
 var id_pokemon_seleccionado = ""
 var filtro_busqueda = ""
+var filtro_busqueda_pc = ""
 var pokemons_db = []
 
 func _ready():
@@ -28,6 +30,8 @@ func _ready():
 	dialogo_confirmacion = $CONFIRMACION
 	if barra_busqueda:
 		barra_busqueda.text_changed.connect(_on_busqueda_text_changed)
+	if busquedaPC:
+		busquedaPC.text_changed.connect(_on_busquedaPC_text_changed)
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -46,6 +50,10 @@ func mostrar_seccion(seccion):
 func _on_busqueda_text_changed(nuevo_texto):
 	filtro_busqueda = nuevo_texto
 	mostrar_tarjetas_captura()
+
+func _on_busquedaPC_text_changed(nuevo_texto):
+	filtro_busqueda_pc = nuevo_texto
+	mostrar_tarjetas_pc()
 
 func mostrar_tarjetas_captura():
 	# Eliminar todos los hijos del GridContainer manualmente
@@ -69,9 +77,15 @@ func mostrar_tarjetas_captura():
 					if tarjeta_escena:
 						var tarjeta = tarjeta_escena.instantiate()
 						var imagen_path = poke.get("img_link", "")
-						var ps = int(poke.get("ps_actual", 0))
+						var ps = poke.get("ps_actual", "")
+						if ps == "":
+							ps = poke.get("ps_max", 0)
+						ps = int(ps)
 						var ps_max = int(poke.get("ps_max", 0))
-						var exp = int(poke.get("exp_actual", 0))
+						var exp = poke.get("exp_actual", "")
+						if exp == "":
+							exp = 0
+						exp = int(exp)
 						var exp_max = int(poke.get("exp_evo", 0))
 						var atrapado = int(poke.get("atrapado", 0))
 						var id_poke = poke.get("id", "")
@@ -98,17 +112,24 @@ func mostrar_tarjetas_pc():
 		if typeof(pokemons_db_local) == TYPE_ARRAY:
 			pokemons_db_local.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
 			for poke in pokemons_db_local:
-				if int(poke.get("atrapado", 0)) == 1:
+				if int(poke.get("atrapado", 0)) == 1 and (filtro_busqueda_pc == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda_pc.to_lower()) != -1):
+					print("Agregando tarjeta al PC:", poke.get("nombre", ""))
 					var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
 					if tarjeta_escena:
 						var tarjeta = tarjeta_escena.instantiate()
 						var imagen_path = poke.get("img_link", "")
-						var ps = int(poke.get("ps_actual", 0))
+						var ps = poke.get("ps_actual", "")
+						if ps == "":
+							ps = poke.get("ps_max", 0)
+						ps = int(ps)
 						var ps_max = int(poke.get("ps_max", 0))
-						var exp = int(poke.get("exp_actual", 0))
+						var exp = poke.get("exp_actual", "")
+						if exp == "":
+							exp = 0
+						exp = int(exp)
 						var exp_max = int(poke.get("exp_evo", 0))
 						var atrapado = int(poke.get("atrapado", 0))
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado)
+						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false)
 						grid_pc.add_child(tarjeta)
 	else:
 		print("No se pudo abrir el archivo POKEMON_DB.json")
