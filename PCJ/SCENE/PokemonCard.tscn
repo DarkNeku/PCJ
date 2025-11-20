@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gaon7jhm72bd"]
+[gd_scene load_steps=3 format=3 uid="uid://gaon7jhm72bd"]
 
 [ext_resource type="Script" uid="uid://wh5542ilov1q" path="res://SCRIPT/PokemonCard.gd" id="1_o5874"]
+[ext_resource type="Texture2D" uid="uid://cl3fteckfdw3o" path="res://ASSET/SELLO.png" id="2"]
 
 [node name="PokemonCard" type="VBoxContainer"]
 custom_minimum_size = Vector2(240, 280)
@@ -9,12 +10,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_o5874")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ImagenContainer" type="Control" parent="."]
 custom_minimum_size = Vector2(355, 250)
 layout_mode = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="ImagenContainer"]
+custom_minimum_size = Vector2(355, 250)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
 expand_mode = 1
+stretch_mode = 5
+
+[node name="SELLO" type="TextureRect" parent="ImagenContainer"]
+modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
+anchor_right = 1.0
+offset_top = 20.0
+offset_right = -20.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture = ExtResource("2")
 stretch_mode = 5
 
 [node name="BARRAS" type="HBoxContainer" parent="."]
@@ -29,11 +49,13 @@ size_flags_horizontal = 0
 [node name="PS" type="Label" parent="BARRAS/SALUD"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "PS"
 
 [node name="ProgressBar" type="ProgressBar" parent="BARRAS/SALUD"]
 custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+mouse_filter = 1
 value = 25.0
 show_percentage = false
 
@@ -44,10 +66,12 @@ layout_mode = 2
 [node name="EXP" type="Label" parent="BARRAS/EXPERIENCIA"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+mouse_filter = 1
 text = "EXP"
 
 [node name="ProgressBar" type="ProgressBar" parent="BARRAS/EXPERIENCIA"]
 custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+mouse_filter = 1
 value = 50.0
 show_percentage = false
