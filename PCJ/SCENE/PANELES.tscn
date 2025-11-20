@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=3 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
+
+[sub_resource type="Theme" id="Theme_unuhw"]
+default_font_size = 40
 
 [node name="PANELES" type="VBoxContainer"]
 anchors_preset = 15
@@ -15,6 +18,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelEquipo"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "EQUIPO"
 horizontal_alignment = 1
 
@@ -27,6 +31,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelPC"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "PC"
 horizontal_alignment = 1
 
@@ -38,8 +43,15 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelCaptura"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "CAPTURA"
 horizontal_alignment = 1
+
+[node name="BarraBusqueda" type="LineEdit" parent="PanelCaptura"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Buscar Pokémon..."
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelCaptura"]
 custom_minimum_size = Vector2(0, 900)
@@ -78,6 +90,8 @@ text = "CAPTURA"
 [node name="CONFIRMACION" type="ConfirmationDialog" parent="."]
 title = "CONFIRMA"
 size = Vector2i(500, 200)
-visible = true
+theme = SubResource("Theme_unuhw")
+ok_button_text = "SI"
+cancel_button_text = "NO"
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]

@@ -11,9 +11,11 @@ extends VBoxContainer
 @onready var scroll_captura = $PanelCaptura/ScrollContainer
 @onready var grid_captura = $PanelCaptura/ScrollContainer/GridContainer
 @onready var confirmacion = $CONFIRMACION
+@onready var barra_busqueda = $PanelCaptura/BarraBusqueda
 
 var dialogo_confirmacion
 var nombre_pokemon_seleccionado = ""
+var filtro_busqueda = ""
 
 func _ready():
 	mostrar_seccion("equipo")
@@ -21,6 +23,8 @@ func _ready():
 	btn_pc.pressed.connect(func(): mostrar_seccion("pc"))
 	btn_captura.pressed.connect(func(): mostrar_seccion("captura"))
 	dialogo_confirmacion = $CONFIRMACION
+	if barra_busqueda:
+		barra_busqueda.text_changed.connect(_on_busqueda_text_changed)
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -34,6 +38,10 @@ func mostrar_seccion(seccion):
 	elif seccion == "captura":
 		move_child(panel_captura, 0)
 		mostrar_tarjetas_captura()
+
+func _on_busqueda_text_changed(nuevo_texto):
+	filtro_busqueda = nuevo_texto
+	mostrar_tarjetas_captura()
 
 func mostrar_tarjetas_captura():
 	# Eliminar todos los hijos del GridContainer manualmente
@@ -53,22 +61,24 @@ func mostrar_tarjetas_captura():
 			# Ordenar por id (asumiendo que es string tipo '001', '002', ...)
 			pokemons.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
 			for poke in pokemons:
-				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
-				if tarjeta_escena:
-					var tarjeta = tarjeta_escena.instantiate()
-					# Obtener la ruta de la imagen correctamente
-					var imagen_path = poke.get("img_link", "")
-					var ps = int(poke.get("ps_actual", 0))
-					var ps_max = int(poke.get("ps_max", 0))
-					var exp = int(poke.get("exp_actual", 0))
-					var exp_max = int(poke.get("exp_evo", 0))
-					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max)
-					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(poke.get("nombre", "")))
-					grid_captura.add_child(tarjeta)
+				if filtro_busqueda == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda.to_lower()) != -1:
+					var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+					if tarjeta_escena:
+						var tarjeta = tarjeta_escena.instantiate()
+						# Obtener la ruta de la imagen correctamente
+						var imagen_path = poke.get("img_link", "")
+						var ps = int(poke.get("ps_actual", 0))
+						var ps_max = int(poke.get("ps_max", 0))
+						var exp = int(poke.get("exp_actual", 0))
+						var exp_max = int(poke.get("exp_evo", 0))
+						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max)
+						tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(poke.get("nombre", "")))
+						grid_captura.add_child(tarjeta)
 	else:
 		print("No se pudo abrir el archivo POKEMON_DB.json")
 
 func mostrar_confirmacion(nombre_pokemon):
 	nombre_pokemon_seleccionado = nombre_pokemon
 	confirmacion.dialog_text = "¿CAPTURASTE A %s?" % nombre_pokemon
-	confirmacion.popup_centered()
+	if not confirmacion.visible:
+		confirmacion.popup_centered()
