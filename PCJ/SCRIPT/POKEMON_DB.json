@@ -15,7 +15,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 0.0,
+		"equipo": 4.0,
 		"estado": "",
 		"exp_actual": "53",
 		"exp_evo": "",
@@ -25,7 +25,7 @@
 		"numero": "002",
 		"ps_actual": "",
 		"ps_max": "30",
-		"ubicacion": "pc"
+		"ubicacion": "equipo"
 	},
 	{
 		"atrapado": 1.0,
@@ -57,7 +57,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 1.0,
+		"equipo": 0,
 		"estado": "51",
 		"exp_actual": "250",
 		"exp_evo": "",
@@ -67,7 +67,7 @@
 		"numero": "005",
 		"ps_actual": "",
 		"ps_max": "30",
-		"ubicacion": "equipo"
+		"ubicacion": "pc"
 	},
 	{
 		"atrapado": 1.0,
@@ -85,7 +85,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 0.0,
+		"equipo": 2.0,
 		"estado": "",
 		"exp_actual": "",
 		"exp_evo": "",
@@ -95,10 +95,10 @@
 		"numero": "007",
 		"ps_actual": "",
 		"ps_max": "20",
-		"ubicacion": ""
+		"ubicacion": "equipo"
 	},
 	{
-		"atrapado": 0.0,
+		"atrapado": 1.0,
 		"equipo": 0.0,
 		"estado": "",
 		"exp_actual": "",
@@ -140,8 +140,8 @@
 		"ubicacion": "pc"
 	},
 	{
-		"atrapado": 0.0,
-		"equipo": 0.0,
+		"atrapado": 1.0,
+		"equipo": 1.0,
 		"estado": "",
 		"exp_actual": "",
 		"exp_evo": "",
@@ -151,7 +151,7 @@
 		"numero": "011",
 		"ps_actual": "",
 		"ps_max": "20",
-		"ubicacion": ""
+		"ubicacion": "equipo"
 	},
 	{
 		"atrapado": 1.0,
@@ -743,7 +743,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 2.0,
+		"equipo": 0.0,
 		"estado": "",
 		"exp_actual": "",
 		"exp_evo": "",
@@ -753,7 +753,7 @@
 		"numero": "051",
 		"ps_actual": "",
 		"ps_max": "35",
-		"ubicacion": "equipo"
+		"ubicacion": "pc"
 	},
 	{
 		"atrapado": 0.0,
@@ -1373,7 +1373,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 0,
+		"equipo": 0.0,
 		"estado": "",
 		"exp_actual": "",
 		"exp_evo": "",
@@ -1975,7 +1975,7 @@
 	},
 	{
 		"atrapado": 1.0,
-		"equipo": 4.0,
+		"equipo": 0.0,
 		"estado": "",
 		"exp_actual": "",
 		"exp_evo": "",
@@ -1985,7 +1985,7 @@
 		"numero": "135_1",
 		"ps_actual": "",
 		"ps_max": "45",
-		"ubicacion": "equipo"
+		"ubicacion": "pc"
 	},
 	{
 		"atrapado": 1.0,

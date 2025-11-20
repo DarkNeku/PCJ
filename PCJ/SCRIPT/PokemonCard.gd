@@ -53,11 +53,24 @@ func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual:
 	if sello:
 		sello.visible = mostrar_sello and atrapado == 1
 
+var touch_start_pos = null
+var touch_moved = false
+const TAP_THRESHOLD = 20 # píxeles
+
 func _ready():
 	# Habilitar la detección de clics en la tarjeta
 	self.mouse_filter = Control.MOUSE_FILTER_PASS
 	connect("gui_input", Callable(self, "_on_gui_input"))
 
 func _on_gui_input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		emit_signal("tarjeta_presionada")
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			touch_start_pos = event.position
+			touch_moved = false
+		elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT and touch_start_pos != null:
+			if not touch_moved:
+				emit_signal("tarjeta_presionada")
+			touch_start_pos = null
+	elif event is InputEventMouseMotion and touch_start_pos != null:
+		if event.position.distance_to(touch_start_pos) > TAP_THRESHOLD:
+			touch_moved = true

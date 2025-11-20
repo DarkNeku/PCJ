@@ -14,8 +14,14 @@ extends VBoxContainer
 @onready var barra_busqueda = $PanelCaptura/BarraBusqueda
 @onready var grid_pc = $PanelPC/ScrollContainer/GridContainer
 @onready var busquedaPC = $PanelPC/busquedaPC
-@onready var grid_equipo = $PanelEquipo/GridContainer
+@onready var grid_equipo = $PanelEquipo/Panel/GridContainer
 @onready var lista_equipo = $ListaEquipo
+@onready var popup_tarjeta = $PopupTarjetaPokemon
+@onready var contenedor_tarjeta = $PopupTarjetaPokemon/ContenedorTarjeta
+@onready var btn_cerrar_popup = $PopupTarjetaPokemon/BtnCerrarPopup
+
+const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
+const JSON_PATH_USER = "user://POKEMON_DB.json"
 
 var dialogo_confirmacion
 var nombre_pokemon_seleccionado = ""
@@ -36,6 +42,7 @@ func _ready():
 	if busquedaPC:
 		busquedaPC.text_changed.connect(_on_busquedaPC_text_changed)
 	lista_equipo.id_pressed.connect(_on_ListaEquipo_id_pressed)
+	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -67,39 +74,31 @@ func mostrar_tarjetas_captura():
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_captura.has_method("set_columns"):
 		grid_captura.set_columns(2)
-	# Leer el JSON de la base de datos de Pokémon
-	var pokedex_json = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
-	if pokedex_json:
-		var data = pokedex_json.get_as_text()
-		pokemons_db = []
-		if data:
-			pokemons_db = JSON.parse_string(data)
-		if typeof(pokemons_db) == TYPE_ARRAY:
-			pokemons_db.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
-			for poke in pokemons_db:
-				if filtro_busqueda == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda.to_lower()) != -1:
-					var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
-					if tarjeta_escena:
-						var tarjeta = tarjeta_escena.instantiate()
-						var imagen_path = poke.get("img_link", "")
-						var ps = poke.get("ps_actual", "")
-						if ps == "":
-							ps = poke.get("ps_max", 0)
-						ps = int(ps)
-						var ps_max = int(poke.get("ps_max", 0))
-						var exp = poke.get("exp_actual", "")
-						if exp == "":
-							exp = 0
-						exp = int(exp)
-						var exp_max = int(poke.get("exp_evo", 0))
-						var atrapado = int(poke.get("atrapado", 0))
-						var id_poke = poke.get("id", "")
-						# En captura, mostrar_sello = true
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, true, poke.get("nombre", ""), false)
-						tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(id_poke, poke.get("nombre", "")))
-						grid_captura.add_child(tarjeta)
-	else:
-		print("No se pudo abrir el archivo POKEMON_DB.json")
+	pokemons_db = cargar_json()
+	if typeof(pokemons_db) == TYPE_ARRAY:
+		pokemons_db.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
+		for poke in pokemons_db:
+			if filtro_busqueda == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda.to_lower()) != -1:
+				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+				if tarjeta_escena:
+					var tarjeta = tarjeta_escena.instantiate()
+					var imagen_path = poke.get("img_link", "")
+					var ps = poke.get("ps_actual", "")
+					if ps == "":
+						ps = poke.get("ps_max", 0)
+					ps = int(ps)
+					var ps_max = int(poke.get("ps_max", 0))
+					var exp = poke.get("exp_actual", "")
+					if exp == "":
+						exp = 0
+					exp = int(exp)
+					var exp_max = int(poke.get("exp_evo", 0))
+					var atrapado = int(poke.get("atrapado", 0))
+					var id_poke = poke.get("id", "")
+					# En captura, mostrar_sello = true
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, true, poke.get("nombre", ""), false)
+					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(id_poke, poke.get("nombre", "")))
+					grid_captura.add_child(tarjeta)
 
 func mostrar_tarjetas_pc():
 	# Eliminar todos los hijos del GridContainer manualmente
@@ -108,39 +107,31 @@ func mostrar_tarjetas_pc():
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_pc.has_method("set_columns"):
 		grid_pc.set_columns(2)
-	# Leer el JSON de la base de datos de Pokémon
-	var pokedex_json = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
-	if pokedex_json:
-		var data = pokedex_json.get_as_text()
-		var pokemons_db_local = []
-		if data:
-			pokemons_db_local = JSON.parse_string(data)
-		if typeof(pokemons_db_local) == TYPE_ARRAY:
-			pokemons_db_local.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
-			for poke in pokemons_db_local:
-				if int(poke.get("atrapado", 0)) == 1 and int(poke.get("equipo", 0)) == 0 and (filtro_busqueda_pc == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda_pc.to_lower()) != -1):
-					var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
-					if tarjeta_escena:
-						var tarjeta = tarjeta_escena.instantiate()
-						var imagen_path = poke.get("img_link", "")
-						var ps = poke.get("ps_actual", "")
-						if ps == "":
-							ps = poke.get("ps_max", 0)
-						ps = int(ps)
-						var ps_max = int(poke.get("ps_max", 0))
-						var exp = poke.get("exp_actual", "")
-						if exp == "":
-							exp = 0
-						exp = int(exp)
-						var exp_max = int(poke.get("exp_evo", 0))
-						var atrapado = int(poke.get("atrapado", 0))
-						# En cada llamada a configurar, agrega el parámetro nombre
-						# En PC, mostrar_sello = false, mostrar_barras = true, es_pc = true
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true, true)
-						tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion_pc").bind(poke.get("id", ""), poke.get("nombre", "")))
-						grid_pc.add_child(tarjeta)
-	else:
-		print("No se pudo abrir el archivo POKEMON_DB.json")
+	var pokemons_db_local = cargar_json()
+	if typeof(pokemons_db_local) == TYPE_ARRAY:
+		pokemons_db_local.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
+		for poke in pokemons_db_local:
+			if int(poke.get("atrapado", 0)) == 1 and int(poke.get("equipo", 0)) == 0 and (filtro_busqueda_pc == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda_pc.to_lower()) != -1):
+				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+				if tarjeta_escena:
+					var tarjeta = tarjeta_escena.instantiate()
+					var imagen_path = poke.get("img_link", "")
+					var ps = poke.get("ps_actual", "")
+					if ps == "":
+						ps = poke.get("ps_max", 0)
+					ps = int(ps)
+					var ps_max = int(poke.get("ps_max", 0))
+					var exp = poke.get("exp_actual", "")
+					if exp == "":
+						exp = 0
+					exp = int(exp)
+					var exp_max = int(poke.get("exp_evo", 0))
+					var atrapado = int(poke.get("atrapado", 0))
+					# En cada llamada a configurar, agrega el parámetro nombre
+					# En PC, mostrar_sello = false, mostrar_barras = true, es_pc = true
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true, true)
+					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion_pc").bind(poke.get("id", ""), poke.get("nombre", "")))
+					grid_pc.add_child(tarjeta)
 
 func mostrar_tarjetas_equipo():
 	# Eliminar todos los hijos del GridContainer manualmente
@@ -149,39 +140,65 @@ func mostrar_tarjetas_equipo():
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_equipo.has_method("set_columns"):
 		grid_equipo.set_columns(2)
-	# Leer el JSON de la base de datos de Pokémon
-	var pokedex_json = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
-	if pokedex_json:
-		var data = pokedex_json.get_as_text()
-		var pokemons_db_local = []
-		if data:
-			pokemons_db_local = JSON.parse_string(data)
-		if typeof(pokemons_db_local) == TYPE_ARRAY:
-			pokemons_db_local.sort_custom(func(a, b): return int(a["equipo"]) < int(b["equipo"]))
-			for poke in pokemons_db_local:
-				var eq = int(poke.get("equipo", 0))
-				if eq > 0 and eq <= 6:
-					var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
-					if tarjeta_escena:
-						var tarjeta = tarjeta_escena.instantiate()
-						var imagen_path = poke.get("img_link", "")
-						var ps = poke.get("ps_actual", "")
-						if ps == "":
-							ps = poke.get("ps_max", 0)
-						ps = int(ps)
-						var ps_max = int(poke.get("ps_max", 0))
-						var exp = poke.get("exp_actual", "")
-						if exp == "":
-							exp = 0
-						exp = int(exp)
-						var exp_max = int(poke.get("exp_evo", 0))
-						var atrapado = int(poke.get("atrapado", 0))
-						# En cada llamada a configurar, agrega el parámetro nombre
-						# En equipo, mostrar_sello = false
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true)
-						grid_equipo.add_child(tarjeta)
-	else:
-		print("No se pudo abrir el archivo POKEMON_DB.json")
+	var pokemons_db_local = cargar_json()
+	if typeof(pokemons_db_local) == TYPE_ARRAY:
+		pokemons_db_local.sort_custom(func(a, b): return int(a["equipo"]) < int(b["equipo"]))
+		for poke in pokemons_db_local:
+			var eq = int(poke.get("equipo", 0))
+			if eq > 0 and eq <= 6:
+				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+				if tarjeta_escena:
+					var tarjeta = tarjeta_escena.instantiate()
+					var imagen_path = poke.get("img_link", "")
+					var ps = poke.get("ps_actual", "")
+					if ps == "":
+						ps = poke.get("ps_max", 0)
+					ps = int(ps)
+					var ps_max = int(poke.get("ps_max", 0))
+					var exp = poke.get("exp_actual", "")
+					if exp == "":
+						exp = 0
+					exp = int(exp)
+					var exp_max = int(poke.get("exp_evo", 0))
+					var atrapado = int(poke.get("atrapado", 0))
+					# En equipo, mostrar_sello = false
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true)
+					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_popup_tarjeta_equipo").bind(poke))
+					grid_equipo.add_child(tarjeta)
+
+func mostrar_popup_tarjeta_equipo(poke):
+	# Cerrar cualquier ventana modal abierta
+	if confirmacion.visible:
+		confirmacion.hide()
+	popup_tarjeta.hide()
+	# Limpiar el contenedor del popup
+	for child in contenedor_tarjeta.get_children():
+		child.queue_free()
+	# Instanciar la tarjeta y configurarla con los datos del Pokémon
+	var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+	if tarjeta_escena:
+		var tarjeta = tarjeta_escena.instantiate()
+		var imagen_path = poke.get("img_link", "")
+		var ps = poke.get("ps_actual", "")
+		if ps == "":
+			ps = poke.get("ps_max", 0)
+		ps = int(ps)
+		var ps_max = int(poke.get("ps_max", 0))
+		var exp = poke.get("exp_actual", "")
+		if exp == "":
+			exp = 0
+		exp = int(exp)
+		var exp_max = int(poke.get("exp_evo", 0))
+		var atrapado = int(poke.get("atrapado", 0))
+		# En equipo, mostrar_sello = false
+		tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true)
+		contenedor_tarjeta.add_child(tarjeta)
+	popup_tarjeta.popup_centered()
+
+func cerrar_popup_tarjeta():
+	popup_tarjeta.hide()
+	for child in contenedor_tarjeta.get_children():
+		child.queue_free()
 
 func mostrar_confirmacion(id_pokemon, nombre_pokemon):
 	id_pokemon_seleccionado = id_pokemon
@@ -202,18 +219,13 @@ func mostrar_confirmacion_pc(id_pokemon, nombre_pokemon):
 
 func mostrar_lista_equipo():
 	lista_equipo.clear()
-	var pokedex_json = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
-	if pokedex_json:
-		var data = pokedex_json.get_as_text()
-		var pokemons_db_local = []
-		if data:
-			pokemons_db_local = JSON.parse_string(data)
-		if typeof(pokemons_db_local) == TYPE_ARRAY:
-			for poke in pokemons_db_local:
-				var eq = int(poke.get("equipo", 0))
-				if eq > 0 and eq <= 6:
-					var texto = "%d - %s" % [eq, poke.get("nombre", "")]
-					lista_equipo.add_item(texto)
+	var pokemons_db_local = cargar_json()
+	if typeof(pokemons_db_local) == TYPE_ARRAY:
+		for poke in pokemons_db_local:
+			var eq = int(poke.get("equipo", 0))
+			if eq > 0 and eq <= 6:
+				var texto = "%d - %s" % [eq, poke.get("nombre", "")]
+				lista_equipo.add_item(texto)
 	lista_equipo.popup_centered()
 
 func _on_confirmation_dialog_confirmed():
@@ -228,7 +240,7 @@ func _on_confirmation_dialog_confirmed():
 			break
 	# Guardar el JSON actualizado (usando JSON.stringify para formato correcto)
 	if typeof(pokemons_db) == TYPE_ARRAY:
-		json_utils.save_pretty_json("res://SCRIPT/POKEMON_DB.json", pokemons_db)
+		guardar_json(pokemons_db)
 	else:
 		print("Error: pokemons_db no es un array válido")
 	# Refrescar la grilla para mostrar el sello
@@ -243,13 +255,7 @@ func _on_ListaEquipo_id_pressed(index):
 	var num_equipo = int(partes[0])
 	var nombre_equipo = partes[1]
 	# Leer la base de datos
-	var pokedex_json = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
-	var pokemons_db_local = []
-	if pokedex_json:
-		var data = pokedex_json.get_as_text()
-		if data:
-			pokemons_db_local = JSON.parse_string(data)
-	# Buscar el Pokémon del PC y el del equipo
+	var pokemons_db_local = cargar_json()
 	var id_pc = id_pokemon_seleccionado
 	var idx_pc = -1
 	var idx_eq = -1
@@ -267,8 +273,38 @@ func _on_ListaEquipo_id_pressed(index):
 		pokemons_db_local[idx_pc]["ubicacion"] = "equipo"
 		pokemons_db_local[idx_eq]["ubicacion"] = "pc"
 		# Guardar el JSON actualizado
-		json_utils.save_pretty_json("res://SCRIPT/POKEMON_DB.json", pokemons_db_local)
+		guardar_json(pokemons_db_local)
 		# Refrescar las vistas
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_equipo()
 	lista_equipo.hide()
+
+func cargar_json():
+	var file = FileAccess.open(JSON_PATH_USER, FileAccess.READ)
+	if file == null:
+		# Si no existe en user://, copiar desde res://
+		var res_file = FileAccess.open(JSON_PATH_RES, FileAccess.READ)
+		if res_file:
+			var data = res_file.get_as_text()
+			res_file.close()
+			var user_file = FileAccess.open(JSON_PATH_USER, FileAccess.WRITE)
+			if user_file:
+				user_file.store_string(data)
+				user_file.close()
+				file = FileAccess.open(JSON_PATH_USER, FileAccess.READ)
+	if file:
+		var json_text = file.get_as_text()
+		file.close()
+		var json = JSON.parse_string(json_text)
+		if typeof(json) == TYPE_ARRAY:
+			return json
+		else:
+			return []
+	else:
+		return {}
+
+func guardar_json(data):
+	var file = FileAccess.open(JSON_PATH_USER, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data, "\t"))
+		file.close()
