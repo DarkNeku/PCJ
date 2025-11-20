@@ -22,6 +22,10 @@ theme_override_font_sizes/font_size = 30
 text = "EQUIPO"
 horizontal_alignment = 1
 
+[node name="Control" type="Control" parent="PanelEquipo"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
 [node name="GridContainer" type="GridContainer" parent="PanelEquipo"]
 layout_mode = 2
 columns = 2
@@ -103,9 +107,12 @@ text = "CAPTURA"
 
 [node name="CONFIRMACION" type="ConfirmationDialog" parent="."]
 title = "CONFIRMA"
-size = Vector2i(500, 200)
+size = Vector2i(500, 250)
 theme = SubResource("Theme_unuhw")
 ok_button_text = "SI"
 cancel_button_text = "NO"
+
+[node name="ListaEquipo" type="PopupMenu" parent="."]
+theme_override_font_sizes/font_size = 40
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
