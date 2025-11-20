@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PCJ"
-run/main_scene="uid://b2eoxbojvfrd4"
+run/main_scene="uid://yo2i6m45rom8"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,3 +28,4 @@ window/handheld/orientation=1
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

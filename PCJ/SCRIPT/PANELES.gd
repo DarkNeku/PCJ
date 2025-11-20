@@ -94,8 +94,8 @@ func mostrar_tarjetas_captura():
 						var exp_max = int(poke.get("exp_evo", 0))
 						var atrapado = int(poke.get("atrapado", 0))
 						var id_poke = poke.get("id", "")
-						# En cada llamada a configurar, agrega el parámetro nombre
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, true, poke.get("nombre", ""))
+						# En captura, mostrar_sello = true
+						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, true, poke.get("nombre", ""), false)
 						tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(id_poke, poke.get("nombre", "")))
 						grid_captura.add_child(tarjeta)
 	else:
@@ -135,7 +135,8 @@ func mostrar_tarjetas_pc():
 						var exp_max = int(poke.get("exp_evo", 0))
 						var atrapado = int(poke.get("atrapado", 0))
 						# En cada llamada a configurar, agrega el parámetro nombre
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""))
+						# En PC, mostrar_sello = false, mostrar_barras = true, es_pc = true
+						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true, true)
 						tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion_pc").bind(poke.get("id", ""), poke.get("nombre", "")))
 						grid_pc.add_child(tarjeta)
 	else:
@@ -176,7 +177,8 @@ func mostrar_tarjetas_equipo():
 						var exp_max = int(poke.get("exp_evo", 0))
 						var atrapado = int(poke.get("atrapado", 0))
 						# En cada llamada a configurar, agrega el parámetro nombre
-						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""))
+						# En equipo, mostrar_sello = false
+						tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true)
 						grid_equipo.add_child(tarjeta)
 	else:
 		print("No se pudo abrir el archivo POKEMON_DB.json")
