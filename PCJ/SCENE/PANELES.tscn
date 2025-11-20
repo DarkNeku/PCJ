@@ -141,22 +141,28 @@ theme_override_font_sizes/font_size = 40
 
 [node name="PopupTarjetaPokemon" type="Window" parent="."]
 title = "POKEMON"
-size = Vector2i(1000, 700)
+size = Vector2i(1000, 1000)
 visible = false
 
 [node name="ContenedorTarjeta" type="VBoxContainer" parent="PopupTarjetaPokemon"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BtnCerrarPopup" type="Button" parent="PopupTarjetaPokemon"]
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 623.0
+offset_top = -31.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
 text = "CERRAR"
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]

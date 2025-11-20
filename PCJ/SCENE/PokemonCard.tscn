@@ -54,24 +54,29 @@ size_flags_horizontal = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 mouse_filter = 1
+theme_override_font_sizes/font_size = 30
 text = "PS"
 
 [node name="ProgressBar" type="ProgressBar" parent="BARRAS/SALUD"]
-custom_minimum_size = Vector2(150, 25)
+custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 1
 value = 25.0
 show_percentage = false
 
 [node name="PS_ACTUAL" type="Label" parent="BARRAS/SALUD"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 
 [node name="SEPARACION" type="Label" parent="BARRAS/SALUD"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "/"
 
 [node name="PS_MAX" type="Label" parent="BARRAS/SALUD"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 
 [node name="Control" type="HBoxContainer" parent="BARRAS"]
 custom_minimum_size = Vector2(30, 0)
@@ -86,7 +91,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 mouse_filter = 1
+theme_override_font_sizes/font_size = 30
 text = "EXP"
 
 [node name="EXP_ACTUAL" type="Label" parent="BARRAS/EXPERIENCIA"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30

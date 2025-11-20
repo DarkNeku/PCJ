@@ -174,24 +174,12 @@ func mostrar_popup_tarjeta_equipo(poke):
 	# Limpiar el contenedor del popup
 	for child in contenedor_tarjeta.get_children():
 		child.queue_free()
-	# Instanciar la tarjeta y configurarla con los datos del Pokémon
-	var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
+	# Instanciar la tarjeta grande y configurarla con la imagen del Pokémon
+	var tarjeta_escena = load("res://SCENE/PokemonCardGrande.tscn")
 	if tarjeta_escena:
 		var tarjeta = tarjeta_escena.instantiate()
 		var imagen_path = poke.get("img_link", "")
-		var ps = poke.get("ps_actual", "")
-		if ps == "":
-			ps = poke.get("ps_max", 0)
-		ps = int(ps)
-		var ps_max = int(poke.get("ps_max", 0))
-		var exp = poke.get("exp_actual", "")
-		if exp == "":
-			exp = 0
-		exp = int(exp)
-		var exp_max = int(poke.get("exp_evo", 0))
-		var atrapado = int(poke.get("atrapado", 0))
-		# En equipo, mostrar_sello = false
-		tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp, exp_max, atrapado, false, poke.get("nombre", ""), true)
+		tarjeta.call_deferred("configurar", imagen_path)
 		contenedor_tarjeta.add_child(tarjeta)
 	popup_tarjeta.popup_centered()
 

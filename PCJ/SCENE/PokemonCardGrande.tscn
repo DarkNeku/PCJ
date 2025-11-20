@@ -1,0 +1,92 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmfnyg0got4y"]
+
+[ext_resource type="Script" uid="uid://uwftg3g8aee5" path="res://SCRIPT/PokemonCardGrande.gd" id="1_d3rg1"]
+
+[node name="PokemonCard" type="VBoxContainer"]
+custom_minimum_size = Vector2(240, 280)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_d3rg1")
+
+[node name="ImagenContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(535, 550)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="ImagenContainer"]
+custom_minimum_size = Vector2(0, 550)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BARRAS" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="SALUD" type="HBoxContainer" parent="BARRAS"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PS" type="Label" parent="BARRAS/SALUD"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 80
+text = "PS"
+
+[node name="PS_ACTUAL" type="Label" parent="BARRAS/SALUD"]
+layout_mode = 2
+
+[node name="SEPARACION" type="Label" parent="BARRAS/SALUD"]
+layout_mode = 2
+text = "/"
+
+[node name="PS_MAX" type="Label" parent="BARRAS/SALUD"]
+layout_mode = 2
+
+[node name="Control" type="HBoxContainer" parent="BARRAS"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="EXPERIENCIA" type="HBoxContainer" parent="BARRAS"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="EXP" type="Label" parent="BARRAS/EXPERIENCIA"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 1
+text = "EXP"
+
+[node name="EXP_ACTUAL" type="Label" parent="BARRAS/EXPERIENCIA"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -38.0
+offset_right = 27.5
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
