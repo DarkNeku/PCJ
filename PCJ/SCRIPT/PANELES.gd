@@ -23,6 +23,7 @@ var id_pokemon_seleccionado = ""
 var filtro_busqueda = ""
 var filtro_busqueda_pc = ""
 var pokemons_db = []
+var json_utils = preload("res://SCRIPT/json_utils.gd").new()
 
 func _ready():
 	mostrar_seccion("equipo")
@@ -225,9 +226,7 @@ func _on_confirmation_dialog_confirmed():
 			break
 	# Guardar el JSON actualizado (usando JSON.stringify para formato correcto)
 	if typeof(pokemons_db) == TYPE_ARRAY:
-		var file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.WRITE)
-		if file:
-			file.store_string(JSON.stringify(pokemons_db))
+		json_utils.save_pretty_json("res://SCRIPT/POKEMON_DB.json", pokemons_db)
 	else:
 		print("Error: pokemons_db no es un array válido")
 	# Refrescar la grilla para mostrar el sello
@@ -266,9 +265,7 @@ func _on_ListaEquipo_id_pressed(index):
 		pokemons_db_local[idx_pc]["ubicacion"] = "equipo"
 		pokemons_db_local[idx_eq]["ubicacion"] = "pc"
 		# Guardar el JSON actualizado
-		var file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.WRITE)
-		if file:
-			file.store_string(JSON.stringify(pokemons_db_local))
+		json_utils.save_pretty_json("res://SCRIPT/POKEMON_DB.json", pokemons_db_local)
 		# Refrescar las vistas
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_equipo()
