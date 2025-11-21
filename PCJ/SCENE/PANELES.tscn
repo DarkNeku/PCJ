@@ -57,6 +57,7 @@ horizontal_alignment = 1
 [node name="busquedaPC" type="LineEdit" parent="PanelPC"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
 placeholder_text = "Buscar Pokémon en PC..."
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelPC"]
@@ -87,6 +88,7 @@ horizontal_alignment = 1
 [node name="BarraBusqueda" type="LineEdit" parent="PanelCaptura"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
 placeholder_text = "Buscar Pokémon..."
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelCaptura"]
@@ -114,35 +116,36 @@ alignment = 1
 [node name="BtnEquipo" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 80
 text = "EQUIPO"
 
 [node name="BtnPC" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 80
 text = "PC"
 
 [node name="BtnCaptura" type="Button" parent="BarraNavegacion"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 80
 text = "CAPTURA"
 
 [node name="CONFIRMACION" type="ConfirmationDialog" parent="."]
 title = "CONFIRMA"
-size = Vector2i(500, 250)
+size = Vector2i(500, 390)
+borderless = true
 theme = SubResource("Theme_unuhw")
-ok_button_text = "SI"
-cancel_button_text = "NO"
+ok_button_text = "   SI   "
+cancel_button_text = " NO "
 
 [node name="ListaEquipo" type="PopupMenu" parent="."]
 theme_override_font_sizes/font_size = 40
 
 [node name="PopupTarjetaPokemon" type="Window" parent="."]
-title = "POKEMON"
 size = Vector2i(1000, 1000)
 visible = false
+borderless = true
 
 [node name="ContenedorTarjeta" type="VBoxContainer" parent="PopupTarjetaPokemon"]
 anchors_preset = 15
@@ -152,6 +155,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="BTNGUARDARPOPUP" type="Button" parent="PopupTarjetaPokemon"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -190.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+text = "GUARDAR"
 
 [node name="BtnCerrarPopup" type="Button" parent="PopupTarjetaPokemon"]
 anchors_preset = 12

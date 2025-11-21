@@ -1,6 +1,88 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmfnyg0got4y"]
+[gd_scene load_steps=3 format=3 uid="uid://cmfnyg0got4y"]
 
 [ext_resource type="Script" uid="uid://uwftg3g8aee5" path="res://SCRIPT/PokemonCardGrande.gd" id="1_d3rg1"]
+
+[sub_resource type="FontFile" id="FontFile_d3rg1"]
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/85/0/ascent = 0.0
+cache/0/85/0/descent = 0.0
+cache/0/85/0/underline_position = 0.0
+cache/0/85/0/underline_thickness = 0.0
+cache/0/85/0/scale = 1.0
+cache/0/90/0/ascent = 0.0
+cache/0/90/0/descent = 0.0
+cache/0/90/0/underline_position = 0.0
+cache/0/90/0/underline_thickness = 0.0
+cache/0/90/0/scale = 1.0
+cache/0/95/0/ascent = 0.0
+cache/0/95/0/descent = 0.0
+cache/0/95/0/underline_position = 0.0
+cache/0/95/0/underline_thickness = 0.0
+cache/0/95/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/105/0/ascent = 0.0
+cache/0/105/0/descent = 0.0
+cache/0/105/0/underline_position = 0.0
+cache/0/105/0/underline_thickness = 0.0
+cache/0/105/0/scale = 1.0
+cache/0/110/0/ascent = 0.0
+cache/0/110/0/descent = 0.0
+cache/0/110/0/underline_position = 0.0
+cache/0/110/0/underline_thickness = 0.0
+cache/0/110/0/scale = 1.0
+cache/0/115/0/ascent = 0.0
+cache/0/115/0/descent = 0.0
+cache/0/115/0/underline_position = 0.0
+cache/0/115/0/underline_thickness = 0.0
+cache/0/115/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+cache/0/125/0/ascent = 0.0
+cache/0/125/0/descent = 0.0
+cache/0/125/0/underline_position = 0.0
+cache/0/125/0/underline_thickness = 0.0
+cache/0/125/0/scale = 1.0
+cache/0/80/0/ascent = 0.0
+cache/0/80/0/descent = 0.0
+cache/0/80/0/underline_position = 0.0
+cache/0/80/0/underline_thickness = 0.0
+cache/0/80/0/scale = 1.0
+cache/0/75/0/ascent = 0.0
+cache/0/75/0/descent = 0.0
+cache/0/75/0/underline_position = 0.0
+cache/0/75/0/underline_thickness = 0.0
+cache/0/75/0/scale = 1.0
+cache/0/70/0/ascent = 0.0
+cache/0/70/0/descent = 0.0
+cache/0/70/0/underline_position = 0.0
+cache/0/70/0/underline_thickness = 0.0
+cache/0/70/0/scale = 1.0
+cache/0/65/0/ascent = 0.0
+cache/0/65/0/descent = 0.0
+cache/0/65/0/underline_position = 0.0
+cache/0/65/0/underline_thickness = 0.0
+cache/0/65/0/scale = 1.0
+cache/0/130/0/ascent = 0.0
+cache/0/130/0/descent = 0.0
+cache/0/130/0/underline_position = 0.0
+cache/0/130/0/underline_thickness = 0.0
+cache/0/130/0/scale = 1.0
 
 [node name="PokemonCard" type="VBoxContainer"]
 custom_minimum_size = Vector2(240, 280)
@@ -27,66 +109,140 @@ anchor_bottom = 1.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BARRAS" type="HBoxContainer" parent="."]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
 
-[node name="SALUD" type="HBoxContainer" parent="BARRAS"]
-custom_minimum_size = Vector2(0, 30)
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 
-[node name="PS" type="Label" parent="BARRAS/SALUD"]
+[node name="PS" type="Label" parent="HBoxContainer/Panel"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+offset_left = 16.0
+offset_top = 81.0
+offset_right = 152.0
+offset_bottom = 177.0
 mouse_filter = 1
-theme_override_font_sizes/font_size = 80
-text = "PS"
+theme_override_font_sizes/font_size = 60
+text = "PS   "
 
-[node name="PS_ACTUAL" type="Label" parent="BARRAS/SALUD"]
-layout_mode = 2
+[node name="PS_LINE" type="LineEdit" parent="HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 91.0
+offset_top = -38.0
+offset_right = 287.0
+offset_bottom = 39.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
 
-[node name="SEPARACION" type="Label" parent="BARRAS/SALUD"]
+[node name="SEPARACION" type="Label" parent="HBoxContainer/Panel"]
 layout_mode = 2
+offset_left = 290.0
+offset_top = 12.0
+offset_right = 349.0
+offset_bottom = 217.0
+theme_override_font_sizes/font_size = 150
 text = "/"
 
-[node name="PS_MAX" type="Label" parent="BARRAS/SALUD"]
+[node name="SEPARACION2" type="Label" parent="HBoxContainer/Panel"]
 layout_mode = 2
+offset_left = 808.0
+offset_top = 12.0
+offset_right = 867.0
+offset_bottom = 217.0
+theme_override_font_sizes/font_size = 150
+text = "/"
 
-[node name="Control" type="HBoxContainer" parent="BARRAS"]
-custom_minimum_size = Vector2(30, 0)
+[node name="SEPARACION3" type="Label" parent="HBoxContainer/Panel"]
 layout_mode = 2
-size_flags_horizontal = 6
+offset_left = 392.0
+offset_top = -81.0
+offset_right = 557.0
+offset_bottom = 261.0
+theme_override_colors/font_color = Color(0.698834, 0, 0.0242553, 1)
+theme_override_font_sizes/font_size = 250
+text = "|"
 
-[node name="EXPERIENCIA" type="HBoxContainer" parent="BARRAS"]
-custom_minimum_size = Vector2(0, 30)
+[node name="PS_MAX" type="Label" parent="HBoxContainer/Panel"]
 layout_mode = 2
+offset_left = 349.0
+offset_top = 64.0
+offset_right = 477.0
+offset_bottom = 198.0
+theme_override_colors/font_color = Color(0.121569, 1, 0.282353, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("FontFile_d3rg1")
+theme_override_font_sizes/font_size = 80
 
-[node name="EXP" type="Label" parent="BARRAS/EXPERIENCIA"]
+[node name="EXP_ACT" type="Label" parent="HBoxContainer/Panel"]
+layout_mode = 2
+offset_left = 867.0
+offset_top = 64.0
+offset_right = 995.0
+offset_bottom = 198.0
+theme_override_colors/font_color = Color(4.81307e-07, 0.429902, 0.652709, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("FontFile_d3rg1")
+theme_override_font_sizes/font_size = 80
+
+[node name="EXP" type="Label" parent="HBoxContainer/Panel"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+offset_left = 482.0
+offset_top = 76.0
+offset_right = 689.0
+offset_bottom = 186.0
 mouse_filter = 1
-text = "EXP"
+theme_override_font_sizes/font_size = 70
+text = "EXP   "
 
-[node name="EXP_ACTUAL" type="Label" parent="BARRAS/EXPERIENCIA"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="TextEdit" type="TextEdit" parent="Panel"]
+[node name="EXP_LINE" type="LineEdit" parent="HBoxContainer/Panel"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.5
+offset_left = 610.0
 offset_top = -38.0
-offset_right = 27.5
-offset_bottom = 38.0
-grow_horizontal = 2
+offset_right = 806.0
+offset_bottom = 39.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 50
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
+
+[node name="MAS_PS" type="Button" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 12.0
+offset_right = 287.0
+offset_bottom = 87.0
+
+[node name="MAS_EXP" type="Button" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 12.0
+offset_right = 806.0
+offset_bottom = 87.0
+
+[node name="MENOS_PS" type="Button" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 164.0
+offset_right = 287.0
+offset_bottom = 239.0
+
+[node name="MENOS_EXP" type="Button" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 164.0
+offset_right = 806.0
+offset_bottom = 239.0

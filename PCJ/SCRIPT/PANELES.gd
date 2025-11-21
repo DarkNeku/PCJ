@@ -19,6 +19,7 @@ extends VBoxContainer
 @onready var popup_tarjeta = $PopupTarjetaPokemon
 @onready var contenedor_tarjeta = $PopupTarjetaPokemon/ContenedorTarjeta
 @onready var btn_cerrar_popup = $PopupTarjetaPokemon/BtnCerrarPopup
+@onready var btn_guardar_popup = $PopupTarjetaPokemon/BTNGUARDARPOPUP
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -43,6 +44,7 @@ func _ready():
 		busquedaPC.text_changed.connect(_on_busquedaPC_text_changed)
 	lista_equipo.id_pressed.connect(_on_ListaEquipo_id_pressed)
 	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
+	btn_guardar_popup.pressed.connect(_on_btn_guardar_popup_pressed)
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -179,7 +181,9 @@ func mostrar_popup_tarjeta_equipo(poke):
 	if tarjeta_escena:
 		var tarjeta = tarjeta_escena.instantiate()
 		var imagen_path = poke.get("img_link", "")
-		tarjeta.call_deferred("configurar", imagen_path)
+		var ps_max = int(poke.get("ps_max", 0))
+		var exp_actual = int(poke.get("exp_actual", 0))
+		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual)
 		contenedor_tarjeta.add_child(tarjeta)
 	popup_tarjeta.popup_centered()
 
@@ -296,3 +300,37 @@ func guardar_json(data):
 	if file:
 		file.store_string(JSON.stringify(data, "\t"))
 		file.close()
+
+func _on_btn_guardar_popup_pressed():
+	# Obtener la tarjeta grande actual
+	if contenedor_tarjeta.get_child_count() == 0:
+		return
+	var tarjeta = contenedor_tarjeta.get_child(0)
+	# Obtener los valores de los LineEdit
+	var ps_line = tarjeta.get_node("HBoxContainer/Panel/PS_LINE")
+	var exp_line = tarjeta.get_node("HBoxContainer/Panel/EXP_LINE")
+	if not ps_line or not exp_line:
+		return
+	var nuevo_ps = int(ps_line.text)
+	var nueva_exp = int(exp_line.text)
+	# Buscar el Pokémon en la base de datos por id
+	var id_poke = null
+	if tarjeta.has_method("get_id"):
+		id_poke = tarjeta.get_id()
+	else:
+		# Si no hay método, buscar por imagen o por el id guardado en variable global
+		id_poke = id_pokemon_seleccionado
+	if not id_poke:
+		return
+	var pokemons_db_local = cargar_json()
+	for poke in pokemons_db_local:
+		if poke.get("id", "") == str(id_poke):
+			poke["ps_actual"] = str(nuevo_ps)
+			poke["exp_actual"] = str(nueva_exp)
+			break
+	guardar_json(pokemons_db_local)
+	# Opcional: refrescar la vista
+	mostrar_tarjetas_equipo()
+	mostrar_tarjetas_pc()
+	mostrar_tarjetas_captura()
+	popup_tarjeta.hide()
