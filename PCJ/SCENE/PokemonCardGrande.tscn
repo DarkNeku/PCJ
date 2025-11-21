@@ -140,7 +140,7 @@ offset_bottom = 39.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 alignment = 1
-max_length = 3
+max_length = 2
 virtual_keyboard_type = 2
 
 [node name="SEPARACION" type="Label" parent="HBoxContainer/Panel"]

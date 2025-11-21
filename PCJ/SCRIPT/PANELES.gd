@@ -317,16 +317,20 @@ func _on_btn_guardar_popup_pressed():
 	# Obtener los valores de los LineEdit
 	var ps_line = tarjeta.get_node("HBoxContainer/Panel/PS_LINE")
 	var exp_line = tarjeta.get_node("HBoxContainer/Panel/EXP_LINE")
-	if not ps_line or not exp_line:
+	var ps_max_label = tarjeta.get_node("HBoxContainer/Panel/PS_MAX")
+	if not ps_line or not exp_line or not ps_max_label:
 		return
 	var nuevo_ps = int(ps_line.text)
+	var ps_max = int(ps_max_label.text)
+	if nuevo_ps > ps_max:
+		nuevo_ps = ps_max
+		ps_line.text = str(ps_max)
 	var nueva_exp = int(exp_line.text)
 	# Buscar el Pokémon en la base de datos por id
 	var id_poke = null
 	if tarjeta.has_method("get_id"):
 		id_poke = tarjeta.get_id()
 	else:
-		# Si no hay método, buscar por imagen o por el id guardado en variable global
 		id_poke = id_pokemon_seleccionado
 	if not id_poke:
 		return
@@ -337,7 +341,6 @@ func _on_btn_guardar_popup_pressed():
 			poke["exp_actual"] = str(nueva_exp)
 			break
 	guardar_json(pokemons_db_local)
-	# Opcional: refrescar la vista
 	mostrar_tarjetas_equipo()
 	mostrar_tarjetas_pc()
 	mostrar_tarjetas_captura()
