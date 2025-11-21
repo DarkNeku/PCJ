@@ -181,4 +181,9 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 60
 text = "CERRAR"
 
+[node name="ALERT_GUARDADO" type="AcceptDialog" parent="PopupTarjetaPokemon"]
+title = ""
+size = Vector2i(100, 285)
+borderless = true
+
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]

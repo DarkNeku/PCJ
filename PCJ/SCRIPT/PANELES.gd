@@ -20,6 +20,7 @@ extends VBoxContainer
 @onready var contenedor_tarjeta = $PopupTarjetaPokemon/ContenedorTarjeta
 @onready var btn_cerrar_popup = $PopupTarjetaPokemon/BtnCerrarPopup
 @onready var btn_guardar_popup = $PopupTarjetaPokemon/BTNGUARDARPOPUP
+@onready var alert_guardado = $PopupTarjetaPokemon/ALERT_GUARDADO
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -45,6 +46,11 @@ func _ready():
 	lista_equipo.id_pressed.connect(_on_ListaEquipo_id_pressed)
 	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
 	btn_guardar_popup.pressed.connect(_on_btn_guardar_popup_pressed)
+	# Forzar el popup a ser modal
+	if popup_tarjeta.has_method("set_modal"):
+		popup_tarjeta.set_modal(true)
+	elif "modal" in popup_tarjeta:
+		popup_tarjeta.modal = true
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -190,12 +196,20 @@ func mostrar_popup_tarjeta_equipo(poke):
 		var id_poke = poke.get("id", "")
 		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual, ps_actual, id_poke)
 		contenedor_tarjeta.add_child(tarjeta)
+	# Deshabilitar navegación mientras el popup está abierto
+	btn_equipo.disabled = true
+	btn_pc.disabled = true
+	btn_captura.disabled = true
 	popup_tarjeta.popup_centered()
 
 func cerrar_popup_tarjeta():
 	popup_tarjeta.hide()
 	for child in contenedor_tarjeta.get_children():
 		child.queue_free()
+	# Habilitar navegación al cerrar el popup
+	btn_equipo.disabled = false
+	btn_pc.disabled = false
+	btn_captura.disabled = false
 
 func mostrar_confirmacion(id_pokemon, nombre_pokemon):
 	id_pokemon_seleccionado = id_pokemon
@@ -309,6 +323,59 @@ func guardar_json(data):
 		file.store_string(JSON.stringify(data, "\t"))
 		file.close()
 
+var popup_confirmacion_actualizacion: AcceptDialog = null
+var panel_mensaje_actualizacion: Panel = null
+
+func mostrar_confirmacion_actualizacion():
+	if popup_confirmacion_actualizacion:
+		popup_confirmacion_actualizacion.queue_free()
+	popup_confirmacion_actualizacion = AcceptDialog.new()
+	popup_confirmacion_actualizacion.title = ""
+	popup_confirmacion_actualizacion.dialog_text = "DATOS ACTUALIZADOS"
+	popup_confirmacion_actualizacion.resizable = false
+	popup_confirmacion_actualizacion.modal = true
+	popup_confirmacion_actualizacion.get_ok_button().text = "OK"
+	popup_tarjeta.add_child(popup_confirmacion_actualizacion)
+	popup_confirmacion_actualizacion.popup_centered()
+
+func mostrar_mensaje_actualizacion():
+	if panel_mensaje_actualizacion:
+		panel_mensaje_actualizacion.queue_free()
+	panel_mensaje_actualizacion = Panel.new()
+	panel_mensaje_actualizacion.name = "PanelMensajeActualizacion"
+	panel_mensaje_actualizacion.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	panel_mensaje_actualizacion.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	panel_mensaje_actualizacion.custom_minimum_size = Vector2(350, 120)
+	panel_mensaje_actualizacion.modulate = Color(0.1, 0.1, 0.1, 0.95)
+	panel_mensaje_actualizacion.set_anchors_and_margins_preset(Control.PRESET_CENTER)
+
+	var vbox = VBoxContainer.new()
+	vbox.anchor_right = 1
+	vbox.anchor_bottom = 1
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	vbox.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+
+	var label = Label.new()
+	label.text = "DATOS ACTUALIZADOS"
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 32)
+	vbox.add_child(label)
+
+	var btn_ok = Button.new()
+	btn_ok.text = "OK"
+	btn_ok.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn_ok.pressed.connect(func():
+		panel_mensaje_actualizacion.hide()
+		panel_mensaje_actualizacion.queue_free()
+	)
+	vbox.add_child(btn_ok)
+
+	panel_mensaje_actualizacion.add_child(vbox)
+	popup_tarjeta.add_child(panel_mensaje_actualizacion)
+	panel_mensaje_actualizacion.show()
+
 func _on_btn_guardar_popup_pressed():
 	# Obtener la tarjeta grande actual
 	if contenedor_tarjeta.get_child_count() == 0:
@@ -344,4 +411,13 @@ func _on_btn_guardar_popup_pressed():
 	mostrar_tarjetas_equipo()
 	mostrar_tarjetas_pc()
 	mostrar_tarjetas_captura()
-	popup_tarjeta.hide()
+	# Mostrar el mensaje de guardado
+	if alert_guardado:
+		alert_guardado.dialog_text = "DATOS GUARDADOS"
+		var label = alert_guardado.get_label()
+		if label:
+			label.add_theme_font_size_override("font_size", 50)
+		var ok_button = alert_guardado.get_ok_button()
+		if ok_button:
+			ok_button.add_theme_font_size_override("font_size", 50)
+		alert_guardado.popup_centered()
