@@ -21,6 +21,9 @@ extends VBoxContainer
 @onready var btn_cerrar_popup = $PopupTarjetaPokemon/BtnCerrarPopup
 @onready var btn_guardar_popup = $PopupTarjetaPokemon/BTNGUARDARPOPUP
 @onready var alert_guardado = $PopupTarjetaPokemon/ALERT_GUARDADO
+@onready var panel_control = $PANEL_CONTROL
+@onready var panel_vacio = $PANEL_VACIO
+@onready var btn_centro_pokemon = $PANEL_CONTROL/CENTRO_POKEMON
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -46,16 +49,43 @@ func _ready():
 	lista_equipo.id_pressed.connect(_on_ListaEquipo_id_pressed)
 	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
 	btn_guardar_popup.pressed.connect(_on_btn_guardar_popup_pressed)
+	btn_centro_pokemon.pressed.connect(_on_btn_centro_pokemon_pressed)
 	# Forzar el popup a ser modal
 	if popup_tarjeta.has_method("set_modal"):
 		popup_tarjeta.set_modal(true)
 	elif "modal" in popup_tarjeta:
 		popup_tarjeta.modal = true
+	if alert_guardado:
+		alert_guardado.confirmed.connect(_on_alert_guardado_confirmed)
+	# Modificar el texto del cuadro de curación
+	var label_curacion = $PANEL_CONTROL/CONFIRMAR_CURACION.get_label()
+	if label_curacion:
+		label_curacion.add_theme_font_size_override("font_size", 50)
+		label_curacion.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label_curacion.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	# Inicializar tamaño y centrado del popup de curación
+	var dialog = $PANEL_CONTROL/CONFIRMAR_CURACION
+	dialog.set_size(Vector2(400, 200))
+	dialog.popup_centered()
+	dialog.hide()
+	$PANEL_CONTROL/CONFIRMAR_CURACION.confirmed.connect(_on_confirmar_curacion_confirmed)
+
+func _on_alert_guardado_confirmed():
+	# Refresca el banner EXP_ACT en PokemonCardGrande si está visible
+	if contenedor_tarjeta.get_child_count() > 0:
+		var tarjeta = contenedor_tarjeta.get_child(0)
+		if tarjeta and tarjeta.has_node("HBoxContainer/Panel/EXP_ACT") and tarjeta.has_node("HBoxContainer/Panel/EXP_LINE"):
+			var exp_actual_label = tarjeta.get_node("HBoxContainer/Panel/EXP_ACT")
+			var exp_line_edit = tarjeta.get_node("HBoxContainer/Panel/EXP_LINE")
+			if exp_actual_label and exp_line_edit:
+				exp_actual_label.text = exp_line_edit.text
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
 	panel_pc.visible = (seccion == "pc")
 	panel_captura.visible = (seccion == "captura")
+	panel_control.visible = (seccion == "equipo")
+	panel_vacio.visible = (seccion == "pc" or seccion == "captura")
 	# Para que el panel visible se muestre arriba, lo movemos al inicio del VBoxContainer
 	if seccion == "equipo":
 		move_child(panel_equipo, 0)
@@ -174,6 +204,11 @@ func mostrar_tarjetas_equipo():
 					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_popup_tarjeta_equipo").bind(poke))
 					grid_equipo.add_child(tarjeta)
 
+func set_panel_control_disabled(disabled: bool):
+	for child in panel_control.get_children():
+		if child is Button:
+			child.disabled = disabled
+
 func mostrar_popup_tarjeta_equipo(poke):
 	# Cerrar cualquier ventana modal abierta
 	if confirmacion.visible:
@@ -196,20 +231,22 @@ func mostrar_popup_tarjeta_equipo(poke):
 		var id_poke = poke.get("id", "")
 		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual, ps_actual, id_poke)
 		contenedor_tarjeta.add_child(tarjeta)
-	# Deshabilitar navegación mientras el popup está abierto
+	# Deshabilitar navegación y panel_control mientras el popup está abierto
 	btn_equipo.disabled = true
 	btn_pc.disabled = true
 	btn_captura.disabled = true
+	set_panel_control_disabled(true)
 	popup_tarjeta.popup_centered()
 
 func cerrar_popup_tarjeta():
 	popup_tarjeta.hide()
 	for child in contenedor_tarjeta.get_children():
 		child.queue_free()
-	# Habilitar navegación al cerrar el popup
+	# Habilitar navegación y panel_control al cerrar el popup
 	btn_equipo.disabled = false
 	btn_pc.disabled = false
 	btn_captura.disabled = false
+	set_panel_control_disabled(false)
 
 func mostrar_confirmacion(id_pokemon, nombre_pokemon):
 	id_pokemon_seleccionado = id_pokemon
@@ -421,3 +458,30 @@ func _on_btn_guardar_popup_pressed():
 		if ok_button:
 			ok_button.add_theme_font_size_override("font_size", 50)
 		alert_guardado.popup_centered()
+
+func _on_btn_centro_pokemon_pressed():
+	var dialog = $PANEL_CONTROL/CONFIRMAR_CURACION
+	dialog.set_size(Vector2(400, 200)) # Tamaño más grande y estándar
+	dialog.popup_centered()
+	# Hacer los botones SI y NO grandes
+	var ok_button = dialog.get_ok_button()
+	if ok_button:
+		ok_button.add_theme_font_size_override("font_size", 50)
+	var cancel_button = dialog.get_cancel_button()
+	if cancel_button:
+		cancel_button.add_theme_font_size_override("font_size", 50)
+
+func _on_confirmar_curacion_confirmed():
+	var pokemons_db_local = cargar_json()
+	var curados = false
+	for poke in pokemons_db_local:
+		var eq = int(poke.get("equipo", 0))
+		if eq > 0 and eq <= 6:
+			if poke.has("ps_max"):
+				poke["ps_actual"] = str(poke["ps_max"])
+				curados = true
+	if curados:
+		guardar_json(pokemons_db_local)
+		mostrar_tarjetas_equipo()
+		mostrar_tarjetas_pc()
+		mostrar_tarjetas_captura()

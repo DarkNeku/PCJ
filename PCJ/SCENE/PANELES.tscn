@@ -1,6 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=8 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
+[ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahi4q"]
+texture = ExtResource("2_m3bc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_quhiq"]
+texture = ExtResource("2_m3bc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3n73y"]
+texture = ExtResource("2_m3bc2")
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m3bc2"]
+texture = ExtResource("2_m3bc2")
 
 [sub_resource type="Theme" id="Theme_unuhw"]
 default_font_size = 40
@@ -102,8 +119,32 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="Control" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 30)
+[node name="PANEL_CONTROL" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CENTRO_POKEMON" type="Button" parent="PANEL_CONTROL"]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 9.0
+offset_right = 597.0
+offset_bottom = 123.0
+theme_override_styles/disabled = SubResource("StyleBoxTexture_ahi4q")
+theme_override_styles/hover = SubResource("StyleBoxTexture_quhiq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3n73y")
+theme_override_styles/normal = SubResource("StyleBoxTexture_m3bc2")
+
+[node name="CONFIRMAR_CURACION" type="ConfirmationDialog" parent="PANEL_CONTROL"]
+size = Vector2i(274, 100)
+borderless = true
+ok_button_text = " SI "
+dialog_text = "¿QUIERES CURAR TUS POKEMON?"
+cancel_button_text = "NO"
+
+[node name="PANEL_VACIO" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 
