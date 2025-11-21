@@ -183,7 +183,12 @@ func mostrar_popup_tarjeta_equipo(poke):
 		var imagen_path = poke.get("img_link", "")
 		var ps_max = int(poke.get("ps_max", 0))
 		var exp_actual = int(poke.get("exp_actual", 0))
-		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual)
+		var ps_actual = poke.get("ps_actual", "")
+		if ps_actual == "":
+			ps_actual = ps_max
+		ps_actual = int(ps_actual)
+		var id_poke = poke.get("id", "")
+		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual, ps_actual, id_poke)
 		contenedor_tarjeta.add_child(tarjeta)
 	popup_tarjeta.popup_centered()
 
@@ -264,6 +269,9 @@ func _on_ListaEquipo_id_pressed(index):
 		pokemons_db_local[idx_pc]["equipo"] = temp
 		pokemons_db_local[idx_pc]["ubicacion"] = "equipo"
 		pokemons_db_local[idx_eq]["ubicacion"] = "pc"
+		# Al pasar al PC, ps_actual = ps_max
+		if pokemons_db_local[idx_eq].has("ps_max"):
+			pokemons_db_local[idx_eq]["ps_actual"] = str(pokemons_db_local[idx_eq]["ps_max"])
 		# Guardar el JSON actualizado
 		guardar_json(pokemons_db_local)
 		# Refrescar las vistas
