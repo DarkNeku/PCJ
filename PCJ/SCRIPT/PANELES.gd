@@ -20,7 +20,7 @@ extends VBoxContainer
 @onready var contenedor_tarjeta = $PopupTarjetaPokemon/ContenedorTarjeta
 @onready var btn_cerrar_popup = $PopupTarjetaPokemon/BtnCerrarPopup
 @onready var btn_guardar_popup = $PopupTarjetaPokemon/BTNGUARDARPOPUP
-@onready var alert_guardado = $PopupTarjetaPokemon/ALERT_GUARDADO
+@onready var alert_guardado = $ALERT_GUARDADO
 @onready var panel_control = $PANEL_CONTROL
 @onready var panel_vacio = $PANEL_VACIO
 @onready var btn_centro_pokemon = $PANEL_CONTROL/CENTRO_POKEMON
@@ -50,13 +50,16 @@ func _ready():
 	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
 	btn_guardar_popup.pressed.connect(_on_btn_guardar_popup_pressed)
 	btn_centro_pokemon.pressed.connect(_on_btn_centro_pokemon_pressed)
-	# Forzar el popup a ser modal
+	# Forzar el popup a ser modal (opcional, puedes dejarlo en false si prefieres)
 	if popup_tarjeta.has_method("set_modal"):
 		popup_tarjeta.set_modal(true)
 	elif "modal" in popup_tarjeta:
 		popup_tarjeta.modal = true
 	if alert_guardado:
 		alert_guardado.confirmed.connect(_on_alert_guardado_confirmed)
+	# Conectar la señal de cierre de la ventana para restaurar la UI
+	if popup_tarjeta.has_signal("close_requested"):
+		popup_tarjeta.close_requested.connect(cerrar_popup_tarjeta)
 	# Modificar el texto del cuadro de curación
 	var label_curacion = $PANEL_CONTROL/CONFIRMAR_CURACION.get_label()
 	if label_curacion:
@@ -79,6 +82,13 @@ func _on_alert_guardado_confirmed():
 			var exp_line_edit = tarjeta.get_node("HBoxContainer/Panel/EXP_LINE")
 			if exp_actual_label and exp_line_edit:
 				exp_actual_label.text = exp_line_edit.text
+	# Habilitar navegación y panel_control al cerrar la alerta
+	btn_equipo.disabled = false
+	btn_pc.disabled = false
+	btn_captura.disabled = false
+	set_panel_control_disabled(false)
+	if not popup_tarjeta.visible:
+		popup_tarjeta.show()
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -371,7 +381,12 @@ func mostrar_confirmacion_actualizacion():
 	popup_confirmacion_actualizacion.dialog_text = "DATOS ACTUALIZADOS"
 	popup_confirmacion_actualizacion.resizable = false
 	popup_confirmacion_actualizacion.modal = true
+	popup_confirmacion_actualizacion.exclusive = true # Esto evita que se pueda interactuar fuera
 	popup_confirmacion_actualizacion.get_ok_button().text = "OK"
+	# Deshabilitar cerrar con Escape o clic fuera
+	popup_confirmacion_actualizacion.set_close_on_escape(false)
+	popup_confirmacion_actualizacion.set_hide_on_ok(true)
+	popup_confirmacion_actualizacion.connect("canceled", func(): popup_confirmacion_actualizacion.popup_centered())
 	popup_tarjeta.add_child(popup_confirmacion_actualizacion)
 	popup_confirmacion_actualizacion.popup_centered()
 
@@ -448,6 +463,8 @@ func _on_btn_guardar_popup_pressed():
 	mostrar_tarjetas_equipo()
 	mostrar_tarjetas_pc()
 	mostrar_tarjetas_captura()
+	# Ocultar el popup de la tarjeta antes de mostrar ALERT_GUARDADO
+	popup_tarjeta.hide()
 	# Mostrar el mensaje de guardado
 	if alert_guardado:
 		alert_guardado.dialog_text = "DATOS GUARDADOS"

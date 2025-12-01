@@ -1,5 +1,15 @@
 [
-	{
+
+  {
+    "nick": "",
+    "genero": "",
+    "fecha_inicio": "",
+    "fecha_ultima":"",
+    "dinero": "",
+    "medallas": "",
+    "casilla": ""
+  },
+  {
 		"atrapado": 1.0,
 		"equipo": 0.0,
 		"estado": "",

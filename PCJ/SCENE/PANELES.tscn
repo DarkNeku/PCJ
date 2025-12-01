@@ -186,6 +186,7 @@ theme_override_font_sizes/font_size = 40
 [node name="PopupTarjetaPokemon" type="Window" parent="."]
 size = Vector2i(1000, 1000)
 visible = false
+exclusive = true
 borderless = true
 
 [node name="ContenedorTarjeta" type="VBoxContainer" parent="PopupTarjetaPokemon"]
@@ -222,7 +223,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 60
 text = "CERRAR"
 
-[node name="ALERT_GUARDADO" type="AcceptDialog" parent="PopupTarjetaPokemon"]
+[node name="ALERT_GUARDADO" type="AcceptDialog" parent="."]
 title = ""
 size = Vector2i(100, 285)
 borderless = true
