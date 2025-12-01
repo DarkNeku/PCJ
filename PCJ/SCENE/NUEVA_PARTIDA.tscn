@@ -1,0 +1,186 @@
+[gd_scene load_steps=12 format=3 uid="uid://csmoo32qm1en6"]
+
+[ext_resource type="PackedScene" uid="uid://dlesib4bmtmj5" path="res://SCENE/PROFESOR_OAK.tscn" id="1_4wkrd"]
+
+[sub_resource type="Theme" id="Theme_4wkrd"]
+default_font_size = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wkrd"]
+bg_color = Color(0.913725, 0.0392157, 0.0431373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4k4h"]
+bg_color = Color(0.0352941, 0.862745, 0.0745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui1qq"]
+bg_color = Color(0.435294, 0.568627, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7rk6"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3lh8"]
+bg_color = Color(0.788235, 0.690196, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l27hy"]
+bg_color = Color(0.894118, 0.898039, 0.258824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bj0oa"]
+bg_color = Color(0.643137, 0.772549, 0.984314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcljb"]
+bg_color = Color(0.756863, 0.756863, 0.756863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6lwu"]
+bg_color = Color(0.968627, 0.027451, 0.760784, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterBody2D" parent="Panel" instance=ExtResource("1_4wkrd")]
+position = Vector2(578, 1365)
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1122.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -305.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "NOMBRE"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+
+[node name="Control" type="Control" parent="Panel/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "GENERO"
+
+[node name="OptionButton" type="OptionButton" parent="Panel/Panel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme = SubResource("Theme_4wkrd")
+theme_override_font_sizes/font_size = 100
+alignment = 1
+icon_alignment = 1
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "..."
+popup/item_0/id = 0
+popup/item_0/disabled = true
+popup/item_1/text = "MUJER"
+popup/item_1/id = 1
+popup/item_2/text = "HOMBRE"
+popup/item_2/id = 2
+
+[node name="Control2" type="Control" parent="Panel/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="COLOR" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "COLOR"
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="COLOR_RED" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wkrd")
+
+[node name="COLOR_GREEN" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_k4k4h")
+
+[node name="COLOR_BLUE" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ui1qq")
+
+[node name="COLOR_YELLOW" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c7rk6")
+
+[node name="COLOR_BROWN" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3lh8")
+
+[node name="COLOR_GOLD" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_l27hy")
+
+[node name="COLOR_CRYSTAL" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_bj0oa")
+
+[node name="COLOR_SILVER" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_tcljb")
+
+[node name="COLOR_KIMONO" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_g6lwu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

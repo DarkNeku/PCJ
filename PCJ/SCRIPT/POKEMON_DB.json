@@ -6,8 +6,67 @@
     "fecha_inicio": "",
     "fecha_ultima":"",
     "dinero": "",
-    "medallas": "",
     "casilla": ""
+  },
+  {
+    "nick": "",
+    "genero": "",
+    "fecha_inicio": "",
+    "fecha_ultima":"",
+    "dinero": "",
+    "casilla": "",
+    "color": "0"
+  },
+  {
+  "medalla_1": "0",
+  "medalla_2": "0",
+  "medalla_3": "0",
+  "medalla_4": "0",
+  "medalla_5": "0",
+  "medalla_6": "0",
+  "medalla_7": "0",
+  "medalla_8": "0",
+  "alto_mando": "0"
+    },
+  {
+    "corte": "0",
+    "vuelo": "0",
+    "surf": "0",
+    "fuerza": "0"
+  },
+  {
+    "uo1": "0",
+    "uo2": "0",
+    "uo3": "0",
+    "uo4": "0",
+    "uo5": "0",
+    "uo6": "0",
+    "uo7": "0",
+    "uo8": "0",
+    "uo9": "0",
+    "uo10": "0",
+    "uo11": "0"
+
+  },
+  {
+    "pokeball": "0",
+    "cuerda_huida": "0",
+    "piedra_fuego": "0",
+    "restaurar_todo": "0",
+    "superball": "0",
+    "chaleco_asalto": "0",
+    "piedra_agua": "0",
+    "revivir_maximo": "0",
+    "ultraball": "0",
+    "cinta_eleccion": "0",
+    "caramelo_raro": "0",
+    "pocion": "0",
+    "puerro": "0",
+    "piedra_hoja": "0",
+    "super_pocion": "0",
+    "revivir": "0",
+    "piedra_lunar": "0",
+    "piedra_trueno": "0"
   },
   {
 		"atrapado": 1.0,

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlesib4bmtmj5"]
+
+[ext_resource type="Texture2D" uid="uid://be6iih5bcdkx3" path="res://ASSET/PROFESOR_OAK.png" id="1_okmvl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ole21"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_okmvl")
+}],
+"loop": true,
+"name": &"QUIETO",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_ole21")
+animation = &"QUIETO"
