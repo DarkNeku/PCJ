@@ -1,18 +1,34 @@
-[gd_scene load_steps=12 format=3 uid="uid://csmoo32qm1en6"]
+[gd_scene load_steps=19 format=3 uid="uid://csmoo32qm1en6"]
 
 [ext_resource type="PackedScene" uid="uid://dlesib4bmtmj5" path="res://SCENE/PROFESOR_OAK.tscn" id="1_4wkrd"]
+[ext_resource type="Script" uid="uid://bts0anronk8bm" path="res://SCRIPT/NUEVA_PARTIDA.gd" id="1_k4k4h"]
 
 [sub_resource type="Theme" id="Theme_4wkrd"]
-default_font_size = 100
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_k4k4h"]
+default_font_size = 50
+
+[sub_resource type="Theme" id="Theme_ui1qq"]
+default_font_size = 55
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmdvr"]
+bg_color = Color(0.913725, 0.0392157, 0.0431373, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wkrd"]
 bg_color = Color(0.913725, 0.0392157, 0.0431373, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr4fv"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4k4h"]
 bg_color = Color(0.0352941, 0.862745, 0.0745098, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2xen"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ui1qq"]
 bg_color = Color(0.435294, 0.568627, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gucts"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7rk6"]
 bg_color = Color(1, 1, 0, 1)
@@ -39,6 +55,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k4k4h")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -49,13 +66,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CharacterBody2D" parent="Panel" instance=ExtResource("1_4wkrd")]
-position = Vector2(578, 1365)
+position = Vector2(554, 1165)
 
 [node name="Panel" type="Panel" parent="Panel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 1122.0
+offset_bottom = 901.0
 grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel"]
@@ -64,8 +81,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -305.0
-offset_bottom = 244.0
+offset_left = 40.0
+offset_top = -367.5
+offset_right = -40.0
+offset_bottom = 435.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -75,11 +94,13 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "NOMBRE"
+text = "NOMBRE   "
 
 [node name="LineEdit" type="LineEdit" parent="Panel/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 150
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 100
+max_length = 10
 
 [node name="Control" type="Control" parent="Panel/Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -91,11 +112,12 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "GENERO"
+text = "GENERO    "
 
 [node name="OptionButton" type="OptionButton" parent="Panel/Panel/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme = SubResource("Theme_4wkrd")
 theme_override_font_sizes/font_size = 100
 alignment = 1
@@ -106,6 +128,7 @@ item_count = 3
 popup/item_0/text = "..."
 popup/item_0/id = 0
 popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "MUJER"
 popup/item_1/id = 1
 popup/item_2/text = "HOMBRE"
@@ -116,68 +139,157 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Panel/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 
-[node name="COLOR" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
+[node name="AVATAR" type="Label" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "COLOR"
+text = "AVATAR     "
 
-[node name="GridContainer" type="GridContainer" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
+[node name="OptionButton" type="OptionButton" parent="Panel/Panel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_k4k4h")
+theme_override_font_sizes/font_size = 100
+alignment = 1
+selected = 0
+fit_to_longest_item = false
+item_count = 10
+popup/item_0/text = "..."
+popup/item_0/id = 0
+popup/item_0/disabled = true
+popup/item_0/separator = true
+popup/item_1/text = "RED"
+popup/item_1/id = 1
+popup/item_2/text = "BLUE"
+popup/item_2/id = 2
+popup/item_3/text = "GREEN"
+popup/item_3/id = 3
+popup/item_4/text = "YELLOW"
+popup/item_4/id = 4
+popup/item_5/text = "DALIA"
+popup/item_5/id = 5
+popup/item_6/text = "GOLD"
+popup/item_6/id = 6
+popup/item_7/text = "CRYSTAL"
+popup/item_7/id = 7
+popup/item_8/text = "SILVER"
+popup/item_8/id = 8
+popup/item_9/text = "SAKURA"
+popup/item_9/id = 9
+
+[node name="Control3" type="Control" parent="Panel/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 80
+text = "CONTINUAR"
+
+[node name="Panel2" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -499.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ui1qq")
+text = "HOLA, BIENVENIDO A POKÉMON
+CHAMPION'S JOURNEY, POR FAVOR 
+DIME TU NOMBRE, SI ERES CHICO O 
+CHICA Y CUAL ES TU AVATAR... 
+LUEGO PRESIONA CONTINUAR PARA 
+INCIAR LA PARTIDA."
+
+[node name="GridContainer" type="GridContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 252.0
+offset_top = 514.0
+offset_right = 1040.0
+offset_bottom = 1014.0
 size_flags_horizontal = 3
 columns = 3
 
-[node name="COLOR_RED" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_RED" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cmdvr")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4wkrd")
 
-[node name="COLOR_GREEN" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_GREEN" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qr4fv")
 theme_override_styles/normal = SubResource("StyleBoxFlat_k4k4h")
 
-[node name="COLOR_BLUE" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_BLUE" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u2xen")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ui1qq")
 
-[node name="COLOR_YELLOW" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_YELLOW" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gucts")
 theme_override_styles/normal = SubResource("StyleBoxFlat_c7rk6")
 
-[node name="COLOR_BROWN" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_BROWN" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_b3lh8")
 
-[node name="COLOR_GOLD" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_GOLD" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_l27hy")
 
-[node name="COLOR_CRYSTAL" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_CRYSTAL" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_bj0oa")
 
-[node name="COLOR_SILVER" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_SILVER" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_tcljb")
 
-[node name="COLOR_KIMONO" type="Button" parent="Panel/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
+[node name="COLOR_KIMONO" type="Button" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
