@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2eoxbojvfrd4"]
+[gd_scene load_steps=5 format=3 uid="uid://b2eoxbojvfrd4"]
 
 [ext_resource type="Script" uid="uid://taod6bpgsoy0" path="res://SCRIPT/MAIN_MENU.gd" id="1_u6qdw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spiek"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u6qdw"]
+
+[sub_resource type="Theme" id="Theme_u6qdw"]
+default_font_size = 50
 
 [node name="MENU_PRINCIPAL" type="Control"]
 layout_mode = 3
@@ -41,7 +44,7 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+[node name="Button_CONTINUE" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 130
@@ -56,3 +59,107 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_u6qdw")
 layout_mode = 2
 theme_override_font_sizes/font_size = 130
 text = "NUEVA PARTIDA"
+
+[node name="Window" type="Window" parent="Panel"]
+initial_position = 1
+size = Vector2i(1030, 700)
+visible = false
+borderless = true
+
+[node name="Panel" type="Panel" parent="Panel/Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Window/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 70.0
+offset_right = -60.0
+offset_bottom = 639.0
+grow_horizontal = 2
+
+[node name="Control" type="Control" parent="Panel/Window/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Window/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6qdw")
+
+[node name="Label" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "NOMBRE:   "
+
+[node name="NOMBRE_JUGADOR" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Panel/Window/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Window/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6qdw")
+
+[node name="Label" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "GENERO:   "
+
+[node name="GENERO_JUGADOR" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="Panel/Window/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/Window/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6qdw")
+
+[node name="Label" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "AVATAR:   "
+
+[node name="AVATAR_JUGADOR" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="Panel/Window/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/Window/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6qdw")
+
+[node name="Label" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "ULTIMA SESION:"
+
+[node name="ULTIMA_SESION" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="Control5" type="Control" parent="Panel/Window/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/Window/Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_u6qdw")
+
+[node name="VOLVER" type="Button" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "VOLVER"
+
+[node name="Control" type="Control" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="CONTINUAR" type="Button" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CONTINUAR"

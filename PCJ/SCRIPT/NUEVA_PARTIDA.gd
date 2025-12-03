@@ -3,9 +3,9 @@ extends Control
 @onready var texto_label = $Panel/Panel2/RichTextLabel
 @onready var boton_continuar = $Panel/Panel/VBoxContainer/Button
 @onready var Panel_datos = $Panel/Panel
-@onready var line_edit_nombre = $Panel/Panel/VBoxContainer/HBoxContainer/LineEdit
-@onready var option_genero = $Panel/Panel/VBoxContainer/HBoxContainer2/OptionButton
-@onready var option_avatar = $Panel/Panel/VBoxContainer/HBoxContainer3/OptionButton2
+@onready var line_edit_nombre = $Panel/Panel/VBoxContainer/HBoxContainer/NOMBRE_USUARIO
+@onready var option_genero = $Panel/Panel/VBoxContainer/HBoxContainer2/OptionButton_GENERO
+@onready var option_avatar = $Panel/Panel/VBoxContainer/HBoxContainer3/OptionButton_AVATAR
 
 # Texto completo a mostrar
 var texto_completo = "HOLA, BIENVENIDO A POKÉMON CHAMPION'S JOURNEY, POR FAVOR DIME TU NOMBRE, SI ERES CHICO O CHICA Y CUAL ES TU AVATAR... LUEGO PRESIONA CONTINUAR PARA INCIAR LA PARTIDA."
@@ -72,8 +72,9 @@ func _on_timer_escribir():
 		for child in get_children():
 			if child is Timer:
 				child.stop()
-				child.queue_free()
-		
+				if child.is_inside_tree():
+					child.queue_free()
+
 		# Mostrar el panel de datos y el botón (pero desactivado)
 		boton_continuar.visible = true
 		Panel_datos.visible = true
@@ -101,6 +102,47 @@ func _validar_formulario(_texto = ""):
 		boton_continuar.disabled = true
 
 func _cambiar_escena():
+	# Guardar datos del usuario y resetear campos
+	var file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
+	var json_text = file.get_as_text()
+	file.close()
+	var data = JSON.parse_string(json_text)
+
+	# Guardar datos del usuario
+	data["jugador"]["usuario"] = line_edit_nombre.text.strip_edges()
+	data["jugador"]["genero"] = option_genero.get_item_text(option_genero.selected)
+	data["jugador"]["avatar"] = option_avatar.get_item_text(option_avatar.selected)
+	data["jugador"]["fecha_inicio"] = Time.get_date_string_from_system()
+
+	# Resetear medallas, MO, objetos_unicos, inventario
+	for key in data["medallas"]:
+		data["medallas"][key] = 0
+	for key in data["MO"]:
+		data["MO"][key] = 0
+	for key in data["objetos_unicos"]:
+		data["objetos_unicos"][key] = 0
+	for key in data["inventario"]:
+		data["inventario"][key] = 0
+
+	# Resetear campos de cada Pokémon en la pokedex
+	for poke in data["pokedex"]:
+		poke["atrapado"] = 0
+		poke["equipo"] = 0
+		poke["estado"] = ""
+		poke["exp_actual"] = 0
+		poke["exp_evo"] = 0
+		poke["ps_actual"] = poke["ps_max"]
+		poke["ubicacion"] = ""
+
+	# Guardar el JSON actualizado en ambos archivos
+	file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(data, "\t"))
+	file.close()
+	var user_file = FileAccess.open("user://POKEMON_DB.json", FileAccess.WRITE)
+	if user_file:
+		user_file.store_string(JSON.stringify(data, "\t"))
+		user_file.close()
+
 	get_tree().change_scene_to_file("res://SCENE/PANELES.tscn")
 
 # Opcional: permite saltarse el efecto al hacer clic
@@ -115,8 +157,9 @@ func _completar_texto_inmediatamente():
 	for child in get_children():
 		if child is Timer:
 			child.stop()
-			child.queue_free()
-	
+			if child.is_inside_tree():
+				child.queue_free()
+
 	# Mostrar texto completo
 	texto_label.text = texto_completo
 	escribiendo = false

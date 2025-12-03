@@ -12,7 +12,7 @@ extends VBoxContainer
 signal tarjeta_presionada
 
 # Función para configurar la tarjeta con los datos del Pokémon
-func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual: int, exp_maximo: int, atrapado := 0, mostrar_sello := true, nombre := "", mostrar_barras := true, es_pc := false):
+func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual: int, _exp_maximo: int, atrapado := 0, mostrar_sello := true, _nombre := "", mostrar_barras := true, es_pc := false):
 	# Cargar y asignar la imagen solo si el nodo existe y el recurso es válido
 	if imagen and ResourceLoader.exists(ruta_imagen):
 		var textura = load(ruta_imagen)
