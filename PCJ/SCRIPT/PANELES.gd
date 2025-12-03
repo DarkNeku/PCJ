@@ -24,6 +24,8 @@ extends VBoxContainer
 @onready var panel_control = $PANEL_CONTROL
 @onready var panel_vacio = $PANEL_VACIO
 @onready var btn_centro_pokemon = $PANEL_CONTROL/CENTRO_POKEMON
+@onready var panel_mochila = $CanvasLayer/PanelMochila
+@onready var btn_mochila = $PANEL_CONTROL/MOCHILA
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -42,6 +44,7 @@ func _ready():
 	btn_equipo.pressed.connect(func(): mostrar_seccion("equipo"))
 	btn_pc.pressed.connect(func(): mostrar_seccion("pc"))
 	btn_captura.pressed.connect(func(): mostrar_seccion("captura"))
+	btn_mochila.pressed.connect(_on_btn_mochila_pressed)
 	dialogo_confirmacion = $CONFIRMACION
 	if barra_busqueda:
 		barra_busqueda.text_changed.connect(_on_busqueda_text_changed)
@@ -566,3 +569,8 @@ func _on_confirmar_curacion_confirmed():
 		mostrar_tarjetas_equipo()
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_captura()
+
+func _on_btn_mochila_pressed():
+	panel_mochila.show()
+	# Si tienes animación, aquí puedes reproducirla
+	# $CanvasLayer/AnimationPlayer.play("abrir_mochila")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=14 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 [ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
 [ext_resource type="Texture2D" uid="uid://b6u71if15ajr5" path="res://ASSET/mochila.png" id="3_quhiq"]
+[ext_resource type="Theme" uid="uid://2wk03h0ud83s" path="res://SPINBOX.tres" id="4_ahi4q"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahi4q"]
 texture = ExtResource("2_m3bc2")
@@ -288,5 +289,237 @@ offset_left = 1200.0
 offset_top = 190.0
 offset_right = 2280.0
 offset_bottom = 1740.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelMochila"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = -11.5
+offset_right = 61.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 90
+text = "ULTRA OBJETOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="uo1" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 29.0
+offset_right = 160.0
+offset_bottom = 60.0
+scale = Vector2(2, 2)
+text = "1) FOSIL DOMO"
+
+[node name="uo2" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 129.0
+offset_right = 153.0
+offset_bottom = 160.0
+scale = Vector2(2, 2)
+text = "2) FOSIL HELIX"
+
+[node name="uo3" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 229.0
+offset_right = 163.0
+offset_bottom = 260.0
+scale = Vector2(2, 2)
+text = "3) AMBAR VIEJO"
+
+[node name="uo4" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 329.0
+offset_right = 192.0
+offset_bottom = 360.0
+scale = Vector2(2, 2)
+text = "4) CAÑA DE PESCAR"
+
+[node name="uo5" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 429.0
+offset_right = 167.0
+offset_bottom = 460.0
+scale = Vector2(2, 2)
+text = "5) AGUA FRESCA"
+
+[node name="uo6" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 29.0
+offset_right = 520.0
+offset_bottom = 60.0
+scale = Vector2(2, 2)
+text = "6) SCOPE SILPH"
+
+[node name="uo11" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 29.0
+offset_right = 866.0
+offset_bottom = 83.0
+scale = Vector2(2, 2)
+text = "11) REPARTIR 
+     EXPERIENCIA"
+
+[node name="uo7" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 129.0
+offset_right = 526.0
+offset_bottom = 160.0
+scale = Vector2(2, 2)
+text = "7) POKE FLAUTA"
+
+[node name="uo8" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 229.0
+offset_right = 523.0
+offset_bottom = 260.0
+scale = Vector2(2, 2)
+text = "8) MASTERBALL"
+
+[node name="uo9" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 329.0
+offset_right = 552.0
+offset_bottom = 360.0
+scale = Vector2(2, 2)
+text = "9) LLAVE SILPH"
+
+[node name="uo10" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 429.0
+offset_right = 548.0
+offset_bottom = 460.0
+scale = Vector2(2, 2)
+text = "10) LLAVE SECRETA"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 79.97)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 90
+text = "ITEM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SC_ITEM" type="ScrollContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListaItems" type="VBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="Pokeball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "POKEBALL"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="Superball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SUPERBALL"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="Ultraball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "ULTRABALL"
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="CERRAR_MOCHILA" type="Button" parent="CanvasLayer/PanelMochila/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 65
+text = "CERRAR"
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
