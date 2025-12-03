@@ -70,3 +70,14 @@ func _on_menos_exp_pressed():
 
 func get_id():
 	return id_pokemon
+
+func _exit_tree():
+	# Desconectar señales de botones al salir
+	if btn_mas_ps and btn_mas_ps.is_connected("pressed", Callable(self, "_on_mas_ps_pressed")):
+		btn_mas_ps.disconnect("pressed", Callable(self, "_on_mas_ps_pressed"))
+	if btn_menos_ps and btn_menos_ps.is_connected("pressed", Callable(self, "_on_menos_ps_pressed")):
+		btn_menos_ps.disconnect("pressed", Callable(self, "_on_menos_ps_pressed"))
+	if btn_mas_exp and btn_mas_exp.is_connected("pressed", Callable(self, "_on_mas_exp_pressed")):
+		btn_mas_exp.disconnect("pressed", Callable(self, "_on_mas_exp_pressed"))
+	if btn_menos_exp and btn_menos_exp.is_connected("pressed", Callable(self, "_on_menos_exp_pressed")):
+		btn_menos_exp.disconnect("pressed", Callable(self, "_on_menos_exp_pressed"))

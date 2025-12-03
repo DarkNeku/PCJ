@@ -102,17 +102,37 @@ func _validar_formulario(_texto = ""):
 		boton_continuar.disabled = true
 
 func _cambiar_escena():
+	print("=== NUEVA_PARTIDA: Iniciando cambio de escena ===")
+
 	# Guardar datos del usuario y resetear campos
+	# Leer siempre desde res:// (archivo base)
 	var file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.READ)
+	if not file:
+		push_error("No se pudo abrir POKEMON_DB.json")
+		print("ERROR: No se pudo abrir res://SCRIPT/POKEMON_DB.json")
+		return
+
+	print("Archivo JSON abierto correctamente")
 	var json_text = file.get_as_text()
 	file.close()
+
 	var data = JSON.parse_string(json_text)
+	if not data:
+		push_error("Error al parsear JSON")
+		print("ERROR: JSON parse falló")
+		return
+
+	print("JSON parseado correctamente")
 
 	# Guardar datos del usuario
 	data["jugador"]["usuario"] = line_edit_nombre.text.strip_edges()
 	data["jugador"]["genero"] = option_genero.get_item_text(option_genero.selected)
 	data["jugador"]["avatar"] = option_avatar.get_item_text(option_avatar.selected)
-	data["jugador"]["fecha_inicio"] = Time.get_date_string_from_system()
+	# Obtener fecha en formato DD/MM/YYYY (compatible con Android)
+	var datetime = Time.get_date_dict_from_system()
+	var fecha_inicio = "%02d/%02d/%04d" % [datetime["day"], datetime["month"], datetime["year"]]
+	print("DEBUG Fecha inicio guardada: ", fecha_inicio, " (día:", datetime["day"], " mes:", datetime["month"], " año:", datetime["year"], ")")
+	data["jugador"]["fecha_inicio"] = fecha_inicio
 
 	# Resetear medallas, MO, objetos_unicos, inventario
 	for key in data["medallas"]:
@@ -134,19 +154,35 @@ func _cambiar_escena():
 		poke["ps_actual"] = poke["ps_max"]
 		poke["ubicacion"] = ""
 
-	# Guardar el JSON actualizado en ambos archivos
-	file = FileAccess.open("res://SCRIPT/POKEMON_DB.json", FileAccess.WRITE)
-	file.store_string(JSON.stringify(data, "\t"))
-	file.close()
+	# Guardar el JSON actualizado SOLO en user:// (res:// es de solo lectura en Android)
+	print("Intentando guardar en user://POKEMON_DB.json")
 	var user_file = FileAccess.open("user://POKEMON_DB.json", FileAccess.WRITE)
 	if user_file:
 		user_file.store_string(JSON.stringify(data, "\t"))
 		user_file.close()
+		print("✓ Datos guardados exitosamente en user://POKEMON_DB.json")
+	else:
+		push_error("No se pudo guardar en user://POKEMON_DB.json")
+		print("ERROR: No se pudo guardar en user://")
+		return
 
+	# Esperar un frame antes de cambiar escena
+	print("Esperando frame antes de cambiar escena...")
+	await get_tree().process_frame
+
+	print("Desactivando procesamiento de input...")
+	# Desactivar procesamiento de input antes de cambiar escena
+	set_process_input(false)
+	set_process_unhandled_input(false)
+
+	print("Cambiando a escena PANELES...")
 	get_tree().change_scene_to_file("res://SCENE/PANELES.tscn")
+	print("=== Cambio de escena completado ===")
 
 # Opcional: permite saltarse el efecto al hacer clic
 func _input(event):
+	if not is_inside_tree():
+		return
 	if escribiendo and event is InputEventMouseButton and event.pressed:
 		_completar_texto_inmediatamente()
 	elif escribiendo and event.is_action_pressed("ui_accept"):
@@ -168,3 +204,14 @@ func _completar_texto_inmediatamente():
 	
 	# Validar el formulario
 	_validar_formulario()
+
+func _exit_tree():
+	# Limpiar procesamiento de input al salir
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	# Limpiar timers
+	for child in get_children():
+		if child is Timer:
+			child.stop()
+			if child.is_inside_tree():
+				child.queue_free()

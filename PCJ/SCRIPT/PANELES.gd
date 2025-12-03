@@ -124,14 +124,16 @@ func mostrar_tarjetas_captura():
 	# Eliminar todos los hijos del GridContainer manualmente
 	for child in grid_captura.get_children():
 		child.queue_free()
+	# Esperar un frame para que se limpien correctamente
+	await get_tree().process_frame
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_captura.has_method("set_columns"):
 		grid_captura.set_columns(2)
 	var db = cargar_json()
-	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
-	if typeof(pokemons_db_local) == TYPE_ARRAY:
-		pokemons_db_local.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
-		for poke in pokemons_db_local:
+	var pokemon_lista_captura = db["pokedex"] if db.has("pokedex") else []
+	if typeof(pokemon_lista_captura) == TYPE_ARRAY:
+		pokemon_lista_captura.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
+		for poke in pokemon_lista_captura:
 			if filtro_busqueda == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda.to_lower()) != -1:
 				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
 				if tarjeta_escena:
@@ -142,15 +144,15 @@ func mostrar_tarjetas_captura():
 						ps = poke.get("ps_max", 0)
 					ps = int(ps)
 					var ps_max = int(poke.get("ps_max", 0))
-					var exp_actual = poke.get("exp_actual", "")
-					if typeof(exp_actual) == TYPE_STRING and exp_actual == "":
-						exp_actual = 0
-					exp_actual = int(exp_actual)
+					var experiencia_actual = poke.get("exp_actual", "")
+					if typeof(experiencia_actual) == TYPE_STRING and experiencia_actual == "":
+						experiencia_actual = 0
+					experiencia_actual = int(experiencia_actual)
 					var exp_max = int(poke.get("exp_evo", 0))
 					var atrapado = int(poke.get("atrapado", 0))
 					var id_poke = poke.get("id", "")
 					# En captura, mostrar_sello = true
-					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp_actual, exp_max, atrapado, true, poke.get("nombre", ""), false)
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, experiencia_actual, exp_max, atrapado, true, poke.get("nombre", ""), false)
 					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion").bind(id_poke, poke.get("nombre", "")))
 					grid_captura.add_child(tarjeta)
 
@@ -158,14 +160,16 @@ func mostrar_tarjetas_pc():
 	# Eliminar todos los hijos del GridContainer manualmente
 	for child in grid_pc.get_children():
 		child.queue_free()
+	# Esperar un frame para que se limpien correctamente
+	await get_tree().process_frame
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_pc.has_method("set_columns"):
 		grid_pc.set_columns(2)
 	var db = cargar_json()
-	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
-	if typeof(pokemons_db_local) == TYPE_ARRAY:
-		pokemons_db_local.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
-		for poke in pokemons_db_local:
+	var pokemon_lista_pc = db["pokedex"] if db.has("pokedex") else []
+	if typeof(pokemon_lista_pc) == TYPE_ARRAY:
+		pokemon_lista_pc.sort_custom(func(a, b): return int(a["id"]) < int(b["id"]))
+		for poke in pokemon_lista_pc:
 			if int(poke.get("atrapado", 0)) == 1 and int(poke.get("equipo", 0)) == 0 and (filtro_busqueda_pc == "" or poke.get("nombre", "").to_lower().find(filtro_busqueda_pc.to_lower()) != -1):
 				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
 				if tarjeta_escena:
@@ -176,15 +180,15 @@ func mostrar_tarjetas_pc():
 						ps = poke.get("ps_max", 0)
 					ps = int(ps)
 					var ps_max = int(poke.get("ps_max", 0))
-					var exp_actual = poke.get("exp_actual", "")
-					if typeof(exp_actual) == TYPE_STRING and exp_actual == "":
-						exp_actual = 0
-					exp_actual = int(exp_actual)
+					var experiencia_actual = poke.get("exp_actual", "")
+					if typeof(experiencia_actual) == TYPE_STRING and experiencia_actual == "":
+						experiencia_actual = 0
+					experiencia_actual = int(experiencia_actual)
 					var exp_max = int(poke.get("exp_evo", 0))
 					var atrapado = int(poke.get("atrapado", 0))
 					# En cada llamada a configurar, agrega el parámetro nombre
 					# En PC, mostrar_sello = false, mostrar_barras = true, es_pc = true
-					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp_actual, exp_max, atrapado, false, poke.get("nombre", ""), true, true)
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, experiencia_actual, exp_max, atrapado, false, poke.get("nombre", ""), true, true)
 					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_confirmacion_pc").bind(poke.get("id", ""), poke.get("nombre", "")))
 					grid_pc.add_child(tarjeta)
 
@@ -192,14 +196,16 @@ func mostrar_tarjetas_equipo():
 	# Eliminar todos los hijos del GridContainer manualmente
 	for child in grid_equipo.get_children():
 		child.queue_free()
+	# Esperar un frame para que se limpien correctamente
+	await get_tree().process_frame
 	# Configurar columnas del GridContainer (por si acaso)
 	if grid_equipo.has_method("set_columns"):
 		grid_equipo.set_columns(2)
 	var db = cargar_json()
-	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
-	if typeof(pokemons_db_local) == TYPE_ARRAY:
-		pokemons_db_local.sort_custom(func(a, b): return int(a["equipo"]) < int(b["equipo"]))
-		for poke in pokemons_db_local:
+	var pokemon_lista_equipo = db["pokedex"] if db.has("pokedex") else []
+	if typeof(pokemon_lista_equipo) == TYPE_ARRAY:
+		pokemon_lista_equipo.sort_custom(func(a, b): return int(a["equipo"]) < int(b["equipo"]))
+		for poke in pokemon_lista_equipo:
 			var eq = int(poke.get("equipo", 0))
 			if eq > 0 and eq <= 6:
 				var tarjeta_escena = load("res://SCENE/PokemonCard.tscn")
@@ -211,14 +217,14 @@ func mostrar_tarjetas_equipo():
 						ps = poke.get("ps_max", 0)
 					ps = int(ps)
 					var ps_max = int(poke.get("ps_max", 0))
-					var exp_actual = poke.get("exp_actual", "")
-					if typeof(exp_actual) == TYPE_STRING and exp_actual == "":
-						exp_actual = 0
-					exp_actual = int(exp_actual)
+					var experiencia_actual = poke.get("exp_actual", "")
+					if typeof(experiencia_actual) == TYPE_STRING and experiencia_actual == "":
+						experiencia_actual = 0
+					experiencia_actual = int(experiencia_actual)
 					var exp_max = int(poke.get("exp_evo", 0))
 					var atrapado = int(poke.get("atrapado", 0))
 					# En equipo, mostrar_sello = false
-					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, exp_actual, exp_max, atrapado, false, poke.get("nombre", ""), true)
+					tarjeta.call_deferred("configurar", imagen_path, ps, ps_max, experiencia_actual, exp_max, atrapado, false, poke.get("nombre", ""), true)
 					tarjeta.connect("tarjeta_presionada", Callable(self, "mostrar_popup_tarjeta_equipo").bind(poke))
 					grid_equipo.add_child(tarjeta)
 
@@ -232,6 +238,8 @@ func mostrar_popup_tarjeta_equipo(poke):
 		confirmacion.hide()
 	if popup_tarjeta and popup_tarjeta.is_inside_tree():
 		popup_tarjeta.hide()
+	# Esperar un frame antes de limpiar para evitar errores de input
+	await get_tree().process_frame
 	for child in contenedor_tarjeta.get_children():
 		if child and child.is_inside_tree():
 			child.queue_free()
@@ -260,6 +268,8 @@ func mostrar_popup_tarjeta_equipo(poke):
 func cerrar_popup_tarjeta():
 	if popup_tarjeta and popup_tarjeta.is_inside_tree():
 		popup_tarjeta.hide()
+	# Esperar un frame antes de limpiar los hijos para evitar errores de input
+	await get_tree().process_frame
 	for child in contenedor_tarjeta.get_children():
 		if child and child.is_inside_tree():
 			child.queue_free()
@@ -350,31 +360,31 @@ func _on_ListaEquipo_id_pressed(index):
 	if partes.size() != 2:
 		return
 	var num_equipo = int(partes[0])
-	var _nombre_equipo = partes[1]
+	var _nombre_equipo = partes[1]  # No usado pero necesario para el split
 	# Leer la base de datos
 	var db = cargar_json()
-	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
+	var pokemon_lista_intercambio = db["pokedex"] if db.has("pokedex") else []
 	var id_pc = id_pokemon_seleccionado
 	var idx_pc = -1
 	var idx_eq = -1
-	for i in range(pokemons_db_local.size()):
-		var poke = pokemons_db_local[i]
+	for i in range(pokemon_lista_intercambio.size()):
+		var poke = pokemon_lista_intercambio[i]
 		if poke.get("id", "") == id_pc:
 			idx_pc = i
 		if int(poke.get("equipo", 0)) == num_equipo:
 			idx_eq = i
 	# Intercambiar los valores de 'equipo'
 	if idx_pc != -1 and idx_eq != -1:
-		var slot = pokemons_db_local[idx_eq]["equipo"]
-		pokemons_db_local[idx_eq]["equipo"] = 0
-		pokemons_db_local[idx_eq]["ubicacion"] = "pc"
-		pokemons_db_local[idx_pc]["equipo"] = slot
-		pokemons_db_local[idx_pc]["ubicacion"] = "equipo"
+		var slot = pokemon_lista_intercambio[idx_eq]["equipo"]
+		pokemon_lista_intercambio[idx_eq]["equipo"] = 0
+		pokemon_lista_intercambio[idx_eq]["ubicacion"] = "pc"
+		pokemon_lista_intercambio[idx_pc]["equipo"] = slot
+		pokemon_lista_intercambio[idx_pc]["ubicacion"] = "equipo"
 		# Al pasar al PC, ps_actual = ps_max
-		if pokemons_db_local[idx_eq].has("ps_max"):
-			pokemons_db_local[idx_eq]["ps_actual"] = str(pokemons_db_local[idx_eq]["ps_max"])
+		if pokemon_lista_intercambio[idx_eq].has("ps_max"):
+			pokemon_lista_intercambio[idx_eq]["ps_actual"] = str(pokemon_lista_intercambio[idx_eq]["ps_max"])
 		# Guardar el JSON actualizado en ambos archivos
-		db["pokedex"] = pokemons_db_local
+		db["pokedex"] = pokemon_lista_intercambio
 		guardar_json(db)
 		# Refrescar las vistas
 		mostrar_tarjetas_pc()
@@ -404,7 +414,10 @@ func cargar_json():
 func guardar_json(data):
 	# Actualizar fecha_ultima dentro de 'jugador' antes de guardar
 	if data.has("jugador"):
-		var fecha = Time.get_datetime_string_from_system(true, true)
+		# Obtener fecha en formato DD/MM/YYYY (compatible con Android)
+		var datetime = Time.get_date_dict_from_system()
+		var fecha = "%02d/%02d/%04d" % [datetime["day"], datetime["month"], datetime["year"]]
+		print("DEBUG Fecha guardada: ", fecha, " (día:", datetime["day"], " mes:", datetime["month"], " año:", datetime["year"], ")")
 		data["jugador"]["fecha_ultima"] = fecha
 	# Guardar en user://
 	var file_user = FileAccess.open(JSON_PATH_USER, FileAccess.WRITE)

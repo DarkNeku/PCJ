@@ -12,7 +12,7 @@ extends VBoxContainer
 signal tarjeta_presionada
 
 # Función para configurar la tarjeta con los datos del Pokémon
-func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual: int, _exp_maximo: int, atrapado := 0, mostrar_sello := true, _nombre := "", mostrar_barras := true, es_pc := false):
+func configurar(ruta_imagen: String, ps_actual: int, ps_maximo: int, exp_actual: int, _exp_maximo: int = 0, atrapado := 0, mostrar_sello := true, _nombre := "", mostrar_barras := true, es_pc := false):
 	# Cargar y asignar la imagen solo si el nodo existe y el recurso es válido
 	if imagen and ResourceLoader.exists(ruta_imagen):
 		var textura = load(ruta_imagen)
@@ -63,6 +63,8 @@ func _ready():
 	connect("gui_input", Callable(self, "_on_gui_input"))
 
 func _on_gui_input(event):
+	if not is_inside_tree():
+		return
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			touch_start_pos = event.position
@@ -74,3 +76,8 @@ func _on_gui_input(event):
 	elif event is InputEventMouseMotion and touch_start_pos != null:
 		if event.position.distance_to(touch_start_pos) > TAP_THRESHOLD:
 			touch_moved = true
+
+func _exit_tree():
+	# Desconectar señal gui_input al salir
+	if is_connected("gui_input", Callable(self, "_on_gui_input")):
+		disconnect("gui_input", Callable(self, "_on_gui_input"))

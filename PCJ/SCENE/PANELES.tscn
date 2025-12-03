@@ -47,6 +47,10 @@ EQUIPO
 "
 horizontal_alignment = 1
 
+[node name="Control" type="Control" parent="PanelEquipo"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
 [node name="Panel" type="ScrollContainer" parent="PanelEquipo"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -76,6 +80,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 40
 placeholder_text = "Buscar Pokémon en PC..."
+
+[node name="Control" type="Control" parent="PanelPC"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelPC"]
 layout_mode = 2
@@ -107,6 +115,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 40
 placeholder_text = "Buscar Pokémon..."
+
+[node name="Control2" type="Control" parent="PanelCaptura"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelCaptura"]
 layout_mode = 2
@@ -143,8 +155,7 @@ dialog_text = "¿QUIERES CURAR TUS POKEMON?"
 cancel_button_text = "NO"
 
 [node name="PANEL_VACIO" type="Control" parent="."]
-visible = false
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -171,6 +182,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 80
 text = "CAPTURA"
+
+[node name="BarraNavegacion2" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="CONFIRMACION" type="ConfirmationDialog" parent="."]
 title = "CONFIRMA"
