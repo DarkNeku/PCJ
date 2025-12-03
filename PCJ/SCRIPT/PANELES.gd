@@ -26,6 +26,8 @@ extends VBoxContainer
 @onready var btn_centro_pokemon = $PANEL_CONTROL/CENTRO_POKEMON
 @onready var panel_mochila = $CanvasLayer/PanelMochila
 @onready var btn_mochila = $PANEL_CONTROL/MOCHILA
+@onready var animation_player = $CanvasLayer/AnimationPlayer
+@onready var btn_cerrar_mochila = $CanvasLayer/PanelMochila/VBoxContainer/Control/CERRAR_MOCHILA
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -45,6 +47,7 @@ func _ready():
 	btn_pc.pressed.connect(func(): mostrar_seccion("pc"))
 	btn_captura.pressed.connect(func(): mostrar_seccion("captura"))
 	btn_mochila.pressed.connect(_on_btn_mochila_pressed)
+	btn_cerrar_mochila.pressed.connect(_on_btn_cerrar_mochila_pressed)
 	dialogo_confirmacion = $CONFIRMACION
 	if barra_busqueda:
 		barra_busqueda.text_changed.connect(_on_busqueda_text_changed)
@@ -80,6 +83,7 @@ func _ready():
 	dialog.popup_centered()
 	dialog.hide()
 	$PANEL_CONTROL/CONFIRMAR_CURACION.confirmed.connect(_on_confirmar_curacion_confirmed)
+	animation_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 func _on_alert_guardado_confirmed():
 	# Refresca el banner EXP_ACT en PokemonCardGrande si está visible
@@ -572,5 +576,11 @@ func _on_confirmar_curacion_confirmed():
 
 func _on_btn_mochila_pressed():
 	panel_mochila.show()
-	# Si tienes animación, aquí puedes reproducirla
-	# $CanvasLayer/AnimationPlayer.play("abrir_mochila")
+	animation_player.play("mostrar_mochila")
+
+func _on_btn_cerrar_mochila_pressed():
+	animation_player.play("ocultar_mochila")
+
+func _on_animation_finished(anim_name):
+	if anim_name == "ocultar_mochila":
+		panel_mochila.hide()

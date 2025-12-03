@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=21 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 [ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
@@ -39,6 +39,64 @@ texture = ExtResource("3_quhiq")
 
 [sub_resource type="Theme" id="Theme_unuhw"]
 default_font_size = 40
+
+[sub_resource type="Theme" id="Theme_ahi4q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n73y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahi4q"]
+
+[sub_resource type="Animation" id="Animation_ahi4q"]
+resource_name = "mostrar_mochila"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelMochila:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 190)]
+}
+
+[sub_resource type="Animation" id="Animation_3n73y"]
+resource_name = "ocultar_mochila"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelMochila:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.133333),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1200, 190)]
+}
+
+[sub_resource type="Animation" id="Animation_dsqtg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelMochila:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1200, 190)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dsqtg"]
+_data = {
+&"RESET": SubResource("Animation_dsqtg"),
+&"mostrar_mochila": SubResource("Animation_ahi4q"),
+&"ocultar_mochila": SubResource("Animation_3n73y")
+}
 
 [node name="PANELES" type="VBoxContainer"]
 anchors_preset = 15
@@ -288,9 +346,11 @@ borderless = true
 offset_left = 1200.0
 offset_top = 190.0
 offset_right = 2280.0
-offset_bottom = 1740.0
+offset_bottom = 1770.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource("Theme_ahi4q")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3n73y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelMochila"]
 layout_mode = 1
@@ -329,6 +389,7 @@ vertical_alignment = 1
 [node name="Panel2" type="Panel" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ahi4q")
 
 [node name="uo1" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
@@ -521,5 +582,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 65
 text = "CERRAR"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_dsqtg")
+}
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
