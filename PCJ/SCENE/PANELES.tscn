@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=13 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 [ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
+[ext_resource type="Texture2D" uid="uid://b6u71if15ajr5" path="res://ASSET/mochila.png" id="3_quhiq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahi4q"]
 texture = ExtResource("2_m3bc2")
@@ -18,6 +19,22 @@ expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m3bc2"]
 texture = ExtResource("2_m3bc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dsqtg"]
+texture = ExtResource("3_quhiq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j30nv"]
+texture = ExtResource("3_quhiq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oyk26"]
+texture = ExtResource("3_quhiq")
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ja2pj"]
+texture = ExtResource("3_quhiq")
 
 [sub_resource type="Theme" id="Theme_unuhw"]
 default_font_size = 40
@@ -154,6 +171,25 @@ ok_button_text = " SI "
 dialog_text = "¿QUIERES CURAR TUS POKEMON?"
 cancel_button_text = "NO"
 
+[node name="FICHA_JUGADOR" type="Button" parent="PANEL_CONTROL"]
+visible = false
+layout_mode = 0
+offset_left = 100.0
+offset_top = 9.0
+offset_right = 226.0
+offset_bottom = 123.0
+
+[node name="MOCHILA" type="Button" parent="PANEL_CONTROL"]
+layout_mode = 0
+offset_left = 842.0
+offset_top = 9.0
+offset_right = 968.0
+offset_bottom = 123.0
+theme_override_styles/disabled = SubResource("StyleBoxTexture_dsqtg")
+theme_override_styles/hover = SubResource("StyleBoxTexture_j30nv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_oyk26")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ja2pj")
+
 [node name="PANEL_VACIO" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -244,5 +280,13 @@ text = "CERRAR"
 title = ""
 size = Vector2i(100, 285)
 borderless = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelMochila" type="Panel" parent="CanvasLayer"]
+offset_left = 1200.0
+offset_top = 190.0
+offset_right = 2280.0
+offset_bottom = 1740.0
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
