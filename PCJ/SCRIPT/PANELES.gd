@@ -32,7 +32,7 @@ extends VBoxContainer
 @onready var btn_cerrar_ficha = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control/BTN_CERRAR_FICHA # Asumiendo que este es el botón de cerrar ficha
 @onready var label_nombre_jugador = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control2/NOMBRE_JUGADOR
 @onready var lineedit_dinero = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer/dinero
-@onready var lineedit_casilla_actual = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control/casilla_actual
+@onready var lineedit_casilla_actual = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer/casilla_actual
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -96,6 +96,20 @@ var confirm_action = "" # 'capture' or 'move_pc_to_team'
 	$"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/11",
 	$"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/27", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/33", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/38", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/42", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/56", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/69", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/77", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/84", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/100", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/113", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/124", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/144", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/147", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/161", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/165", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/171", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/179", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/194", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/204", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/207", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/220", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/243", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/280", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/297", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/311", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/320", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/342", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/399", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/445", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/451", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/480", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/488", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/492", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/495"
 ]
+
+# Referencias a los botones de medallas
+@onready var grid_medallas = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/medallas
+@onready var botones_medallas := [
+	grid_medallas.get_node("medalla_1"),
+	grid_medallas.get_node("medalla_2"),
+	grid_medallas.get_node("medalla_3"),
+	grid_medallas.get_node("medalla_4"),
+	grid_medallas.get_node("medalla_5"),
+	grid_medallas.get_node("medalla_6"),
+	grid_medallas.get_node("medalla_7"),
+	grid_medallas.get_node("medalla_8")
+]
+var checks_medallas = []
 
 func _ready():
 	mostrar_seccion("equipo")
@@ -203,23 +217,60 @@ func _ready():
 			var numero_casilla = cb.text
 			if db["casillas"].has(numero_casilla):
 				cb.button_pressed = int(db["casillas"][numero_casilla]) == 1
+	# Inicializar medallas
+	_inicializar_medallas()
 
-func _on_alert_guardado_confirmed():
-	# Refresca el banner EXP_ACT en PokemonCardGrande si está visible
-	if contenedor_tarjeta.get_child_count() > 0:
-		var tarjeta = contenedor_tarjeta.get_child(0)
-		if tarjeta and tarjeta.has_node("HBoxContainer/Panel/EXP_ACT") and tarjeta.has_node("HBoxContainer/Panel/EXP_LINE"):
-			var exp_actual_label = tarjeta.get_node("HBoxContainer/Panel/EXP_ACT")
-			var exp_line_edit = tarjeta.get_node("HBoxContainer/Panel/EXP_LINE")
-			if exp_actual_label and exp_line_edit:
-				exp_actual_label.text = exp_line_edit.text
-	# Habilitar navegación y panel_control al cerrar la alerta
-	btn_equipo.disabled = false
-	btn_pc.disabled = false
-	btn_captura.disabled = false
-	set_panel_control_disabled(false)
-	if popup_tarjeta and popup_tarjeta.is_inside_tree() and not popup_tarjeta.visible:
-		popup_tarjeta.show()
+func _inicializar_medallas():
+	var db = cargar_json()
+	if not db.has("medallas"):
+		db["medallas"] = {}
+	checks_medallas.clear()
+	for i in range(botones_medallas.size()):
+		var btn = botones_medallas[i]
+		# Si no existe el TextureRect del check, lo crea
+		var check = btn.get_node_or_null("Check")
+		if not check:
+			check = TextureRect.new()
+			check.name = "Check"
+			check.texture = load("res://ASSET/CHECK.png")
+			check.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			check.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			check.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			check.size_flags_vertical = Control.SIZE_EXPAND_FILL
+			check.visible = false
+			btn.add_child(check)
+		# Ajustar tamaño y posición del check para cubrir todo el botón
+		check.custom_minimum_size = btn.size
+		check.position = Vector2.ZERO
+		check.anchor_left = 0
+		check.anchor_top = 0
+		check.anchor_right = 1
+		check.anchor_bottom = 1
+		checks_medallas.append(check)
+		# Estado visual según JSON
+		var key = "medalla_%d" % (i+1)
+		var obtenida = int(db["medallas"].get(key, 0))
+		check.visible = obtenida == 1
+		# Conectar señal si no está conectada
+		if not btn.is_connected("pressed", Callable(self, "_on_medalla_pressed")):
+			btn.pressed.connect(_on_medalla_pressed.bind(i))
+
+func _on_medalla_pressed(idx):
+	var db = cargar_json()
+	if not db.has("medallas"):
+		db["medallas"] = {}
+	var key = "medalla_%d" % (idx+1)
+	var actual = int(db["medallas"].get(key, 0))
+	var nuevo = 1 if actual == 0 else 0
+	db["medallas"][key] = nuevo
+	guardar_json(db)
+	# Actualizar visual
+	if idx < checks_medallas.size():
+		checks_medallas[idx].visible = nuevo == 1
+		# Log de depuración para el check
+		var check = checks_medallas[idx]
+		print("[CHECK] idx:", idx, " visible:", check.visible, " size:", check.size, " pos:", check.position, " global_pos:", check.global_position)
+		print("[CHECK] parent size:", check.get_parent().size, " parent pos:", check.get_parent().position)
 
 func mostrar_seccion(seccion):
 	panel_equipo.visible = (seccion == "equipo")
@@ -406,10 +457,21 @@ func cerrar_popup_tarjeta():
 	set_panel_control_disabled(false)
 
 func mostrar_confirmacion(id_pokemon, nombre_pokemon):
-	confirm_action = "capture"
+	var db = cargar_json()
+	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
+	var atrapado = 0
+	for poke in pokemons_db_local:
+		if str(poke.get("id", "")) == str(id_pokemon):
+			atrapado = int(poke.get("atrapado", 0))
+			break
+	if atrapado == 1:
+		confirm_action = "unmark"
+		confirmacion.dialog_text = "\n¿QUIERES DESMARCAR A %s?\n" % nombre_pokemon
+	else:
+		confirm_action = "capture"
+		confirmacion.dialog_text = "\n¿CAPTURASTE A %s?\n" % nombre_pokemon
 	id_pokemon_seleccionado = id_pokemon
 	nombre_pokemon_seleccionado = nombre_pokemon
-	confirmacion.dialog_text = "\n¿CAPTURASTE A %s?\n" % nombre_pokemon
 	if confirmacion and confirmacion.is_inside_tree() and confirmacion.visible:
 		confirmacion.hide()
 	if confirmacion and confirmacion.is_inside_tree():
@@ -440,11 +502,24 @@ func mostrar_lista_equipo():
 		lista_equipo.popup_centered()
 
 func _on_confirmation_dialog_confirmed():
-	# Determina la acción en base a confirm_action
 	if confirm_action == "move_pc_to_team":
-		# Mostrar la lista de equipo para elegir a quién reemplazar
 		mostrar_lista_equipo()
-		# reset action
+		confirm_action = ""
+		return
+	elif confirm_action == "unmark":
+		var db = cargar_json()
+		var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
+		for poke in pokemons_db_local:
+			if str(poke.get("id", "")) == str(id_pokemon_seleccionado):
+				poke["atrapado"] = 0
+				poke["ubicacion"] = ""
+				poke["exp_actual"] = 0
+				break
+		db["pokedex"] = pokemons_db_local
+		guardar_json(db)
+		mostrar_tarjetas_captura()
+		mostrar_tarjetas_equipo()
+		mostrar_tarjetas_pc()
 		confirm_action = ""
 		return
 	# Por defecto: captura
@@ -805,3 +880,26 @@ func _on_casilla_toggled(button_pressed, cb):
 	var numero_casilla = cb.text
 	db["casillas"][numero_casilla] = 1 if button_pressed else 0
 	guardar_json(db)
+
+func _on_alert_guardado_confirmed():
+	# Simplemente cierra el alert_guardado si está visible
+	if alert_guardado and alert_guardado.is_inside_tree():
+		alert_guardado.hide()
+	# Restaurar navegación y panel_control si estaban deshabilitados por el popup de edición
+	cerrar_popup_tarjeta()
+
+func _on_confirmacion_cancelled():
+	if confirm_action == "capture":
+		var db = cargar_json()
+		var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
+		for poke in pokemons_db_local:
+			if str(poke.get("id", "")) == str(id_pokemon_seleccionado):
+				if int(poke.get("atrapado", 0)) == 1:
+					poke["atrapado"] = 0
+					db["pokedex"] = pokemons_db_local
+					guardar_json(db)
+					mostrar_tarjetas_captura()
+					mostrar_tarjetas_equipo()
+					mostrar_tarjetas_pc()
+				break
+	confirmacion.hide()

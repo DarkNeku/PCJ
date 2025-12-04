@@ -137,7 +137,7 @@ theme = SubResource("Theme_u6qdw")
 
 [node name="Label" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
-text = "ULTIMA SESION:"
+text = "ULTIMA SESION:    "
 
 [node name="ULTIMA_SESION" type="Label" parent="Panel/Window/Panel/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
