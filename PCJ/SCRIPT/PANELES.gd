@@ -832,15 +832,35 @@ func _on_confirmar_curacion_confirmed():
 func _on_btn_mochila_pressed():
 	panel_mochila.show()
 	animation_player.play("mostrar_mochila")
+	# Deshabilitar navegación y controles mientras la mochila está abierta
+	btn_equipo.disabled = true
+	btn_pc.disabled = true
+	btn_captura.disabled = true
+	set_panel_control_disabled(true)
 
 func _on_btn_cerrar_mochila_pressed():
 	animation_player.play("ocultar_mochila")
+	# Habilitar navegación y controles al cerrar la mochila
+	btn_equipo.disabled = false
+	btn_pc.disabled = false
+	btn_captura.disabled = false
+	set_panel_control_disabled(false)
 
 func _on_btn_ficha_jugador_pressed():
 	animation_player.play("MOSTRAR_FICHA")
+	# Deshabilitar navegación y controles mientras la ficha está abierta
+	btn_equipo.disabled = true
+	btn_pc.disabled = true
+	btn_captura.disabled = true
+	set_panel_control_disabled(true)
 
 func _on_btn_cerrar_ficha_pressed():
 	animation_player.play("OCULTAR_FICHA")
+	# Habilitar navegación y controles al cerrar la ficha
+	btn_equipo.disabled = false
+	btn_pc.disabled = false
+	btn_captura.disabled = false
+	set_panel_control_disabled(false)
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ocultar_mochila":
