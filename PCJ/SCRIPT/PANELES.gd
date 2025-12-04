@@ -220,6 +220,20 @@ func _ready():
 	# Inicializar medallas
 	_inicializar_medallas()
 
+	# Hacer que los separadores Control en ListaItems permitan el scroll
+	_configurar_separadores_scrollables()
+
+func _configurar_separadores_scrollables():
+	# Obtener el contenedor ListaItems
+	var lista_items = $CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems
+	if lista_items:
+		# Iterar por todos los hijos de ListaItems
+		for child in lista_items.get_children():
+			# Si es un Control (separador), configurarlo para que ignore eventos del mouse
+			if child is Control and not (child is HBoxContainer or child is VBoxContainer):
+				child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				print("Separador configurado para scroll: ", child.name)
+
 func _inicializar_medallas():
 	var db = cargar_json()
 	if not db.has("medallas"):
