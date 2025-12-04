@@ -100,6 +100,7 @@ text = "NOMBRE   "
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 100
+alignment = 1
 max_length = 10
 
 [node name="Control" type="Control" parent="Panel/Panel/VBoxContainer"]

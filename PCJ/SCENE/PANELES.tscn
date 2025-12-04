@@ -70,32 +70,34 @@ default_font_size = 40
 
 [sub_resource type="Animation" id="Animation_amxi0"]
 resource_name = "MOSTRAR_FICHA"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("PanelEntrenador:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.166667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 190)]
+"values": [Vector2(-1200, 190), Vector2(0, 190)]
 }
 
 [sub_resource type="Animation" id="Animation_s2jnp"]
 resource_name = "OCULTAR_FICHA"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("PanelEntrenador:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.166667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-1200, 190)]
+"values": [Vector2(0, 190), Vector2(-1200, 190)]
 }
 
 [sub_resource type="Animation" id="Animation_dsqtg"]
@@ -127,32 +129,34 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ahi4q"]
 resource_name = "mostrar_mochila"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("PanelMochila:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.166667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 190)]
+"values": [Vector2(1200, 190), Vector2(0, 190)]
 }
 
 [sub_resource type="Animation" id="Animation_3n73y"]
 resource_name = "ocultar_mochila"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("PanelMochila:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.133333),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1200, 190)]
+"values": [Vector2(0, 190), Vector2(1200, 190)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dsqtg"]

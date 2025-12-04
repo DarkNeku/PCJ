@@ -480,7 +480,7 @@ func mostrar_confirmacion(id_pokemon, nombre_pokemon):
 			break
 	if atrapado == 1:
 		confirm_action = "unmark"
-		confirmacion.dialog_text = "\n¿QUIERES DESMARCAR A %s?\n" % nombre_pokemon
+		confirmacion.dialog_text = "\n¿QUIERES LIBERAR A %s?\n" % nombre_pokemon
 	else:
 		confirm_action = "capture"
 		confirmacion.dialog_text = "\n¿CAPTURASTE A %s?\n" % nombre_pokemon
