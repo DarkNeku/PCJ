@@ -17,15 +17,26 @@ var indice_letra = 0
 var escribiendo = false
 
 func _ready():
+	print("=== NUEVA_PARTIDA _ready iniciado ===")
 	# Verificar que los nodos existen
 	if texto_label == null:
 		push_error("No se encontró el RichTextLabel. Verifica la ruta.")
 		return
-	
+	else:
+		print("✓ texto_label encontrado")
+
 	if boton_continuar == null:
 		push_error("No se encontró el Button. Verifica la ruta.")
 		return
-	
+	else:
+		print("✓ boton_continuar encontrado")
+
+	if Panel_datos == null:
+		push_error("No se encontró el Panel_datos. Verifica la ruta.")
+		return
+	else:
+		print("✓ Panel_datos encontrado")
+
 	# Conectar el botón para cambiar de escena
 	boton_continuar.pressed.connect(_cambiar_escena)
 	
@@ -35,17 +46,31 @@ func _ready():
 	option_avatar.item_selected.connect(_on_option_selected)
 	
 	# Ocultar y desactivar el botón continuar al inicio
+	print("Ocultando Panel_datos y botón al inicio")
 	boton_continuar.visible = false
 	boton_continuar.disabled = true
 	
+	# Asegurar que Panel_datos esté al frente cuando sea visible
+	if Panel_datos.get_parent():
+		Panel_datos.get_parent().move_child(Panel_datos, -1)
+
 	Panel_datos.visible = false
-	
+	print("Panel_datos.visible inicial = ", Panel_datos.visible)
+
 	# Limpiar el texto inicial
 	texto_label.text = ""
 	
 	# Iniciar el efecto después de un pequeño delay
+	print("Esperando 0.5 segundos antes de iniciar efecto de escritura...")
 	await get_tree().create_timer(0.5).timeout
+	print("Iniciando efecto de escritura")
 	iniciar_efecto_escritura()
+
+	# Timeout de seguridad: si después de 20 segundos no se mostró el panel, mostrarlo forzadamente
+	await get_tree().create_timer(20.0).timeout
+	if not Panel_datos.visible:
+		print("⚠ TIMEOUT: Mostrando Panel_datos forzadamente")
+		_completar_texto_inmediatamente()
 
 func iniciar_efecto_escritura():
 	escribiendo = true
@@ -68,6 +93,7 @@ func _on_timer_escribir():
 	else:
 		# Terminar el efecto
 		escribiendo = false
+		print("=== Efecto de escritura terminado ===")
 		# Detener y eliminar el timer
 		for child in get_children():
 			if child is Timer:
@@ -76,9 +102,12 @@ func _on_timer_escribir():
 					child.queue_free()
 
 		# Mostrar el panel de datos y el botón (pero desactivado)
+		print("Mostrando Panel_datos y botón continuar")
 		boton_continuar.visible = true
 		Panel_datos.visible = true
-		
+		print("Panel_datos.visible = ", Panel_datos.visible)
+		print("boton_continuar.visible = ", boton_continuar.visible)
+
 		# Validar si ya se puede activar
 		_validar_formulario()
 
@@ -134,15 +163,34 @@ func _cambiar_escena():
 	print("DEBUG Fecha inicio guardada: ", fecha_inicio, " (día:", datetime["day"], " mes:", datetime["month"], " año:", datetime["year"], ")")
 	data["jugador"]["fecha_inicio"] = fecha_inicio
 
-	# Resetear medallas, MO, objetos_unicos, inventario
-	for key in data["medallas"]:
-		data["medallas"][key] = 0
-	for key in data["MO"]:
-		data["MO"][key] = 0
-	for key in data["objetos_unicos"]:
-		data["objetos_unicos"][key] = 0
-	for key in data["inventario"]:
-		data["inventario"][key] = 0
+	# Resetear dinero y casilla del jugador
+	data["jugador"]["dinero"] = 0
+	data["jugador"]["casilla_actual"] = 0
+
+	# Resetear medallas a 0
+	if data.has("medallas"):
+		for key in data["medallas"]:
+			data["medallas"][key] = 0
+
+	# Resetear MO a 0
+	if data.has("MO"):
+		for key in data["MO"]:
+			data["MO"][key] = 0
+
+	# Resetear objetos_unicos a 0
+	if data.has("objetos_unicos"):
+		for key in data["objetos_unicos"]:
+			data["objetos_unicos"][key] = 0
+
+	# Resetear inventario a 0
+	if data.has("inventario"):
+		for key in data["inventario"]:
+			data["inventario"][key] = 0
+
+	# Resetear todas las casillas a 0
+	if data.has("casillas"):
+		for key in data["casillas"]:
+			data["casillas"][key] = 0
 
 	# Resetear campos de cada Pokémon en la pokedex
 	for poke in data["pokedex"]:
@@ -153,6 +201,9 @@ func _cambiar_escena():
 		poke["exp_evo"] = 0
 		poke["ps_actual"] = poke["ps_max"]
 		poke["ubicacion"] = ""
+
+	# Convertir todos los valores numéricos a enteros antes de guardar
+	data = _convertir_a_enteros(data)
 
 	# Guardar el JSON actualizado SOLO en user:// (res:// es de solo lectura en Android)
 	print("Intentando guardar en user://POKEMON_DB.json")
@@ -189,6 +240,7 @@ func _input(event):
 		_completar_texto_inmediatamente()
 
 func _completar_texto_inmediatamente():
+	print("=== Completando texto inmediatamente ===")
 	# Detener y eliminar timers
 	for child in get_children():
 		if child is Timer:
@@ -199,6 +251,47 @@ func _completar_texto_inmediatamente():
 	# Mostrar texto completo
 	texto_label.text = texto_completo
 	escribiendo = false
+
+	# Mostrar el panel de datos y el botón
+	print("Mostrando Panel_datos y botón desde _completar_texto_inmediatamente")
+	boton_continuar.visible = true
+	Panel_datos.visible = true
+	print("Panel_datos.visible = ", Panel_datos.visible)
+
+	# Validar si ya se puede activar
+	_validar_formulario()
+
+func _convertir_a_enteros(valor, key_name = ""):
+	# Lista de claves que deben permanecer como string
+	var campos_string = ["id", "numero", "img_link", "nombre", "estado", "ubicacion", "usuario", "genero", "avatar", "fecha_inicio", "fecha_ultima"]
+
+	# Función recursiva para convertir todos los números a enteros
+	if typeof(valor) == TYPE_DICTIONARY:
+		var nuevo_dict = {}
+		for key in valor:
+			# Pasar el nombre de la clave para verificar si debe ser string
+			nuevo_dict[key] = _convertir_a_enteros(valor[key], key)
+		return nuevo_dict
+	elif typeof(valor) == TYPE_ARRAY:
+		var nuevo_array = []
+		for item in valor:
+			nuevo_array.append(_convertir_a_enteros(item, key_name))
+		return nuevo_array
+	elif typeof(valor) == TYPE_FLOAT:
+		return int(valor)
+	elif typeof(valor) == TYPE_STRING:
+		# Si la clave está en la lista de campos que deben ser string, no convertir
+		if key_name in campos_string:
+			return valor
+		# Si es un string que representa un número, convertirlo a entero
+		if valor.is_valid_int():
+			return int(valor)
+		elif valor.is_valid_float():
+			return int(float(valor))
+		else:
+			return valor
+	else:
+		return valor
 	boton_continuar.visible = true
 	Panel_datos.visible = true
 	

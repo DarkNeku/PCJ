@@ -91,6 +91,12 @@ var confirm_action = "" # 'capture' or 'move_pc_to_team'
 	$CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel/fuerza
 ]
 
+# Referencias a los CheckBox de casillas (35 checkboxes)
+@onready var checkboxes_casillas := [
+	$"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/11",
+	$"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/27", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/33", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/38", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/42", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/56", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/69", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/77", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/84", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/100", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/113", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/124", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/144", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/147", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/161", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/165", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/171", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/179", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/194", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/204", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/207", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/220", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/243", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/280", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/297", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/311", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/320", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/342", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/399", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/445", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/451", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/480", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/488", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/492", $"CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS/495"
+]
+
 func _ready():
 	mostrar_seccion("equipo")
 	btn_equipo.pressed.connect(func(): mostrar_seccion("equipo"))
@@ -142,14 +148,14 @@ func _ready():
 	# Mostrar el nombre del jugador en el label correspondiente
 	if db.has("jugador") and db["jugador"].has("usuario"):
 		label_nombre_jugador.text = db["jugador"]["usuario"]
-	# Mostrar el dinero actual en el LineEdit
+	# Mostrar el dinero actual en el LineEdit (siempre como entero)
 	if db.has("jugador") and db["jugador"].has("dinero"):
-		lineedit_dinero.text = str(db["jugador"]["dinero"])
+		lineedit_dinero.text = str(int(db["jugador"]["dinero"]))
 	else:
 		lineedit_dinero.text = "0"
-	# Mostrar la casilla actual en el LineEdit
+	# Mostrar la casilla actual en el LineEdit (siempre como entero)
 	if db.has("jugador") and db["jugador"].has("casilla_actual"):
-		lineedit_casilla_actual.text = str(db["jugador"]["casilla_actual"])
+		lineedit_casilla_actual.text = str(int(db["jugador"]["casilla_actual"]))
 	else:
 		lineedit_casilla_actual.text = "0"
 	# Conectar el evento de cambio de texto
@@ -168,6 +174,9 @@ func _ready():
 				cb.button_pressed = int(db["objetos_unicos"][nombre]) == 1
 	# Conectar los SpinBox de inventario
 	for sb in spinboxes_inventario:
+		# Configurar SpinBox para que solo acepte enteros
+		sb.step = 1.0
+		sb.rounded = true
 		sb.value_changed.connect(_on_inventario_value_changed.bind(sb))
 	# Al iniciar, cargar el estado desde la base de datos
 	if db.has("inventario"):
@@ -184,6 +193,16 @@ func _ready():
 			var nombre = cb.name
 			if db["MO"].has(nombre):
 				cb.button_pressed = int(db["MO"][nombre]) == 1
+	# Conectar los CheckBox de casillas
+	for cb in checkboxes_casillas:
+		cb.toggled.connect(_on_casilla_toggled.bind(cb))
+	# Al iniciar, cargar el estado desde la base de datos
+	if db.has("casillas"):
+		for cb in checkboxes_casillas:
+			# El texto del checkbox es el número de casilla (ej: "11", "27", "33")
+			var numero_casilla = cb.text
+			if db["casillas"].has(numero_casilla):
+				cb.button_pressed = int(db["casillas"][numero_casilla]) == 1
 
 func _on_alert_guardado_confirmed():
 	# Refresca el banner EXP_ACT en PokemonCardGrande si está visible
@@ -361,7 +380,7 @@ func mostrar_popup_tarjeta_equipo(poke):
 		if typeof(ps_actual) == TYPE_STRING and ps_actual == "":
 			ps_actual = ps_max
 		ps_actual = int(ps_actual)
-		var id_poke = poke.get("id", "")
+		var id_poke = str(poke.get("id", ""))
 		tarjeta.call_deferred("configurar", imagen_path, ps_max, exp_actual, ps_actual, id_poke)
 		contenedor_tarjeta.add_child(tarjeta)
 	# Deshabilitar navegación y panel_control mientras el popup está abierto
@@ -438,7 +457,7 @@ func _on_confirmation_dialog_confirmed():
 			equipo_count += 1
 	# Buscar el Pokémon capturado
 	for poke in pokemons_db_local:
-		if poke.get("id", "") == id_pokemon_seleccionado:
+		if str(poke.get("id", "")) == str(id_pokemon_seleccionado):
 			poke["atrapado"] = 1
 			if equipo_count < 6:
 				# Asignar al primer slot disponible
@@ -476,7 +495,7 @@ func _on_ListaEquipo_id_pressed(index):
 	var idx_eq = -1
 	for i in range(pokemon_lista_intercambio.size()):
 		var poke = pokemon_lista_intercambio[i]
-		if poke.get("id", "") == id_pc:
+		if str(poke.get("id", "")) == str(id_pc):
 			idx_pc = i
 		if int(poke.get("equipo", 0)) == num_equipo:
 			idx_eq = i
@@ -518,6 +537,38 @@ func cargar_json():
 			return {"pokedex": json}
 	return {}
 
+func convertir_a_enteros(valor, key_name = ""):
+	# Lista de claves que deben permanecer como string
+	var campos_string = ["id", "numero", "img_link", "nombre", "estado", "ubicacion", "usuario", "genero", "avatar", "fecha_inicio", "fecha_ultima"]
+
+	# Función recursiva para convertir todos los números a enteros
+	if typeof(valor) == TYPE_DICTIONARY:
+		var nuevo_dict = {}
+		for key in valor:
+			# Pasar el nombre de la clave para verificar si debe ser string
+			nuevo_dict[key] = convertir_a_enteros(valor[key], key)
+		return nuevo_dict
+	elif typeof(valor) == TYPE_ARRAY:
+		var nuevo_array = []
+		for item in valor:
+			nuevo_array.append(convertir_a_enteros(item, key_name))
+		return nuevo_array
+	elif typeof(valor) == TYPE_FLOAT:
+		return int(valor)
+	elif typeof(valor) == TYPE_STRING:
+		# Si la clave está en la lista de campos que deben ser string, no convertir
+		if key_name in campos_string:
+			return valor
+		# Si es un string que representa un número, convertirlo a entero
+		if valor.is_valid_int():
+			return int(valor)
+		elif valor.is_valid_float():
+			return int(float(valor))
+		else:
+			return valor
+	else:
+		return valor
+
 func guardar_json(data):
 	# Actualizar fecha_ultima dentro de 'jugador' antes de guardar
 	if data.has("jugador"):
@@ -526,6 +577,10 @@ func guardar_json(data):
 		var fecha = "%02d/%02d/%04d" % [datetime["day"], datetime["month"], datetime["year"]]
 		print("DEBUG Fecha guardada: ", fecha, " (día:", datetime["day"], " mes:", datetime["month"], " año:", datetime["year"], ")")
 		data["jugador"]["fecha_ultima"] = fecha
+
+	# Convertir todos los valores numéricos a enteros antes de guardar
+	data = convertir_a_enteros(data)
+
 	# Guardar en user://
 	var file_user = FileAccess.open(JSON_PATH_USER, FileAccess.WRITE)
 	if file_user:
@@ -623,7 +678,7 @@ func _on_btn_guardar_popup_pressed():
 	var db = cargar_json()
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
 	for poke in pokemons_db_local:
-		if poke.get("id", "") == str(id_poke):
+		if str(poke.get("id", "")) == str(id_poke):
 			poke["ps_actual"] = nuevo_ps
 			poke["exp_actual"] = nueva_exp
 			break
@@ -741,3 +796,12 @@ func _actualizar_casilla_actual(valor):
 	db["jugador"]["casilla_actual"] = casilla
 	guardar_json(db)
 	lineedit_casilla_actual.text = str(casilla)
+
+func _on_casilla_toggled(button_pressed, cb):
+	var db = cargar_json()
+	if not db.has("casillas"):
+		db["casillas"] = {}
+	# El texto del checkbox es el número de casilla (ej: "11", "27", "33")
+	var numero_casilla = cb.text
+	db["casillas"][numero_casilla] = 1 if button_pressed else 0
+	guardar_json(db)

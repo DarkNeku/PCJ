@@ -1173,7 +1173,7 @@ custom_minimum_size = Vector2(0, 620)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CheckBox" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="11" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -1182,7 +1182,7 @@ offset_bottom = 51.0
 scale = Vector2(4, 4)
 text = "11"
 
-[node name="CheckBox2" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="27" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 100.0
@@ -1191,7 +1191,7 @@ offset_bottom = 131.0
 scale = Vector2(4, 4)
 text = "27"
 
-[node name="CheckBox3" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="33" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 180.0
@@ -1200,7 +1200,7 @@ offset_bottom = 211.0
 scale = Vector2(4, 4)
 text = "33"
 
-[node name="CheckBox4" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="38" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 260.0
@@ -1209,7 +1209,7 @@ offset_bottom = 291.0
 scale = Vector2(4, 4)
 text = "38"
 
-[node name="CheckBox5" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="42" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 340.0
@@ -1218,7 +1218,7 @@ offset_bottom = 371.0
 scale = Vector2(4, 4)
 text = "42"
 
-[node name="CheckBox6" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="56" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 420.0
@@ -1227,7 +1227,7 @@ offset_bottom = 451.0
 scale = Vector2(4, 4)
 text = "56"
 
-[node name="CheckBox7" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="69" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 500.0
@@ -1236,7 +1236,7 @@ offset_bottom = 531.0
 scale = Vector2(4, 4)
 text = "69"
 
-[node name="CheckBox8" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="77" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 20.0
@@ -1245,7 +1245,7 @@ offset_bottom = 51.0
 scale = Vector2(4, 4)
 text = "77"
 
-[node name="CheckBox9" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="84" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 100.0
@@ -1254,7 +1254,7 @@ offset_bottom = 131.0
 scale = Vector2(4, 4)
 text = "84"
 
-[node name="CheckBox10" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="100" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 180.0
@@ -1263,7 +1263,7 @@ offset_bottom = 211.0
 scale = Vector2(4, 4)
 text = "100"
 
-[node name="CheckBox11" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="113" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 260.0
@@ -1272,7 +1272,7 @@ offset_bottom = 291.0
 scale = Vector2(4, 4)
 text = "113"
 
-[node name="CheckBox12" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="124" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 340.0
@@ -1281,7 +1281,7 @@ offset_bottom = 371.0
 scale = Vector2(4, 4)
 text = "124"
 
-[node name="CheckBox13" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="144" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 420.0
@@ -1290,7 +1290,7 @@ offset_bottom = 451.0
 scale = Vector2(4, 4)
 text = "144"
 
-[node name="CheckBox14" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="147" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 230.0
 offset_top = 500.0
@@ -1299,7 +1299,7 @@ offset_bottom = 531.0
 scale = Vector2(4, 4)
 text = "147"
 
-[node name="CheckBox15" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="161" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 20.0
@@ -1308,7 +1308,7 @@ offset_bottom = 51.0
 scale = Vector2(4, 4)
 text = "161"
 
-[node name="CheckBox16" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="165" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 100.0
@@ -1317,7 +1317,7 @@ offset_bottom = 131.0
 scale = Vector2(4, 4)
 text = "165"
 
-[node name="CheckBox17" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="171" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 180.0
@@ -1326,7 +1326,7 @@ offset_bottom = 211.0
 scale = Vector2(4, 4)
 text = "171"
 
-[node name="CheckBox18" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="179" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 260.0
@@ -1335,7 +1335,7 @@ offset_bottom = 291.0
 scale = Vector2(4, 4)
 text = "179"
 
-[node name="CheckBox19" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="194" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 340.0
@@ -1344,7 +1344,7 @@ offset_bottom = 371.0
 scale = Vector2(4, 4)
 text = "194"
 
-[node name="CheckBox20" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="204" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 420.0
@@ -1353,7 +1353,7 @@ offset_bottom = 451.0
 scale = Vector2(4, 4)
 text = "204"
 
-[node name="CheckBox21" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="207" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 500.0
@@ -1362,7 +1362,7 @@ offset_bottom = 531.0
 scale = Vector2(4, 4)
 text = "207"
 
-[node name="CheckBox22" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="220" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 20.0
@@ -1371,7 +1371,7 @@ offset_bottom = 51.0
 scale = Vector2(4, 4)
 text = "220"
 
-[node name="CheckBox23" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="243" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 100.0
@@ -1380,7 +1380,7 @@ offset_bottom = 131.0
 scale = Vector2(4, 4)
 text = "243"
 
-[node name="CheckBox24" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="280" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 180.0
@@ -1389,7 +1389,7 @@ offset_bottom = 211.0
 scale = Vector2(4, 4)
 text = "280"
 
-[node name="CheckBox25" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="297" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 260.0
@@ -1398,7 +1398,7 @@ offset_bottom = 291.0
 scale = Vector2(4, 4)
 text = "297"
 
-[node name="CheckBox26" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="311" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 340.0
@@ -1407,7 +1407,7 @@ offset_bottom = 371.0
 scale = Vector2(4, 4)
 text = "311"
 
-[node name="CheckBox27" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="320" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 420.0
@@ -1416,7 +1416,7 @@ offset_bottom = 451.0
 scale = Vector2(4, 4)
 text = "320"
 
-[node name="CheckBox28" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="342" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 650.0
 offset_top = 500.0
@@ -1425,7 +1425,7 @@ offset_bottom = 531.0
 scale = Vector2(4, 4)
 text = "342"
 
-[node name="CheckBox29" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="399" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 20.0
@@ -1434,7 +1434,7 @@ offset_bottom = 51.0
 scale = Vector2(4, 4)
 text = "399"
 
-[node name="CheckBox30" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="445" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 100.0
@@ -1443,7 +1443,7 @@ offset_bottom = 131.0
 scale = Vector2(4, 4)
 text = "445"
 
-[node name="CheckBox31" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="451" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 180.0
@@ -1452,7 +1452,7 @@ offset_bottom = 211.0
 scale = Vector2(4, 4)
 text = "451"
 
-[node name="CheckBox32" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="480" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 260.0
@@ -1461,7 +1461,7 @@ offset_bottom = 291.0
 scale = Vector2(4, 4)
 text = "480"
 
-[node name="CheckBox33" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="488" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 340.0
@@ -1470,7 +1470,7 @@ offset_bottom = 371.0
 scale = Vector2(4, 4)
 text = "488"
 
-[node name="CheckBox34" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="492" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 420.0
@@ -1479,7 +1479,7 @@ offset_bottom = 451.0
 scale = Vector2(4, 4)
 text = "492"
 
-[node name="CheckBox35" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
+[node name="495" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/CASILLAS_OBJETOS"]
 layout_mode = 0
 offset_left = 860.0
 offset_top = 500.0
