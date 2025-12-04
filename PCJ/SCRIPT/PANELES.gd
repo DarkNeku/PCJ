@@ -30,6 +30,9 @@ extends VBoxContainer
 @onready var btn_cerrar_mochila = $CanvasLayer/PanelMochila/VBoxContainer/Control/CERRAR_MOCHILA
 @onready var btn_ficha_jugador = $PANEL_CONTROL/FICHA_JUGADOR
 @onready var btn_cerrar_ficha = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control/BTN_CERRAR_FICHA # Asumiendo que este es el botón de cerrar ficha
+@onready var label_nombre_jugador = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control2/NOMBRE_JUGADOR
+@onready var lineedit_dinero = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer/dinero
+@onready var lineedit_casilla_actual = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control/casilla_actual
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -42,6 +45,51 @@ var filtro_busqueda_pc = ""
 var pokemons_db = []
 var json_utils = preload("res://SCRIPT/json_utils.gd").new()
 var confirm_action = "" # 'capture' or 'move_pc_to_team'
+
+# Referencias a los CheckBox de objetos_unicos
+@onready var checkboxes_objetos_unicos := [
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo1,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo2,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo3,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo4,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo5,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo6,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo7,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo8,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo9,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo10,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2/uo11
+]
+
+# Referencias a los SpinBox de inventario
+@onready var spinboxes_inventario := [
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer/POKEBALL,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2/SUPERBALL,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3/ULTRABALL,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer4/POCION,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer5/SUPER_POCION,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer6/CUERDA_HUIDA,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer7/CHALECO_ASALTO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer8/CINTA_ELECCION,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer9/PUERRO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer10/REVIVIR,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer11/PIEDRA_FUEGO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer12/PIEDRA_AGUA,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer13/PIEDRA_TRUENO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer14/PIEDRA_HOJA,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer15/PIEDRA_LUNAR,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer16/RESTAURAR_TODO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer17/REVIVIR_MAXIMO,
+	$CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer18/CARAMELO_RARO
+]
+
+# Referencias a los CheckBox de MO
+@onready var checkboxes_mo := [
+	$CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel/corte,
+	$CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel/vuelo,
+	$CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel/surf,
+	$CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel/fuerza
+]
 
 func _ready():
 	mostrar_seccion("equipo")
@@ -88,6 +136,54 @@ func _ready():
 	dialog.hide()
 	$PANEL_CONTROL/CONFIRMAR_CURACION.confirmed.connect(_on_confirmar_curacion_confirmed)
 	animation_player.connect("animation_finished", Callable(self, "_on_animation_finished"))
+
+	# Cargar el JSON una sola vez y reutilizar la variable
+	var db = cargar_json()
+	# Mostrar el nombre del jugador en el label correspondiente
+	if db.has("jugador") and db["jugador"].has("usuario"):
+		label_nombre_jugador.text = db["jugador"]["usuario"]
+	# Mostrar el dinero actual en el LineEdit
+	if db.has("jugador") and db["jugador"].has("dinero"):
+		lineedit_dinero.text = str(db["jugador"]["dinero"])
+	else:
+		lineedit_dinero.text = "0"
+	# Mostrar la casilla actual en el LineEdit
+	if db.has("jugador") and db["jugador"].has("casilla_actual"):
+		lineedit_casilla_actual.text = str(db["jugador"]["casilla_actual"])
+	else:
+		lineedit_casilla_actual.text = "0"
+	# Conectar el evento de cambio de texto
+	lineedit_dinero.text_submitted.connect(_on_dinero_text_submitted)
+	lineedit_dinero.focus_exited.connect(_on_dinero_focus_exited)
+	lineedit_casilla_actual.text_submitted.connect(_on_casilla_actual_text_submitted)
+	lineedit_casilla_actual.focus_exited.connect(_on_casilla_actual_focus_exited)
+	# Conectar los CheckBox de objetos_unicos
+	for cb in checkboxes_objetos_unicos:
+		cb.toggled.connect(_on_objeto_unico_toggled.bind(cb))
+	# Al iniciar, cargar el estado desde la base de datos
+	if db.has("objetos_unicos"):
+		for cb in checkboxes_objetos_unicos:
+			var nombre = cb.name
+			if db["objetos_unicos"].has(nombre):
+				cb.button_pressed = int(db["objetos_unicos"][nombre]) == 1
+	# Conectar los SpinBox de inventario
+	for sb in spinboxes_inventario:
+		sb.value_changed.connect(_on_inventario_value_changed.bind(sb))
+	# Al iniciar, cargar el estado desde la base de datos
+	if db.has("inventario"):
+		for sb in spinboxes_inventario:
+			var nombre = sb.name.to_lower()
+			if db["inventario"].has(nombre):
+				sb.value = int(db["inventario"][nombre])
+	# Conectar los CheckBox de MO
+	for cb in checkboxes_mo:
+		cb.toggled.connect(_on_mo_toggled.bind(cb))
+	# Al iniciar, cargar el estado desde la base de datos
+	if db.has("MO"):
+		for cb in checkboxes_mo:
+			var nombre = cb.name
+			if db["MO"].has(nombre):
+				cb.button_pressed = int(db["MO"][nombre]) == 1
 
 func _on_alert_guardado_confirmed():
 	# Refresca el banner EXP_ACT en PokemonCardGrande si está visible
@@ -386,14 +482,14 @@ func _on_ListaEquipo_id_pressed(index):
 			idx_eq = i
 	# Intercambiar los valores de 'equipo'
 	if idx_pc != -1 and idx_eq != -1:
-		var slot = pokemon_lista_intercambio[idx_eq]["equipo"]
+		var slot = int(pokemon_lista_intercambio[idx_eq]["equipo"])
 		pokemon_lista_intercambio[idx_eq]["equipo"] = 0
 		pokemon_lista_intercambio[idx_eq]["ubicacion"] = "pc"
 		pokemon_lista_intercambio[idx_pc]["equipo"] = slot
 		pokemon_lista_intercambio[idx_pc]["ubicacion"] = "equipo"
-		# Al pasar al PC, ps_actual = ps_max
+		# Al pasar al PC, ps_actual = ps_max (entero)
 		if pokemon_lista_intercambio[idx_eq].has("ps_max"):
-			pokemon_lista_intercambio[idx_eq]["ps_actual"] = str(pokemon_lista_intercambio[idx_eq]["ps_max"])
+			pokemon_lista_intercambio[idx_eq]["ps_actual"] = int(pokemon_lista_intercambio[idx_eq]["ps_max"])
 		# Guardar el JSON actualizado en ambos archivos
 		db["pokedex"] = pokemon_lista_intercambio
 		guardar_json(db)
@@ -528,8 +624,8 @@ func _on_btn_guardar_popup_pressed():
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
 	for poke in pokemons_db_local:
 		if poke.get("id", "") == str(id_poke):
-			poke["ps_actual"] = str(nuevo_ps)
-			poke["exp_actual"] = str(nueva_exp)
+			poke["ps_actual"] = nuevo_ps
+			poke["exp_actual"] = nueva_exp
 			break
 	db["pokedex"] = pokemons_db_local
 	guardar_json(db)
@@ -569,7 +665,7 @@ func _on_confirmar_curacion_confirmed():
 		var eq = int(poke.get("equipo", 0))
 		if eq > 0 and eq <= 6:
 			if poke.has("ps_max"):
-				poke["ps_actual"] = str(poke["ps_max"])
+				poke["ps_actual"] = int(poke["ps_max"])
 				curados = true
 	if curados:
 		db["pokedex"] = pokemons_db_local
@@ -594,3 +690,54 @@ func _on_btn_cerrar_ficha_pressed():
 func _on_animation_finished(anim_name):
 	if anim_name == "ocultar_mochila":
 		panel_mochila.hide()
+
+func _on_objeto_unico_toggled(button_pressed, cb):
+	var db = cargar_json()
+	if not db.has("objetos_unicos"):
+		db["objetos_unicos"] = {}
+	db["objetos_unicos"][cb.name] = 1 if button_pressed else 0
+	guardar_json(db)
+
+func _on_inventario_value_changed(value, sb):
+	var db = cargar_json()
+	if not db.has("inventario"):
+		db["inventario"] = {}
+	db["inventario"][sb.name.to_lower()] = int(value)
+	guardar_json(db)
+
+func _on_mo_toggled(button_pressed, cb):
+	var db = cargar_json()
+	if not db.has("MO"):
+		db["MO"] = {}
+	db["MO"][cb.name] = 1 if button_pressed else 0
+	guardar_json(db)
+
+func _on_dinero_text_submitted(nuevo_valor):
+	_actualizar_dinero(nuevo_valor)
+
+func _on_dinero_focus_exited():
+	_actualizar_dinero(lineedit_dinero.text)
+
+func _actualizar_dinero(valor):
+	var db = cargar_json()
+	if not db.has("jugador"):
+		db["jugador"] = {}
+	var dinero = int(valor) if valor.is_valid_int() else 0
+	db["jugador"]["dinero"] = dinero
+	guardar_json(db)
+	lineedit_dinero.text = str(dinero)
+
+func _on_casilla_actual_text_submitted(nuevo_valor):
+	_actualizar_casilla_actual(nuevo_valor)
+
+func _on_casilla_actual_focus_exited():
+	_actualizar_casilla_actual(lineedit_casilla_actual.text)
+
+func _actualizar_casilla_actual(valor):
+	var db = cargar_json()
+	if not db.has("jugador"):
+		db["jugador"] = {}
+	var casilla = int(valor) if valor.is_valid_int() else 0
+	db["jugador"]["casilla_actual"] = casilla
+	guardar_json(db)
+	lineedit_casilla_actual.text = str(casilla)
