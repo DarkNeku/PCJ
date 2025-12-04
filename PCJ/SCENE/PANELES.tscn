@@ -1,9 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=41 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 [ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
+[ext_resource type="Texture2D" uid="uid://dvclitcjxuwbl" path="res://ASSET/ficha_entrenador5.png" id="3_dsqtg"]
 [ext_resource type="Texture2D" uid="uid://b6u71if15ajr5" path="res://ASSET/mochila.png" id="3_quhiq"]
 [ext_resource type="Theme" uid="uid://2wk03h0ud83s" path="res://SPINBOX.tres" id="4_ahi4q"]
+[ext_resource type="Theme" uid="uid://bri8rkbreoe5d" path="res://LABEL.tres" id="5_3n73y"]
+[ext_resource type="Texture2D" uid="uid://cpukx7anq0c14" path="res://ASSET/MEDALLAS/image-removebg-preview (3).png" id="7_amxi0"]
+[ext_resource type="Texture2D" uid="uid://bc15aj3mlvuh6" path="res://ASSET/MEDALLAS/image-removebg-preview (4).png" id="8_s2jnp"]
+[ext_resource type="Texture2D" uid="uid://la74bypqilpq" path="res://ASSET/MEDALLAS/image-removebg-preview (5).png" id="9_8xyhm"]
+[ext_resource type="Texture2D" uid="uid://c0x0emde5wig4" path="res://ASSET/MEDALLAS/image-removebg-preview (6).png" id="10_rep4d"]
+[ext_resource type="Texture2D" uid="uid://cglyjo1fsicgu" path="res://ASSET/MEDALLAS/image-removebg-preview (7).png" id="11_0i4jx"]
+[ext_resource type="Texture2D" uid="uid://xarri4uo6yv" path="res://ASSET/MEDALLAS/image-removebg-preview (8).png" id="12_di75u"]
+[ext_resource type="Texture2D" uid="uid://csxye3xijc8rf" path="res://ASSET/MEDALLAS/image-removebg-preview (9).png" id="13_3o5y5"]
+[ext_resource type="Texture2D" uid="uid://oowx61ld3is3" path="res://ASSET/MEDALLAS/image-removebg-preview (10).png" id="14_6y3bd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahi4q"]
 texture = ExtResource("2_m3bc2")
@@ -20,6 +30,18 @@ expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m3bc2"]
 texture = ExtResource("2_m3bc2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lyawv"]
+texture = ExtResource("3_dsqtg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ibr3g"]
+texture = ExtResource("3_dsqtg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pyydk"]
+texture = ExtResource("3_dsqtg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_okdeu"]
+texture = ExtResource("3_dsqtg")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dsqtg"]
 texture = ExtResource("3_quhiq")
@@ -45,6 +67,33 @@ default_font_size = 40
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n73y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahi4q"]
+
+[sub_resource type="Animation" id="Animation_dsqtg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelMochila:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1200, 190)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelEntrenador:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1200, 190)]
+}
 
 [sub_resource type="Animation" id="Animation_ahi4q"]
 resource_name = "mostrar_mochila"
@@ -76,27 +125,52 @@ tracks/0/keys = {
 "values": [Vector2(1200, 190)]
 }
 
-[sub_resource type="Animation" id="Animation_dsqtg"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_amxi0"]
+resource_name = "MOSTRAR_FICHA"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelMochila:position")
+tracks/0/path = NodePath("PanelEntrenador:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.166667),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1200, 190)]
+"values": [Vector2(0, 190)]
+}
+
+[sub_resource type="Animation" id="Animation_s2jnp"]
+resource_name = "OCULTAR_FICHA"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelEntrenador:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1200, 190)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dsqtg"]
 _data = {
+&"MOSTRAR_FICHA": SubResource("Animation_amxi0"),
+&"OCULTAR_FICHA": SubResource("Animation_s2jnp"),
 &"RESET": SubResource("Animation_dsqtg"),
 &"mostrar_mochila": SubResource("Animation_ahi4q"),
 &"ocultar_mochila": SubResource("Animation_3n73y")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amxi0"]
+
+[sub_resource type="Theme" id="Theme_s2jnp"]
+
+[sub_resource type="Theme" id="Theme_8xyhm"]
+
+[sub_resource type="Theme" id="Theme_amxi0"]
 
 [node name="PANELES" type="VBoxContainer"]
 anchors_preset = 15
@@ -208,16 +282,15 @@ size_flags_vertical = 3
 columns = 2
 
 [node name="PANEL_CONTROL" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 130)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CENTRO_POKEMON" type="Button" parent="PANEL_CONTROL"]
 layout_mode = 0
-offset_left = 471.0
-offset_top = 9.0
-offset_right = 597.0
-offset_bottom = 123.0
+offset_left = 471.34
+offset_right = 621.34
+offset_bottom = 150.0
 theme_override_styles/disabled = SubResource("StyleBoxTexture_ahi4q")
 theme_override_styles/hover = SubResource("StyleBoxTexture_quhiq")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_3n73y")
@@ -231,19 +304,20 @@ dialog_text = "¿QUIERES CURAR TUS POKEMON?"
 cancel_button_text = "NO"
 
 [node name="FICHA_JUGADOR" type="Button" parent="PANEL_CONTROL"]
-visible = false
 layout_mode = 0
 offset_left = 100.0
-offset_top = 9.0
-offset_right = 226.0
-offset_bottom = 123.0
+offset_right = 250.0
+offset_bottom = 150.0
+theme_override_styles/disabled = SubResource("StyleBoxTexture_lyawv")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ibr3g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_pyydk")
+theme_override_styles/normal = SubResource("StyleBoxTexture_okdeu")
 
 [node name="MOCHILA" type="Button" parent="PANEL_CONTROL"]
 layout_mode = 0
 offset_left = 842.0
-offset_top = 9.0
-offset_right = 968.0
-offset_bottom = 123.0
+offset_right = 992.0
+offset_bottom = 150.0
 theme_override_styles/disabled = SubResource("StyleBoxTexture_dsqtg")
 theme_override_styles/hover = SubResource("StyleBoxTexture_j30nv")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_oyk26")
@@ -381,7 +455,7 @@ offset_right = 61.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 90
+theme_override_font_sizes/font_size = 80
 text = "ULTRA OBJETOS"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -393,101 +467,101 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ahi4q")
 
 [node name="uo1" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 29.0
-offset_right = 160.0
-offset_bottom = 60.0
+offset_left = 30.0
+offset_top = 76.0
+offset_right = 176.0
+offset_bottom = 107.0
 scale = Vector2(2, 2)
 text = "1) FOSIL DOMO"
 
 [node name="uo2" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 129.0
-offset_right = 153.0
-offset_bottom = 160.0
+offset_left = 30.0
+offset_top = 176.0
+offset_right = 169.0
+offset_bottom = 207.0
 scale = Vector2(2, 2)
 text = "2) FOSIL HELIX"
 
 [node name="uo3" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 229.0
-offset_right = 163.0
-offset_bottom = 260.0
+offset_left = 30.0
+offset_top = 276.0
+offset_right = 179.0
+offset_bottom = 307.0
 scale = Vector2(2, 2)
 text = "3) AMBAR VIEJO"
 
 [node name="uo4" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 329.0
-offset_right = 192.0
-offset_bottom = 360.0
+offset_left = 30.0
+offset_top = 376.0
+offset_right = 208.0
+offset_bottom = 407.0
 scale = Vector2(2, 2)
 text = "4) CAÑA DE PESCAR"
 
 [node name="uo5" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 429.0
-offset_right = 167.0
-offset_bottom = 460.0
+offset_left = 30.0
+offset_top = 476.0
+offset_right = 183.0
+offset_bottom = 507.0
 scale = Vector2(2, 2)
 text = "5) AGUA FRESCA"
 
 [node name="uo6" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 29.0
-offset_right = 520.0
-offset_bottom = 60.0
+offset_left = 390.0
+offset_top = 76.0
+offset_right = 536.0
+offset_bottom = 107.0
 scale = Vector2(2, 2)
 text = "6) SCOPE SILPH"
 
 [node name="uo11" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 735.0
-offset_top = 29.0
-offset_right = 866.0
-offset_bottom = 83.0
+offset_left = 751.0
+offset_top = 76.0
+offset_right = 882.0
+offset_bottom = 130.0
 scale = Vector2(2, 2)
 text = "11) REPARTIR 
      EXPERIENCIA"
 
 [node name="uo7" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 129.0
-offset_right = 526.0
-offset_bottom = 160.0
+offset_left = 390.0
+offset_top = 176.0
+offset_right = 542.0
+offset_bottom = 207.0
 scale = Vector2(2, 2)
 text = "7) POKE FLAUTA"
 
 [node name="uo8" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 229.0
-offset_right = 523.0
-offset_bottom = 260.0
+offset_left = 390.0
+offset_top = 276.0
+offset_right = 539.0
+offset_bottom = 307.0
 scale = Vector2(2, 2)
 text = "8) MASTERBALL"
 
 [node name="uo9" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 329.0
-offset_right = 552.0
-offset_bottom = 360.0
+offset_left = 390.0
+offset_top = 376.0
+offset_right = 568.0
+offset_bottom = 407.0
 scale = Vector2(2, 2)
 text = "9) LLAVE SILPH"
 
 [node name="uo10" type="CheckBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer2/Panel2"]
 layout_mode = 0
-offset_left = 374.0
-offset_top = 429.0
-offset_right = 548.0
-offset_bottom = 460.0
+offset_left = 390.0
+offset_top = 476.0
+offset_right = 564.0
+offset_bottom = 507.0
 scale = Vector2(2, 2)
 text = "10) LLAVE SECRETA"
 
@@ -524,10 +598,15 @@ size_flags_vertical = 3
 [node name="ListaItems" type="VBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+[node name="Control19" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Pokeball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+
+[node name="POKEBALL" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("4_ahi4q")
 max_value = 999.0
@@ -536,13 +615,16 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
 text = "POKEBALL"
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
 layout_mode = 2
 
-[node name="Superball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2"]
+[node name="SUPERBALL" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("4_ahi4q")
 max_value = 999.0
@@ -551,13 +633,17 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme = ExtResource("5_3n73y")
 text = "SUPERBALL"
+
+[node name="Control2" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
 layout_mode = 2
 
-[node name="Ultraball" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3"]
+[node name="ULTRABALL" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3"]
 layout_mode = 2
 theme = ExtResource("4_ahi4q")
 max_value = 999.0
@@ -566,8 +652,297 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme = ExtResource("5_3n73y")
 text = "ULTRABALL"
+
+[node name="Control3" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="POCION" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "POCION"
+
+[node name="Control4" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="SUPER_POCION" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer5"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer5"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "SUPER POCION"
+
+[node name="Control5" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="CUERDA_HUIDA" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer6"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer6"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "CUERDA HUIDA"
+
+[node name="Control6" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="CHALECO_ASALTO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer7"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer7"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "CHALECO ASALTO"
+
+[node name="Control7" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="CINTA_ELECCION" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer8"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer8"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "CINTA ELECCION"
+
+[node name="Control8" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PUERRO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer9"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer9"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PUERRO"
+
+[node name="Control9" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="REVIVIR" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer10"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer10"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "REVIVIR"
+
+[node name="Control10" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PIEDRA_FUEGO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer11"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer11"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PIEDRA FUEGO"
+
+[node name="Control11" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PIEDRA_AGUA" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer12"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer12"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PIEDRA AGUA"
+
+[node name="Control12" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PIEDRA_TRUENO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer13"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer13"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PIEDRA TRUENO"
+
+[node name="Control13" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PIEDRA_HOJA" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer14"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer14"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PIEDRA HOJA"
+
+[node name="Control14" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="PIEDRA_LUNAR" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer15"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer15"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "PIEDRA LUNAR"
+
+[node name="Control15" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="RESTAURAR_TODO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer16"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer16"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "RESTAURAR TODO"
+
+[node name="Control16" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer17" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="REVIVIR_MAXIMO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer17"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer17"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "REVIVIR MAXIMO"
+
+[node name="Control17" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer18" type="HBoxContainer" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+layout_mode = 2
+
+[node name="CARAMELO_RARO" type="SpinBox" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer18"]
+layout_mode = 2
+theme = ExtResource("4_ahi4q")
+max_value = 999.0
+rounded = true
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems/HBoxContainer18"]
+layout_mode = 2
+theme = ExtResource("5_3n73y")
+text = "CARAMELO RARO"
+
+[node name="Control18" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer/VBoxContainer/SC_ITEM/ListaItems"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/PanelMochila/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
@@ -575,9 +950,15 @@ layout_mode = 2
 
 [node name="CERRAR_MOCHILA" type="Button" parent="CanvasLayer/PanelMochila/VBoxContainer/Control"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -529.0
+offset_top = -49.0
+offset_right = -276.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 65
@@ -587,5 +968,567 @@ text = "CERRAR"
 libraries = {
 &"": SubResource("AnimationLibrary_dsqtg")
 }
+
+[node name="PanelEntrenador" type="Panel" parent="CanvasLayer"]
+offset_left = -1200.0
+offset_top = 190.0
+offset_right = -120.0
+offset_bottom = 1770.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_amxi0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelEntrenador"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.5
+offset_right = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_s2jnp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_8xyhm")
+
+[node name="Control2" type="Control" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="NOMBRE_JUGADOR" type="Label" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -129.5
+offset_top = -34.5
+offset_right = 129.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "            DINERO:           "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+alignment = 1
+max_length = 9
+virtual_keyboard_type = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 4
+
+[node name="Button" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+theme = SubResource("Theme_amxi0")
+icon = ExtResource("7_amxi0")
+
+[node name="Button2" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("8_s2jnp")
+
+[node name="Button3" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("9_8xyhm")
+
+[node name="Button4" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("10_rep4d")
+
+[node name="Button5" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("11_0i4jx")
+
+[node name="Button6" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("12_di75u")
+
+[node name="Button7" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("13_3o5y5")
+
+[node name="Button8" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer2/GridContainer"]
+layout_mode = 2
+icon = ExtResource("14_6y3bd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_right = 138.0
+offset_bottom = 34.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+text = "   MO:"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 20.0
+offset_right = 299.0
+offset_bottom = 51.0
+scale = Vector2(2.5, 2.5)
+text = "CORTE"
+
+[node name="CheckBox2" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 430.0
+offset_top = 20.0
+offset_right = 511.0
+offset_bottom = 51.0
+scale = Vector2(2.5, 2.5)
+text = "VUELO"
+
+[node name="CheckBox3" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 20.0
+offset_right = 729.0
+offset_bottom = 51.0
+scale = Vector2(2.5, 2.5)
+text = "SURF"
+
+[node name="CheckBox4" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 20.0
+offset_right = 938.0
+offset_bottom = 51.0
+scale = Vector2(2.5, 2.5)
+text = "FUERZA"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -11.5
+offset_right = 84.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "CASILLAS DE OBJETOS"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 620)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CheckBox" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 67.0
+offset_bottom = 51.0
+scale = Vector2(4, 4)
+text = "11"
+
+[node name="CheckBox2" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 67.0
+offset_bottom = 131.0
+scale = Vector2(4, 4)
+text = "27"
+
+[node name="CheckBox3" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 67.0
+offset_bottom = 211.0
+scale = Vector2(4, 4)
+text = "33"
+
+[node name="CheckBox4" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 260.0
+offset_right = 67.0
+offset_bottom = 291.0
+scale = Vector2(4, 4)
+text = "38"
+
+[node name="CheckBox5" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 340.0
+offset_right = 67.0
+offset_bottom = 371.0
+scale = Vector2(4, 4)
+text = "42"
+
+[node name="CheckBox6" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 420.0
+offset_right = 67.0
+offset_bottom = 451.0
+scale = Vector2(4, 4)
+text = "56"
+
+[node name="CheckBox7" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 500.0
+offset_right = 67.0
+offset_bottom = 531.0
+scale = Vector2(4, 4)
+text = "69"
+
+[node name="CheckBox8" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 20.0
+offset_right = 277.0
+offset_bottom = 51.0
+scale = Vector2(4, 4)
+text = "77"
+
+[node name="CheckBox9" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 100.0
+offset_right = 277.0
+offset_bottom = 131.0
+scale = Vector2(4, 4)
+text = "84"
+
+[node name="CheckBox10" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 180.0
+offset_right = 286.0
+offset_bottom = 211.0
+scale = Vector2(4, 4)
+text = "100"
+
+[node name="CheckBox11" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 260.0
+offset_right = 286.0
+offset_bottom = 291.0
+scale = Vector2(4, 4)
+text = "113"
+
+[node name="CheckBox12" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 340.0
+offset_right = 286.0
+offset_bottom = 371.0
+scale = Vector2(4, 4)
+text = "124"
+
+[node name="CheckBox13" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 420.0
+offset_right = 286.0
+offset_bottom = 451.0
+scale = Vector2(4, 4)
+text = "144"
+
+[node name="CheckBox14" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 500.0
+offset_right = 286.0
+offset_bottom = 531.0
+scale = Vector2(4, 4)
+text = "147"
+
+[node name="CheckBox15" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 20.0
+offset_right = 496.0
+offset_bottom = 51.0
+scale = Vector2(4, 4)
+text = "161"
+
+[node name="CheckBox16" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 100.0
+offset_right = 496.0
+offset_bottom = 131.0
+scale = Vector2(4, 4)
+text = "165"
+
+[node name="CheckBox17" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 180.0
+offset_right = 496.0
+offset_bottom = 211.0
+scale = Vector2(4, 4)
+text = "171"
+
+[node name="CheckBox18" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 260.0
+offset_right = 496.0
+offset_bottom = 291.0
+scale = Vector2(4, 4)
+text = "179"
+
+[node name="CheckBox19" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 340.0
+offset_right = 496.0
+offset_bottom = 371.0
+scale = Vector2(4, 4)
+text = "194"
+
+[node name="CheckBox20" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 420.0
+offset_right = 496.0
+offset_bottom = 451.0
+scale = Vector2(4, 4)
+text = "204"
+
+[node name="CheckBox21" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 500.0
+offset_right = 496.0
+offset_bottom = 531.0
+scale = Vector2(4, 4)
+text = "207"
+
+[node name="CheckBox22" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 20.0
+offset_right = 706.0
+offset_bottom = 51.0
+scale = Vector2(4, 4)
+text = "220"
+
+[node name="CheckBox23" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 100.0
+offset_right = 706.0
+offset_bottom = 131.0
+scale = Vector2(4, 4)
+text = "243"
+
+[node name="CheckBox24" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 180.0
+offset_right = 706.0
+offset_bottom = 211.0
+scale = Vector2(4, 4)
+text = "280"
+
+[node name="CheckBox25" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 260.0
+offset_right = 706.0
+offset_bottom = 291.0
+scale = Vector2(4, 4)
+text = "297"
+
+[node name="CheckBox26" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 340.0
+offset_right = 706.0
+offset_bottom = 371.0
+scale = Vector2(4, 4)
+text = "311"
+
+[node name="CheckBox27" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 420.0
+offset_right = 706.0
+offset_bottom = 451.0
+scale = Vector2(4, 4)
+text = "320"
+
+[node name="CheckBox28" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 500.0
+offset_right = 706.0
+offset_bottom = 531.0
+scale = Vector2(4, 4)
+text = "342"
+
+[node name="CheckBox29" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 20.0
+offset_right = 916.0
+offset_bottom = 51.0
+scale = Vector2(4, 4)
+text = "399"
+
+[node name="CheckBox30" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 100.0
+offset_right = 916.0
+offset_bottom = 131.0
+scale = Vector2(4, 4)
+text = "445"
+
+[node name="CheckBox31" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 180.0
+offset_right = 916.0
+offset_bottom = 211.0
+scale = Vector2(4, 4)
+text = "451"
+
+[node name="CheckBox32" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 260.0
+offset_right = 916.0
+offset_bottom = 291.0
+scale = Vector2(4, 4)
+text = "480"
+
+[node name="CheckBox33" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 340.0
+offset_right = 916.0
+offset_bottom = 371.0
+scale = Vector2(4, 4)
+text = "488"
+
+[node name="CheckBox34" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 420.0
+offset_right = 916.0
+offset_bottom = 451.0
+scale = Vector2(4, 4)
+text = "492"
+
+[node name="CheckBox35" type="CheckBox" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 500.0
+offset_right = 916.0
+offset_bottom = 531.0
+scale = Vector2(4, 4)
+text = "495"
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BTN_CERRAR_FICHA" type="Button" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 323.0
+offset_top = -38.0
+offset_right = 520.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "CERRAR"
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control"]
+layout_mode = 0
+offset_left = 38.5
+offset_top = 7.0
+offset_right = 516.5
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 50
+text = "CASILLA ACTUAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control"]
+layout_mode = 0
+offset_left = 504.5
+offset_top = 4.0
+offset_right = 740.5
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 60
+alignment = 1
+max_length = 3
+virtual_keyboard_type = 2
 
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]

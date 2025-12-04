@@ -1,5 +1,5 @@
 [gd_resource type="Theme" format=3 uid="uid://2wk03h0ud83s"]
 
 [resource]
-default_font_size = 50
+default_font_size = 80
 SpinBox/constants/buttons_width = 80

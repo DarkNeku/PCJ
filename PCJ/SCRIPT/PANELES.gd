@@ -28,6 +28,8 @@ extends VBoxContainer
 @onready var btn_mochila = $PANEL_CONTROL/MOCHILA
 @onready var animation_player = $CanvasLayer/AnimationPlayer
 @onready var btn_cerrar_mochila = $CanvasLayer/PanelMochila/VBoxContainer/Control/CERRAR_MOCHILA
+@onready var btn_ficha_jugador = $PANEL_CONTROL/FICHA_JUGADOR
+@onready var btn_cerrar_ficha = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer2/Control/BTN_CERRAR_FICHA # Asumiendo que este es el botón de cerrar ficha
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -57,6 +59,8 @@ func _ready():
 	btn_cerrar_popup.pressed.connect(func(): cerrar_popup_tarjeta())
 	btn_guardar_popup.pressed.connect(_on_btn_guardar_popup_pressed)
 	btn_centro_pokemon.pressed.connect(_on_btn_centro_pokemon_pressed)
+	btn_ficha_jugador.pressed.connect(_on_btn_ficha_jugador_pressed)
+	btn_cerrar_ficha.pressed.connect(_on_btn_cerrar_ficha_pressed)
 	# Conectar la señal 'confirmed' del dialogo de confirmación una sola vez (Godot 4: usar Callable)
 	var cb_confirm = Callable(self, "_on_confirmation_dialog_confirmed")
 	if not confirmacion.is_connected("confirmed", cb_confirm):
@@ -580,6 +584,12 @@ func _on_btn_mochila_pressed():
 
 func _on_btn_cerrar_mochila_pressed():
 	animation_player.play("ocultar_mochila")
+
+func _on_btn_ficha_jugador_pressed():
+	animation_player.play("MOSTRAR_FICHA")
+
+func _on_btn_cerrar_ficha_pressed():
+	animation_player.play("OCULTAR_FICHA")
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ocultar_mochila":
