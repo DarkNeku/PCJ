@@ -492,12 +492,24 @@ func mostrar_lista_equipo():
 	lista_equipo.clear()
 	var db = cargar_json()
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
+
+	# Crear un diccionario con los slots ocupados
+	var slots_ocupados = {}
 	if typeof(pokemons_db_local) == TYPE_ARRAY:
 		for poke in pokemons_db_local:
 			var eq = int(poke.get("equipo", 0))
 			if eq > 0 and eq <= 6:
-				var texto = "%d - %s" % [eq, poke.get("nombre", "")]
-				lista_equipo.add_item(texto)
+				slots_ocupados[eq] = poke.get("nombre", "")
+
+	# Mostrar TODOS los 6 slots, ocupados o vacíos
+	for i in range(1, 7):
+		var texto = ""
+		if slots_ocupados.has(i):
+			texto = "%d - %s" % [i, slots_ocupados[i]]
+		else:
+			texto = "%d - (vacío)" % i
+		lista_equipo.add_item(texto)
+
 	if lista_equipo and lista_equipo.is_inside_tree():
 		lista_equipo.popup_centered()
 
@@ -556,41 +568,53 @@ func _on_confirmation_dialog_confirmed():
 	mostrar_tarjetas_pc()
 
 func _on_ListaEquipo_id_pressed(index):
-	# Obtener el número de equipo y nombre del Pokémon seleccionado en la lista
+	# Obtener el número de equipo seleccionado en la lista
 	var texto = lista_equipo.get_item_text(index)
 	var partes = texto.split(" - ")
 	if partes.size() != 2:
 		return
 	var num_equipo = int(partes[0])
-	var _nombre_equipo = partes[1]  # No usado pero necesario para el split
+	var nombre_slot = partes[1]
+
 	# Leer la base de datos
 	var db = cargar_json()
 	var pokemon_lista_intercambio = db["pokedex"] if db.has("pokedex") else []
 	var id_pc = id_pokemon_seleccionado
 	var idx_pc = -1
 	var idx_eq = -1
+
+	# Buscar el Pokémon del PC y el del slot seleccionado del equipo
 	for i in range(pokemon_lista_intercambio.size()):
 		var poke = pokemon_lista_intercambio[i]
 		if str(poke.get("id", "")) == str(id_pc):
 			idx_pc = i
 		if int(poke.get("equipo", 0)) == num_equipo:
 			idx_eq = i
-	# Intercambiar los valores de 'equipo'
-	if idx_pc != -1 and idx_eq != -1:
-		var slot = int(pokemon_lista_intercambio[idx_eq]["equipo"])
-		pokemon_lista_intercambio[idx_eq]["equipo"] = 0
-		pokemon_lista_intercambio[idx_eq]["ubicacion"] = "pc"
-		pokemon_lista_intercambio[idx_pc]["equipo"] = slot
-		pokemon_lista_intercambio[idx_pc]["ubicacion"] = "equipo"
-		# Al pasar al PC, ps_actual = ps_max (entero)
-		if pokemon_lista_intercambio[idx_eq].has("ps_max"):
-			pokemon_lista_intercambio[idx_eq]["ps_actual"] = int(pokemon_lista_intercambio[idx_eq]["ps_max"])
-		# Guardar el JSON actualizado en ambos archivos
+
+	# Si encontramos el Pokémon del PC
+	if idx_pc != -1:
+		# CASO 1: El slot del equipo está ocupado - intercambiar
+		if idx_eq != -1:
+			var slot = int(pokemon_lista_intercambio[idx_eq]["equipo"])
+			pokemon_lista_intercambio[idx_eq]["equipo"] = 0
+			pokemon_lista_intercambio[idx_eq]["ubicacion"] = "pc"
+			pokemon_lista_intercambio[idx_pc]["equipo"] = slot
+			pokemon_lista_intercambio[idx_pc]["ubicacion"] = "equipo"
+			# Al pasar al PC, ps_actual = ps_max (entero)
+			if pokemon_lista_intercambio[idx_eq].has("ps_max"):
+				pokemon_lista_intercambio[idx_eq]["ps_actual"] = int(pokemon_lista_intercambio[idx_eq]["ps_max"])
+		# CASO 2: El slot del equipo está vacío - simplemente asignar
+		else:
+			pokemon_lista_intercambio[idx_pc]["equipo"] = num_equipo
+			pokemon_lista_intercambio[idx_pc]["ubicacion"] = "equipo"
+
+		# Guardar el JSON actualizado
 		db["pokedex"] = pokemon_lista_intercambio
 		guardar_json(db)
 		# Refrescar las vistas
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_equipo()
+
 	lista_equipo.hide()
 
 func cargar_json():

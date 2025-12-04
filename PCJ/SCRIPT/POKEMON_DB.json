@@ -37,7 +37,7 @@
 	"pokedex": [
 		{
 			"atrapado": 1,
-			"equipo": 0,
+			"equipo": 4,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -47,7 +47,7 @@
 			"numero": "001",
 			"ps_actual": 20,
 			"ps_max": 20,
-			"ubicacion": "pc"
+			"ubicacion": "equipo"
 		},
 		{
 			"atrapado": 0,
@@ -78,8 +78,8 @@
 			"ubicacion": ""
 		},
 		{
-			"atrapado": 1,
-			"equipo": 2,
+			"atrapado": 0,
+			"equipo": 0,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -89,7 +89,7 @@
 			"numero": "004",
 			"ps_actual": 20,
 			"ps_max": 20,
-			"ubicacion": "equipo"
+			"ubicacion": ""
 		},
 		{
 			"atrapado": 0,
@@ -163,7 +163,7 @@
 		},
 		{
 			"atrapado": 1,
-			"equipo": 3,
+			"equipo": 2,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -247,7 +247,7 @@
 		},
 		{
 			"atrapado": 1,
-			"equipo": 4,
+			"equipo": 0,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -257,7 +257,7 @@
 			"numero": "016",
 			"ps_actual": 15,
 			"ps_max": 15,
-			"ubicacion": "equipo"
+			"ubicacion": "pc"
 		},
 		{
 			"atrapado": 0,
@@ -499,7 +499,7 @@
 		},
 		{
 			"atrapado": 1,
-			"equipo": 0,
+			"equipo": 1,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -509,7 +509,7 @@
 			"numero": "031",
 			"ps_actual": 45,
 			"ps_max": 45,
-			"ubicacion": "pc"
+			"ubicacion": "equipo"
 		},
 		{
 			"atrapado": 0,
@@ -807,7 +807,7 @@
 		},
 		{
 			"atrapado": 1,
-			"equipo": 0,
+			"equipo": 3,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -817,7 +817,7 @@
 			"numero": "053",
 			"ps_actual": 40,
 			"ps_max": 40,
-			"ubicacion": "pc"
+			"ubicacion": "equipo"
 		},
 		{
 			"atrapado": 0,
