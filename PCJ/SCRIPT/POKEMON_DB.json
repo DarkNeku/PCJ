@@ -7,7 +7,7 @@
 	},
 	"fecha_ultima": "2025-12-03 04:24:52",
 	"inventario": {
-		"caramelo_raro": 7,
+		"caramelo_raro": 7.0,
 		"chaleco_asalto": 0.0,
 		"cinta_eleccion": 5.0,
 		"cuerda_huida": 0.0,
@@ -29,8 +29,8 @@
 	"jugador": {
 		"avatar": "SAKURA",
 		"casilla": 0.0,
-		"casilla_actual": 11.0,
-		"dinero": 10000.0,
+		"casilla_actual": 8,
+		"dinero": 1000.0,
 		"fecha_inicio": "2025-12-03",
 		"fecha_ultima": "04/12/2025",
 		"genero": "HOMBRE",

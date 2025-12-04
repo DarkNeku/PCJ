@@ -1,0 +1,79 @@
+{
+  "MO": {
+    "corte": 0,
+    "fuerza": 0,
+    "surf": 0,
+    "vuelo": 0
+  },
+  "fecha_ultima": "2025-12-03 04:24:52",
+  "inventario": {
+    "caramelo_raro": 7,
+    "chaleco_asalto": 0,
+    "cinta_eleccion": 5,
+    "cuerda_huida": 0,
+    "piedra_agua": 0,
+    "piedra_fuego": 6,
+    "piedra_hoja": 4,
+    "piedra_lunar": 0,
+    "piedra_trueno": 0,
+    "pocion": 6,
+    "pokeball": 12,
+    "puerro": 0,
+    "restaurar_todo": 0,
+    "revivir": 0,
+    "revivir_maximo": 5,
+    "super_pocion": 7,
+    "superball": 14,
+    "ultraball": 7
+  },
+  "jugador": {
+    "avatar": "SAKURA",
+    "casilla": 0,
+    "casilla_actual": 11,
+    "dinero": 10000,
+    "fecha_inicio": "2025-12-03",
+    "fecha_ultima": "04/12/2025",
+    "genero": "HOMBRE",
+    "usuario": "oli"
+  },
+  "medallas": {
+    "alto_mando": 0,
+    "medalla_1": 0,
+    "medalla_2": 0,
+    "medalla_3": 0,
+    "medalla_4": 0,
+    "medalla_5": 0,
+    "medalla_6": 0,
+    "medalla_7": 0,
+    "medalla_8": 0
+  },
+  "objetos_unicos": {
+    "uo1": 0,
+    "uo10": 0,
+    "uo11": 0,
+    "uo2": 0,
+    "uo3": 0,
+    "uo4": 0,
+    "uo5": 0,
+    "uo6": 0,
+    "uo7": 1,
+    "uo8": 1,
+    "uo9": 0
+  },
+  "pokedex": [
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "001", "img_link": "res://ASSET/POKEDEX/BULBASAUR.png", "nombre": "Bulbasaur", "numero": "001", "ps_actual": 20, "ps_max": 20, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "002", "img_link": "res://ASSET/POKEDEX/IVYSAUR.png", "nombre": "Ivysaur", "numero": "002", "ps_actual": 30, "ps_max": 30, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "003", "img_link": "res://ASSET/POKEDEX/VENUSAUR.png", "nombre": "Venusaur", "numero": "003", "ps_actual": 50, "ps_max": 50, "ubicacion": ""},
+    {"atrapado": 1, "equipo": 1, "estado": "", "exp_actual": 1, "exp_evo": 0, "id": "004", "img_link": "res://ASSET/POKEDEX/CHARMANDER.png", "nombre": "Charmander", "numero": "004", "ps_actual": 20, "ps_max": 20, "ubicacion": "equipo"},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "005", "img_link": "res://ASSET/POKEDEX/CHARMELEON.png", "nombre": "Charmeleon", "numero": "005", "ps_actual": 30, "ps_max": 30, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "006", "img_link": "res://ASSET/POKEDEX/CHARIZARD.png", "nombre": "Charizard", "numero": "006", "ps_actual": 50, "ps_max": 50, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "007", "img_link": "res://ASSET/POKEDEX/SQUIRTLE.png", "nombre": "Squirtle", "numero": "007", "ps_actual": 20, "ps_max": 20, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "008", "img_link": "res://ASSET/POKEDEX/WARTORTLE.png", "nombre": "Wartortle", "numero": "008", "ps_actual": 30, "ps_max": 30, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "009", "img_link": "res://ASSET/POKEDEX/BLASTOISE.png", "nombre": "Blastoise", "numero": "009", "ps_actual": 50, "ps_max": 50, "ubicacion": ""},
+    {"atrapado": 1, "equipo": 2, "estado": "", "exp_actual": 2, "exp_evo": 0, "id": "010", "img_link": "res://ASSET/POKEDEX/CATERPIE.png", "nombre": "Caterpie", "numero": "010", "ps_actual": 10, "ps_max": 10, "ubicacion": "equipo"},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "011", "img_link": "res://ASSET/POKEDEX/METAPOD.png", "nombre": "Metapod", "numero": "011", "ps_actual": 20, "ps_max": 20, "ubicacion": ""},
+    {"atrapado": 0, "equipo": 0, "estado": "", "exp_actual": 0, "exp_evo": 0, "id": "012", "img_link": "res://ASSET/POKEDEX/BUTTERFREE.png", "nombre": "Butterfree", "numero": "012", "ps_actual": 30, "ps_max": 30, "ubicacion": ""}
+    // ...continúa el resto de la pokedex con el mismo formato...
+  ]
+}
+
