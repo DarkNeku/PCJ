@@ -50,8 +50,8 @@
 			"ubicacion": "pc"
 		},
 		{
-			"atrapado": 1,
-			"equipo": 1,
+			"atrapado": 0,
+			"equipo": 0,
 			"estado": "",
 			"exp_actual": 0,
 			"exp_evo": 0,
@@ -61,7 +61,7 @@
 			"numero": "002",
 			"ps_actual": 30,
 			"ps_max": 30,
-			"ubicacion": "equipo"
+			"ubicacion": ""
 		},
 		{
 			"atrapado": 0,

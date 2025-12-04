@@ -514,6 +514,7 @@ func _on_confirmation_dialog_confirmed():
 				poke["atrapado"] = 0
 				poke["ubicacion"] = ""
 				poke["exp_actual"] = 0
+				poke["equipo"] = 0
 				break
 		db["pokedex"] = pokemons_db_local
 		guardar_json(db)
