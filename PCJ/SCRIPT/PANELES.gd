@@ -700,11 +700,11 @@ func guardar_json(data):
 	if file_user:
 		file_user.store_string(JSON.stringify(data, "\t"))
 		file_user.close()
-	# Guardar en res://
-	var file_res = FileAccess.open(JSON_PATH_RES, FileAccess.WRITE)
-	if file_res:
-		file_res.store_string(JSON.stringify(data, "\t"))
-		file_res.close()
+	# Eliminar escritura en res:// para evitar errores de progress dialog
+	# var file_res = FileAccess.open(JSON_PATH_RES, FileAccess.WRITE)
+	# if file_res:
+	# 	file_res.store_string(JSON.stringify(data, "\t"))
+	# 	file_res.close()
 
 var popup_confirmacion_actualizacion: AcceptDialog = null
 var panel_mensaje_actualizacion: Panel = null
