@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ha6nkr3h4q72"
+path="res://.godot/imported/PANTALLA DE TITULO.mp3-d6b08c3f34ee090cda2a6ab30fd5989a.mp3str"
+
+[deps]
+
+source_file="res://ASSET/SONIDOS/PANTALLA DE TITULO.mp3"
+dest_files=["res://.godot/imported/PANTALLA DE TITULO.mp3-d6b08c3f34ee090cda2a6ab30fd5989a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
