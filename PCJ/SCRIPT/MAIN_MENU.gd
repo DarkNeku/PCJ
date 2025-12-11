@@ -99,3 +99,19 @@ func _exit_tree():
 			btn_continuar.disconnect("pressed", Callable(self, "_ir_a_paneles"))
 		if btn_volver and btn_volver.is_connected("pressed", Callable(self, "_cerrar_window_datos")):
 			btn_volver.disconnect("pressed", Callable(self, "_cerrar_window_datos"))
+
+
+func _on_button_continue_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_button_2_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_volver_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_continuar_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.

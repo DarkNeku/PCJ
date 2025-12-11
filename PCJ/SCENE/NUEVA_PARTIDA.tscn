@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://csmoo32qm1en6"]
+[gd_scene load_steps=20 format=3 uid="uid://csmoo32qm1en6"]
 
 [ext_resource type="PackedScene" uid="uid://dlesib4bmtmj5" path="res://SCENE/PROFESOR_OAK.tscn" id="1_4wkrd"]
 [ext_resource type="Script" uid="uid://bts0anronk8bm" path="res://SCRIPT/NUEVA_PARTIDA.gd" id="1_k4k4h"]
+[ext_resource type="AudioStream" uid="uid://dbuuth7trfon4" path="res://ASSET/SONIDOS/PRESS_A.ogg" id="3_ui1qq"]
 
 [sub_resource type="Theme" id="Theme_4wkrd"]
 default_font_size = 50
@@ -292,3 +293,8 @@ size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_g6lwu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioBoton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ui1qq")
+
+[connection signal="pressed" from="Panel/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]

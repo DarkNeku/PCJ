@@ -308,3 +308,7 @@ func _exit_tree():
 			child.stop()
 			if child.is_inside_tree():
 				child.queue_free()
+
+
+func _on_button_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.

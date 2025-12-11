@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmfnyg0got4y"]
+[gd_scene load_steps=4 format=3 uid="uid://cmfnyg0got4y"]
 
 [ext_resource type="Script" uid="uid://uwftg3g8aee5" path="res://SCRIPT/PokemonCardGrande.gd" id="1_d3rg1"]
+[ext_resource type="AudioStream" uid="uid://dbuuth7trfon4" path="res://ASSET/SONIDOS/PRESS_A.ogg" id="2_cg0rf"]
 
 [sub_resource type="FontFile" id="FontFile_d3rg1"]
 cache/0/60/0/ascent = 0.0
@@ -254,3 +255,6 @@ offset_right = 806.0
 offset_bottom = 239.0
 theme_override_font_sizes/font_size = 50
 text = "▼"
+
+[node name="AudioBoton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_cg0rf")

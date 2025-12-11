@@ -9,7 +9,6 @@ extends VBoxContainer
 @onready var btn_menos_ps = $HBoxContainer/Panel/MENOS_PS
 @onready var btn_mas_exp = $HBoxContainer/Panel/MAS_EXP
 @onready var btn_menos_exp = $HBoxContainer/Panel/MENOS_EXP
-
 var id_pokemon = ""
 
 func configurar(ruta_imagen: String, ps_max: int, exp_actual: int, ps_actual: int = -1, id: String = ""):
@@ -44,25 +43,30 @@ func _ready():
 		btn_menos_exp.pressed.connect(_on_menos_exp_pressed)
 
 func _on_mas_ps_pressed():
+	$AudioBoton.play()
 	if ps_line_edit and ps_max_label:
 		var valor_actual = int(ps_line_edit.text)
 		var valor_max = int(ps_max_label.text)
 		if valor_actual < valor_max:
 			ps_line_edit.text = str(valor_actual + 1)
+			
 
 func _on_menos_ps_pressed():
+	$AudioBoton.play()
 	if ps_line_edit:
 		var valor_actual = int(ps_line_edit.text)
 		if valor_actual > 0:
 			ps_line_edit.text = str(valor_actual - 1)
 
 func _on_mas_exp_pressed():
+	$AudioBoton.play()
 	if exp_line_edit:
 		var valor_actual = int(exp_line_edit.text)
 		if valor_actual < 999:
 			exp_line_edit.text = str(valor_actual + 1)
 
 func _on_menos_exp_pressed():
+	$AudioBoton.play()
 	if exp_line_edit:
 		var valor_actual = int(exp_line_edit.text)
 		if valor_actual > 0:

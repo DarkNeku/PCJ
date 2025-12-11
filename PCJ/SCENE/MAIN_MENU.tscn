@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2eoxbojvfrd4"]
+[gd_scene load_steps=6 format=3 uid="uid://b2eoxbojvfrd4"]
 
 [ext_resource type="Script" uid="uid://taod6bpgsoy0" path="res://SCRIPT/MAIN_MENU.gd" id="1_u6qdw"]
+[ext_resource type="AudioStream" uid="uid://dbuuth7trfon4" path="res://ASSET/SONIDOS/PRESS_A.ogg" id="2_46pfj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spiek"]
 
@@ -163,3 +164,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CONTINUAR"
+
+[node name="AudioBoton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_46pfj")
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button_CONTINUE" to="." method="_on_button_continue_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Panel/Window/Panel/VBoxContainer/HBoxContainer5/VOLVER" to="." method="_on_volver_pressed"]
+[connection signal="pressed" from="Panel/Window/Panel/VBoxContainer/HBoxContainer5/CONTINUAR" to="." method="_on_continuar_pressed"]

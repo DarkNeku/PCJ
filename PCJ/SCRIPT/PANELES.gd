@@ -827,6 +827,7 @@ func _on_btn_centro_pokemon_pressed():
 		cancel_button.add_theme_font_size_override("font_size", 50)
 
 func _on_confirmar_curacion_confirmed():
+	$AudioBotonCurar.play()
 	var db = cargar_json()
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
 	var curados = false
@@ -842,6 +843,7 @@ func _on_confirmar_curacion_confirmed():
 		mostrar_tarjetas_equipo()
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_captura()
+		
 
 func _on_btn_mochila_pressed():
 	panel_mochila.show()
@@ -871,6 +873,7 @@ func _on_btn_ficha_jugador_pressed():
 func _on_btn_cerrar_ficha_pressed():
 	animation_player.play("OCULTAR_FICHA")
 	# Habilitar navegación y controles al cerrar la ficha
+	$AudioBoton.play()
 	btn_equipo.disabled = false
 	btn_pc.disabled = false
 	btn_captura.disabled = false
@@ -962,3 +965,27 @@ func _on_confirmacion_cancelled():
 					mostrar_tarjetas_pc()
 				break
 	confirmacion.hide()
+
+
+func _on_cerrar_mochila_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_mochila_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_ficha_jugador_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_btn_captura_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_btn_equipo_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_btn_pc_pressed() -> void:
+	$AudioBoton_PC.play() # Replace with function body.
