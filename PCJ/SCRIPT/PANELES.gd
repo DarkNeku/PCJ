@@ -827,7 +827,6 @@ func _on_btn_centro_pokemon_pressed():
 		cancel_button.add_theme_font_size_override("font_size", 50)
 
 func _on_confirmar_curacion_confirmed():
-	$AudioBotonCurar.play()
 	var db = cargar_json()
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
 	var curados = false
@@ -843,7 +842,6 @@ func _on_confirmar_curacion_confirmed():
 		mostrar_tarjetas_equipo()
 		mostrar_tarjetas_pc()
 		mostrar_tarjetas_captura()
-		
 
 func _on_btn_mochila_pressed():
 	panel_mochila.show()
@@ -989,3 +987,15 @@ func _on_btn_equipo_pressed() -> void:
 
 func _on_btn_pc_pressed() -> void:
 	$AudioBoton_PC.play() # Replace with function body.
+
+
+func _on_centro_pokemon_pressed() -> void:
+	$AudioBotonCurar.play() # Replace with function body.
+
+
+func _on_btnguardarpopup_pressed() -> void:
+	$AudioBotonGuardar.play() # Replace with function body.
+
+
+func _on_btn_cerrar_popup_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.

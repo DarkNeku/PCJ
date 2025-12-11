@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://yo2i6m45rom8"]
+[gd_scene load_steps=45 format=3 uid="uid://yo2i6m45rom8"]
 
 [ext_resource type="Script" uid="uid://c5l748hujocai" path="res://SCRIPT/PANELES.gd" id="1_unuhw"]
 [ext_resource type="Texture2D" uid="uid://rfrct7g6on3i" path="res://ASSET/Pokemon_Center_Exterior.png" id="2_m3bc2"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://demp2w6hn4y68" path="res://ASSET/SONIDOS/PC.ogg" id="15_rep4d"]
 [ext_resource type="AudioStream" uid="uid://dbuuth7trfon4" path="res://ASSET/SONIDOS/PRESS_A.ogg" id="16_0i4jx"]
 [ext_resource type="AudioStream" uid="uid://cixnu1t4w45yh" path="res://ASSET/SONIDOS/CURAR.ogg" id="17_di75u"]
+[ext_resource type="AudioStream" uid="uid://bensyao3m5uvy" path="res://ASSET/SONIDOS/SAVE.ogg" id="18_0i4jx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ahi4q"]
 texture = ExtResource("2_m3bc2")
@@ -305,7 +306,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_m3bc2")
 
 [node name="CONFIRMAR_CURACION" type="ConfirmationDialog" parent="PANEL_CONTROL"]
 size = Vector2i(274, 100)
-visible = true
 borderless = true
 ok_button_text = " SI "
 dialog_text = "¿QUIERES CURAR TUS POKEMON?"
@@ -1540,10 +1540,15 @@ stream = ExtResource("16_0i4jx")
 [node name="AudioBotonCurar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_di75u")
 
+[node name="AudioBotonGuardar" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_0i4jx")
+
 [connection signal="pressed" from="PANEL_CONTROL/FICHA_JUGADOR" to="." method="_on_ficha_jugador_pressed"]
 [connection signal="pressed" from="PANEL_CONTROL/MOCHILA" to="." method="_on_mochila_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnEquipo" to="." method="_on_btn_equipo_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnPC" to="." method="_on_btn_pc_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnCaptura" to="." method="_on_btn_captura_pressed"]
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
+[connection signal="pressed" from="PopupTarjetaPokemon/BTNGUARDARPOPUP" to="." method="_on_btnguardarpopup_pressed"]
+[connection signal="pressed" from="PopupTarjetaPokemon/BtnCerrarPopup" to="." method="_on_btn_cerrar_popup_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelMochila/VBoxContainer/Control/CERRAR_MOCHILA" to="." method="_on_cerrar_mochila_pressed"]
