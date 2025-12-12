@@ -33,6 +33,7 @@ extends VBoxContainer
 @onready var label_nombre_jugador = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control2/NOMBRE_JUGADOR
 @onready var lineedit_dinero = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer/dinero
 @onready var lineedit_casilla_actual = $CanvasLayer/PanelEntrenador/VBoxContainer/VBoxContainer/Control/HBoxContainer/casilla_actual
+@onready var audio_fondo_paneles = $AudioFondoPaneles
 
 const JSON_PATH_RES = "res://SCRIPT/POKEMON_DB.json"
 const JSON_PATH_USER = "user://POKEMON_DB.json"
@@ -110,6 +111,10 @@ var confirm_action = "" # 'capture' or 'move_pc_to_team'
 	grid_medallas.get_node("medalla_8")
 ]
 var checks_medallas = []
+
+# Variables para guardar la posición de la música de equipo
+var equipo_music_pos: float = 0.0
+var equipo_music_playing: bool = false
 
 func _ready():
 	mostrar_seccion("equipo")
@@ -302,6 +307,38 @@ func mostrar_seccion(seccion):
 	elif seccion == "captura":
 		move_child(panel_captura, 0)
 		mostrar_tarjetas_captura()
+	# Cambiar música de fondo
+	reproducir_musica_panel(seccion)
+
+func reproducir_musica_panel(panel):
+	var musica = null
+	if panel == "equipo":
+		musica = load("res://ASSET/SONIDOS/FONDO.ogg")
+		audio_fondo_paneles.stop()
+		audio_fondo_paneles.stream = musica
+		if equipo_music_pos > 0.0 and not equipo_music_playing:
+			audio_fondo_paneles.play(equipo_music_pos)
+		else:
+			equipo_music_pos = 0.0
+			audio_fondo_paneles.play()
+		equipo_music_playing = true
+	elif panel == "pc":
+		if equipo_music_playing:
+			equipo_music_pos = audio_fondo_paneles.get_playback_position()
+			equipo_music_playing = false
+		musica = load("res://ASSET/SONIDOS/CENTRO.ogg")
+		audio_fondo_paneles.stop()
+		audio_fondo_paneles.stream = musica
+		audio_fondo_paneles.play()
+	elif panel == "captura":
+		if equipo_music_playing:
+			equipo_music_pos = audio_fondo_paneles.get_playback_position()
+			equipo_music_playing = false
+		musica = load("res://ASSET/SONIDOS/BATALLA.ogg")
+		audio_fondo_paneles.stop()
+		audio_fondo_paneles.stream = musica
+		audio_fondo_paneles.play()
+	# Puedes agregar más paneles y música aquí
 
 func _on_busqueda_text_changed(nuevo_texto):
 	filtro_busqueda = nuevo_texto
@@ -528,6 +565,7 @@ func mostrar_lista_equipo():
 		lista_equipo.popup_centered()
 
 func _on_confirmation_dialog_confirmed():
+	$AudioBoton.play()
 	if confirm_action == "move_pc_to_team":
 		mostrar_lista_equipo()
 		confirm_action = ""
@@ -804,7 +842,7 @@ func _on_btn_guardar_popup_pressed():
 	# Ocultar el popup de la tarjeta antes de mostrar ALERT_GUARDADO
 	popup_tarjeta.hide()
 	# Mostrar el mensaje de guardado
-	if alert_guardado:
+	if alert_guardado:		
 		alert_guardado.dialog_text = "DATOS GUARDADOS"
 		var label = alert_guardado.get_label()
 		if label:
@@ -814,6 +852,7 @@ func _on_btn_guardar_popup_pressed():
 			ok_button.add_theme_font_size_override("font_size", 50)
 			
 		alert_guardado.popup_centered()
+		
 
 func _on_btn_centro_pokemon_pressed():
 	var dialog = $PANEL_CONTROL/CONFIRMAR_CURACION
@@ -945,6 +984,7 @@ func _on_casilla_toggled(button_pressed, cb):
 
 func _on_alert_guardado_confirmed():
 	# Simplemente cierra el alert_guardado si está visible
+	
 	if alert_guardado and alert_guardado.is_inside_tree():
 		alert_guardado.hide()
 	# Restaurar navegación y panel_control si estaban deshabilitados por el popup de edición

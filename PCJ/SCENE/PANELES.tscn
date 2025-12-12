@@ -1543,6 +1543,8 @@ stream = ExtResource("17_di75u")
 [node name="AudioBotonGuardar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_0i4jx")
 
+[node name="AudioFondoPaneles" type="AudioStreamPlayer" parent="."]
+
 [connection signal="canceled" from="PANEL_CONTROL/CONFIRMAR_CURACION" to="." method="_on_confirmar_curacion_canceled"]
 [connection signal="pressed" from="PANEL_CONTROL/FICHA_JUGADOR" to="." method="_on_ficha_jugador_pressed"]
 [connection signal="pressed" from="PANEL_CONTROL/MOCHILA" to="." method="_on_mochila_pressed"]
