@@ -841,7 +841,7 @@ func _on_btn_guardar_popup_pressed():
 	mostrar_tarjetas_captura()
 	# Ocultar el popup de la tarjeta antes de mostrar ALERT_GUARDADO
 	popup_tarjeta.hide()
-	# Mostrar el mensaje de guardado
+	# Mostrar el mensaje de guardados
 	if alert_guardado:		
 		alert_guardado.dialog_text = "DATOS GUARDADOS"
 		var label = alert_guardado.get_label()
