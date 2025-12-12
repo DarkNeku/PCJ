@@ -1543,11 +1543,13 @@ stream = ExtResource("17_di75u")
 [node name="AudioBotonGuardar" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_0i4jx")
 
+[connection signal="canceled" from="PANEL_CONTROL/CONFIRMAR_CURACION" to="." method="_on_confirmar_curacion_canceled"]
 [connection signal="pressed" from="PANEL_CONTROL/FICHA_JUGADOR" to="." method="_on_ficha_jugador_pressed"]
 [connection signal="pressed" from="PANEL_CONTROL/MOCHILA" to="." method="_on_mochila_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnEquipo" to="." method="_on_btn_equipo_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnPC" to="." method="_on_btn_pc_pressed"]
 [connection signal="pressed" from="BarraNavegacion/BtnCaptura" to="." method="_on_btn_captura_pressed"]
+[connection signal="canceled" from="CONFIRMACION" to="." method="_on_confirmacion_canceled"]
 [connection signal="confirmed" from="CONFIRMACION" to="." method="_on_confirmation_dialog_confirmed"]
 [connection signal="pressed" from="PopupTarjetaPokemon/BTNGUARDARPOPUP" to="." method="_on_btnguardarpopup_pressed"]
 [connection signal="pressed" from="PopupTarjetaPokemon/BtnCerrarPopup" to="." method="_on_btn_cerrar_popup_pressed"]

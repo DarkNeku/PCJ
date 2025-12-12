@@ -812,6 +812,7 @@ func _on_btn_guardar_popup_pressed():
 		var ok_button = alert_guardado.get_ok_button()
 		if ok_button:
 			ok_button.add_theme_font_size_override("font_size", 50)
+			
 		alert_guardado.popup_centered()
 
 func _on_btn_centro_pokemon_pressed():
@@ -827,6 +828,7 @@ func _on_btn_centro_pokemon_pressed():
 		cancel_button.add_theme_font_size_override("font_size", 50)
 
 func _on_confirmar_curacion_confirmed():
+	$AudioBotonCurar.play()
 	var db = cargar_json()
 	var pokemons_db_local = db["pokedex"] if db.has("pokedex") else []
 	var curados = false
@@ -998,4 +1000,12 @@ func _on_btnguardarpopup_pressed() -> void:
 
 
 func _on_btn_cerrar_popup_pressed() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_confirmacion_canceled() -> void:
+	$AudioBoton.play() # Replace with function body.
+
+
+func _on_confirmar_curacion_canceled() -> void:
 	$AudioBoton.play() # Replace with function body.
